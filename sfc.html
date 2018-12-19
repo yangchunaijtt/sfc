@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width,user-scalable=no,initial-scale=1.0, maximum-scale=1" name="viewport" />    
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="./font/css/react.css">
+    <link rel="stylesheet" href="./font/css/sfc.css"> 
+    <link rel="shortcut icon" href="./font/img/sfc.jpg">   
+    <!-- 测试下 -->
+    <title>顺风车</title>
+    <style>
+        .amap-touch-toolbar .amap-zoomcontrol {
+            bottom: -39px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 头部切换的锚点 -->
+    <div class="header clearfix" style="
+    z-index:9999999">
+        <div  class="hpassenger">
+            <a href="#passenger" class="hactive htoggleone">乘客</a>
+        </div>
+        <div class="hvowner">
+            <a href="#vowner"   class="htoggletwo">车主</a>
+        </div>
+        <div  class="hrun">
+            <a href="#run" class="htogglethree">全部行程</a>
+        </div>
+    </div>
+    <!-- 显示切换的div -->
+    <div class="center clearfix">
+        <!-- 乘客的div -->
+        <div class="passenger clearfix">
+            <!-- 表单 -->
+            <div class="select">
+                <form action="">
+                    <div class="snav">开启路程</div>
+                    <div class="departure clearfix">
+                        <span class="sfc-icon">始发地:</span>
+                        <input  type="text" class="form-control"  id="pformcontrolsr"  name="departure"  placeholder="你从哪里来"/>
+                    </div>
+                    <div class="destination">
+                        <span class="sfc-brand">
+                           目的地:
+                        </span>
+                        <input  type="text"  class="form-control" name="destination" id="pformcontrolsc" placeholder="你要去哪儿"/>
+                    </div>
+                       <button class="sbutton btn btn-info">发布</button>
+                </form>
+            </div>
+            <!-- 常用路线 -->
+            <div class="cylx clearfix">
+                <div class="chd">
+                    <sapn class="glyphicon glyphicon-map-marker cylx-icon"></sapn>
+                    <span class="circle">常用路线</span>
+                </div>
+                    <div id="passengerNode"  class="clearfix">
+                        <!-- 乘客div内容嵌套区 -->
+                    </div>
+                
+            </div>
+        </div>
+        <!-- 车主的div -->
+        <div class="vowner clearfix">
+            <!-- 表单 -->
+            <div class="select clearfix">
+                <form action="">
+                    <div class="snav">开启路程</div>
+                    <div class="departure clearfix">
+                        <span class="sfc-icon">始发地:</span>
+                        <input  type="text" class="form-control"  id="vformcontrolsr" name="departure"  placeholder="你从哪里来"/>
+                    </div>
+                    <div class="destination">
+                        <span class="sfc-brand">
+                            目的地:
+                        </span>
+                        <input  type="text"  class="form-control" name="destination"  id="vformcontrolsc" placeholder="你要去哪儿"/>
+                    </div>
+                        <button class="sbutton btn btn-info">发布</button>
+                </form>
+            </div>
+            <div class="dclxc clearfix">
+                <div class="top clearfix"> 
+                    <span class="glyphicon glyphicon-volume-up top-icon"></span>
+                    <span class="deng">待处理行程</span>
+                </div>
+                
+                    <div id="vownperNode"  class="clearfix">
+                        <!-- 复用添加地方 -->
+                    </div>
+                
+            </div>    
+        </div>
+        <!-- 全部行程的div -->
+        <div class="run clearfix">
+            <!-- 乘客全部行程 -->
+            <div class="runpassenger clearfix">
+                <div class="dclxc clearfix">
+                    <div class="top clearfix"> 
+                        <span class="glyphicon glyphicon-user top-icon"></span>
+                        <span class="deng">乘客全部行程</span>
+                    </div>
+                    <!-- 复用创建部分 -->
+                    <div id="runpassengerNode" class="clearfix">
+                            <!-- div填充地方 -->
+                    </div>
+                </div> 
+            </div>
+            <!-- <div class="runxian"></div> -->
+            <!-- 车主全部行程 -->
+            <div class="runvowner clearfix">         
+                    <div class="dclxc clearfix">
+                            <div class="top clearfix"> 
+                                <span class="glyphicon glyphicon-plane
+                                top-icon"></span>
+                                <span class="deng">车主全部行程</span>
+                            </div>
+                            <!-- 复用创建部分 -->
+                            <div id="runvownerNode" class="clearfix" >
+                             <!-- div填充地方 -->
+                        </div>
+                    </div>     
+            </div>
+        </div>
+        <!-- 订单详情的div details -->
+        <div class="details">
+            <!-- 输入查询 -->
+                <div class="search-bar-inner clearfix">
+                      
+                    <div class="city" id="cityselect">
+                        <a href="#searchcity" class="acityselect"></a> 
+                    </div>
+                    <div class="searchdiz">
+                        <span class="glyphicon glyphicon-search cityicon"></span>
+                        <input type="text" class="form-control" id="citysearch" placeholder="输入你想查询的地址">
+                    </div>
+                    <div class="searchvalshow" id="idsearchvalshow">
+                       
+                    </div>
+                    <div class="xinxi" id="idxinxi">
+
+                    </div>
+                </div>
+            <!-- 地图显示图 -->
+            <div id="container">
+                <div id="ctxz" >
+                    点击选择目的地
+                </div>
+            </div>
+               
+                <div class="input-card clearfix" >
+                    <form action="" id="gaodeform" style="padding-bottom: 11px;">
+                        <div class="chufadi">
+                            始发地:<input type="text" class="form-control"  id="chufadi" name="departure" placeholder="你从哪里来"/>
+                        </div>
+                        <!-- 发送始发地经纬度的input  name="chufadijwd" -->
+                        <input id='lnglat' type="text" style="display:none" name="chufadijwd">
+                        <!-- 发送目的地经纬度的input name="mmdjwd" -->
+                        <input type="text" id='mmdjwd' style="display:none" name="mmdjwd">
+                            <P>目的地:<input type="text" id='address' class="form-control" name="Destination"  placeholder="你要去哪儿" /></P>
+                                <p>
+                            <input type="submit" id="gaodesubmit" value="发布" class="sbutton1 btn btn-info" />
+                        </p>
+                    </form>   
+        </div>
+        </div>
+
+        <!-- 选择城市页 -->
+        <div id="searchcity" class="clearfix">
+            
+            <div class="nowcity clearfix">
+                <div class="dangq">当前</div>
+                <div class="nowcityval clearfix">
+                    <div></div>
+                </div>
+            </div>
+            <div class="xzcity clearfix">
+                <div class="quanbu">全部</div>
+                <ul class="ulone clearfix">
+                    <li class="ulliwx">
+                       全国
+                    </li>
+                    <li class="ullish">
+                        上海市
+                    </li>
+                    <li  class="ullisz">
+                        苏州市
+                    </li>
+                </ul>
+                <ul class="ultwo clearfix">
+                    <li  class="ullinj">
+                        南京市
+                    </li>
+                    <li  class="ullint">
+                        南通市
+                    </li>
+                    <li  class="ulliyz">
+                        常州市
+                    </li>
+                </ul>
+                <ul class="ulthree clearfix">
+                    <li  class="ullitz">
+                       无锡市
+                    </li>
+                    <li  class="ullizjg">
+                        张家港市
+                    </li>
+                    <li  class="ullics">
+                        常熟市
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+    <script src="./font/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.11&key=5eeab4fb86fdb2ea40bb70b720de1927&plugin=AMap.Geocoder"></script>
+    <script type="text/javascript" src="https://cache.amap.com/lbs/static/addToolbar.js"></script>
+    <script src="./font/sfc.js"></script>
+    <script src="./font/gaode.js"></script>
+    <script src="./font/dizselect.js"></script>
+</html>
