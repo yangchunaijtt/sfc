@@ -36,7 +36,8 @@
                 $("#address").attr("placeholder","不能为空！")
                 return false;
             }
-            console.log(window.location.href);
+            
+            $(".xcspanleft").text($(".acityselect").text());
         })
 
         /* 搜索功能的实现 */
@@ -64,7 +65,7 @@
 
         /* 城市出来地址 */
         /* 推荐功能的实现 */
-    function autoInput(){ 
+    function autoInput(val){ 
     
         var keywords = document.getElementById("citysearch").value;
         
@@ -73,8 +74,12 @@
                     city:"常州市"
                 }
           // 实例化Autocomplete
-          var autoComplete = new AMap.Autocomplete(autoOptions);
           var searchval = $(".acityselect").text()+keywords;
+          if(val!=undefined){
+            searchval = searchcityval.citysfdmmd+keywords;
+          }
+          var autoComplete = new AMap.Autocomplete(autoOptions);
+         
           autoComplete.search(searchval, function(status, result) {
             // 搜索成功时，result即是对应的匹配数据
            /*  var node = new PrettyJSON.view.Node({
@@ -108,7 +113,8 @@
       }
   
       autoInput();
-  
+      
+      /* 绑定信息 */
       document.getElementById("citysearch").oninput = autoInput;
 
       /* 点击处理函数  公用的 */

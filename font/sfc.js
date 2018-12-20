@@ -178,6 +178,8 @@
         $(".vowner").hide();
         $(".run").hide();
         $(".details").hide();
+        $("#searchcity").hide();
+        $("#searchxincheng").hide();
     }
     //切换路由的初始化方法
     function hashcreate(){
@@ -186,6 +188,7 @@
         $(".run").hide();
         $(".details").hide();
         $("#searchcity").hide();
+        $("#searchxincheng").hide();
     }
     
     // 切换路由的方法
@@ -224,9 +227,35 @@
         }else if(locationHash == "#searchcity"){
             hashcreate();
             $("#searchcity").show();
+        }else if(locationHash =="#s" || locationHash =="#m"|| locationHash =="#time" ||
+            locationHash == "#xxwz" ){
+            hashcreate();
+            $("#searchxincheng").show();
+            if(locationHash =="#s"){
+                searchcfdhide();
+                $("#searchxincheng .nowcheckcity").show();
+                $("#searchxincheng .searchcfd").show();
+            }else if(locationHash =="#m"){
+                searchcfdhide();
+                $("#searchxincheng .nowcheckcity").show();
+                $("#searchxincheng .searchcfd").show();
+            }else if(locationHash =="#time"){
+                searchcfdhide();
+                $("#searchxincheng .nowcheckcity").hide();
+                $("#searchxincheng .searchtime").show();
+            }else if(locationHash == "#xxwz"){
+                searchcfdhide();
+                $("#searchxincheng .searchweizhi").show();
+                $("#searchxincheng .nowcheckcity").show();
+            }
         }
     }
+    function searchcfdhide(){
+        $("#searchxincheng .searchcfd").hide();
+        $("#searchxincheng .searchweizhi").hide();
+        $("#searchxincheng .searchtime").hide();
 
+    }
     //header 中 ctive 的选择
     function hactive(){
         $(".htoggleone").bind("touch click",function(){

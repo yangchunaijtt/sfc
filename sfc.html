@@ -154,17 +154,35 @@
                
                 <div class="input-card clearfix" >
                     <form action="" id="gaodeform" style="padding-bottom: 11px;">
-                        <div class="chufadi">
-                            始发地:<input type="text" class="form-control"  id="chufadi" name="departure" placeholder="你从哪里来"/>
+                        <div class="chufadi clearfix">
+                            <span class="left" style="
+                            line-height: 30px;
+                            text-indent: 5px; margin-top: 10px;">始发地:</span>
+                            <input type="text" class="form-control" 
+                            style="
+                            float: right;"  id="chufadi" name="departure" placeholder="你从哪里来"/>
                         </div>
                         <!-- 发送始发地经纬度的input  name="chufadijwd" -->
                         <input id='lnglat' type="text" style="display:none" name="chufadijwd">
                         <!-- 发送目的地经纬度的input name="mmdjwd" -->
                         <input type="text" id='mmdjwd' style="display:none" name="mmdjwd">
-                            <P>目的地:<input type="text" id='address' class="form-control" name="Destination"  placeholder="你要去哪儿" /></P>
-                                <p>
+                            <div class="clearfix">
+                               <span class="left" style="
+                               line-height: 30px;
+                               text-indent: 5px;">目的地:</span>      
+                            <input style="
+                            float: right;" type="text" id='address' class="form-control" name="Destination"  placeholder="你要去哪儿" /></div>
+                            <div>
+                                <div class="ctsearchtime clearfix">
+                                    
+                                    <span class="left" style="
+                                    line-height: 30px;
+                                    text-indent: 5px;" >出发时间:</span>
+                                    <input type="text" style="
+                                    float: right;" placeholder="选择出发时间" class="form-control" id="containersearchtime">
+                                </div>
                             <input type="submit" id="gaodesubmit" value="发布" class="sbutton1 btn btn-info" />
-                        </p>
+                        </div>
                     </form>   
         </div>
         </div>
@@ -185,7 +203,7 @@
                        全国
                     </li>
                     <li class="ullish">
-                        上海市
+                        常州市
                     </li>
                     <li  class="ullisz">
                         苏州市
@@ -196,23 +214,106 @@
                         南京市
                     </li>
                     <li  class="ullint">
-                        南通市
+                        上海市
                     </li>
                     <li  class="ulliyz">
-                        常州市
+                        无锡市
                     </li>
                 </ul>
                 <ul class="ulthree clearfix">
                     <li  class="ullitz">
-                       无锡市
+                       南通市
                     </li>
                     <li  class="ullizjg">
-                        张家港市
+                        镇江市
                     </li>
                     <li  class="ullics">
-                        常熟市
+                        泰州市
                     </li>
                 </ul>
+            </div>
+        </div>
+
+        <!-- 选择出发地 目的地页 -->
+        <div id="searchxincheng" class="clearfix">
+            <div class="nowcheckcity clearfix">
+                <div class="xcheader clearfix">
+                    <span class="xcspanleft">
+                       常州
+                    </span>
+                    <span class="glyphicon glyphicon-triangle-bottom scspanright">
+                    </span>
+                </div>   
+                <div class="xcbody clearfix">
+                    <input type="text" id="inxcbody" class="form-control" placeholder="你在哪儿上车">    
+                </div>     
+                <div class="xcqx">
+                    取消 
+                </div>
+            </div>
+            <div class="searchcfd clearfix">
+                <div class="cityshow clearfix">
+                    <div class="scheader clearfix">
+                        <span>当前城市:</span>
+                        <div class="dqcsval"></div>
+                    </div>
+                    <div class="cityxuzhe clearfix">
+                        <div class="cityxzone">附近城市</div>
+                        <ul class="xzulone clearfix">
+                            <li class="xzli1">
+                                苏州
+                            </li>
+                            <li  class="xzli2">
+                                无锡
+                            </li>
+                            <li  class="xzli3">
+                                上海
+                            </li>
+                            <li  class="xzli4">
+                                南京
+                            </li>
+                            <li class="xzli5">
+                                扬州
+                            </li>
+                            <li class="xzli6">
+                                泰州
+                            </li>
+                            <li class="xzli7">
+                                南通
+                            </li>
+                            <li class="xzli8">
+                                镇江
+                            </li>
+                        </ul>
+                        <div class="cityxztwo">其他城市</div>
+                        <ul class="xzultwo clearfix">
+                            <li class="xzli9">
+                                杭州
+                            </li>
+                            <li class="xzli10">
+                                北京
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="searchweizhi clearfix">
+                <div class="tjheader clearfix">
+                    <div class="icon">
+                        <span class="glyphicon glyphicon-send iconone"></span>
+                    </div>
+                    <div class="show-weizhi clearfix">
+                        <p class="dizi">
+                            副食品大楼(县直街)
+                        </p>
+                        <p class="jtdz">
+                            江苏省常州市钟楼区荷花池街道延陵西路157号
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="searchtime clearfix">
+                选择时间
             </div>
         </div>
     </div>

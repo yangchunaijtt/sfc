@@ -418,7 +418,7 @@
     }
 /* 地图api页设置 */
     .details .sbutton1 {
-        margin: 10px 15%;
+        margin:0px 15%;
         width: 70%;
         line-height: 23px;
         font-size: 18px;
@@ -607,3 +607,179 @@
         color:#fff;
         background:#ff8700;
     }
+/* 选择出发地 目的地页 */
+    #searchxincheng{
+        width:100%;
+        height:100%;
+    }
+    #searchxincheng .nowcheckcity{
+        width:100%;
+        background: #fff;
+    }
+    #searchxincheng .nowcheckcity .xcheader{
+        display: inline-block;
+        width:78px;
+        height:42px;
+        position: relative;
+    }
+    #searchxincheng .nowcheckcity .xcheader .xcspanleft{
+        display: inline-block;
+        width:100%;
+        line-height: 47px;
+        text-indent: 20px;
+        height:100%;
+    }
+    #searchxincheng .nowcheckcity .xcheader .xcspanleft input{
+        width:100%;
+        height:100%;
+    }
+    #searchxincheng .nowcheckcity .xcheader .scspanright{
+        position: absolute;
+        top:16px;
+        right:14px;
+        font-size:12px;
+        color:#a1a1a1;
+    }
+    #searchxincheng .nowcheckcity .xcbody {
+        min-width:200px;
+        width:228px;
+        height: 42px;
+        max-width:228px;
+        display:inline-block;
+    }
+    #searchxincheng .nowcheckcity .xcbody  input{
+        width:100%;
+        height:100%;
+        border: 1px solid #fff;
+    }
+    #searchxincheng .nowcheckcity .xcqx{
+        display: inline-block;
+        width:50px;
+        text-align: center;
+        line-height: 45px;
+        text-indent: 20px;
+    }
+    .form-control{
+        border:none;
+    }
+    .form-control:active{
+        border-color:#fff;
+        border:none;
+    }
+    /* 第二部分设置 */
+        #searchxincheng .searchcfd{
+            margin:0px 10px ;
+            margin-top:10px;
+            background:#fff;
+        }
+        #searchxincheng .searchcfd .scheader{
+            width:100%;
+            height:50px;
+        }
+        #searchxincheng .searchcfd .scheader span{
+            display: inline-block;
+            width:30%;
+            text-align: center;
+            line-height: 50px;
+            height:100%;
+        }   
+        #searchxincheng .searchcfd .scheader .dqcsval{
+            display: inline-block;
+        }
+        #searchxincheng .searchcfd .scheader input{
+            display: inline-block;
+            width:68%;;
+            height:100%;
+        }
+        #searchxincheng .searchcfd .cityxuzhe{
+            width:100%;
+        }
+        #searchxincheng .searchcfd .cityxuzhe .cityxzone,
+        #searchxincheng .searchcfd .cityxuzhe .cityxztwo{
+            width:100%;
+            height:38px;
+            text-indent: 16px;
+            background:#f7f7f7;
+            line-height: 38px;
+
+        }
+        #searchxincheng .searchcfd .cityxuzhe .xzulone,
+        #searchxincheng .searchcfd .cityxuzhe .xzultwo{
+            display: block;
+            width:100%;
+        }
+        #searchxincheng .searchcfd .cityxuzhe .xzulone li,
+        #searchxincheng .searchcfd .cityxuzhe .xzultwo li{
+            height:50px;
+            border-bottom: 1px solid #f7f7f7;
+            border-top: 1px solid #f7f7f7;
+            text-indent: 16px;
+            line-height: 50px;
+        }
+        /* 具体详细信息 */
+        #searchxincheng  .searchweizhi{
+            margin:0px 10px;
+            margin-top:10px;
+            background: #fff;
+        }
+        #searchxincheng  .searchweizhi .tjheader{
+            width:100%;
+            height:62px;
+            position: relative;
+            border-bottom: 1px solid #d5d5d5;
+        }
+        #searchxincheng  .searchweizhi .tjheader .icon{
+            display: inline-block;
+            width:10%;
+            height:62px;
+        }
+        #searchxincheng  .searchweizhi .tjheader .icon{
+            position:relative;
+            line-height: 62px;
+            text-align: center;
+            font-size:14px;
+           
+        }
+        #searchxincheng  .searchweizhi .tjheader .show-weizhi{
+            display: inline-block;
+            width:88%;
+            height:100%;
+            position: absolute;
+        }
+        #searchxincheng  .searchweizhi .tjheader .icon span{
+            position: absolute;
+            top: 28px;
+            left:10px;
+        }
+        #searchxincheng  .searchweizhi .tjheader .dizi,#searchxincheng  .searchweizhi .tjheader .dizi0,#searchxincheng  .searchweizhi .tjheader .dizi1,#searchxincheng  .searchweizhi .tjheader .dizi3,#searchxincheng  .searchweizhi .tjheader .dizi4,#searchxincheng  .searchweizhi .tjheader .dizi5,#searchxincheng  .searchweizhi .tjheader .dizi6,#searchxincheng  .searchweizhi .tjheader .dizi7,#searchxincheng  .searchweizhi .tjheader .dizi8,
+        #searchxincheng  .searchweizhi .tjheader .dizi9,#searchxincheng  .searchweizhi .tjheader .dizi2{
+    
+            height: 20px;
+            width: 100%;
+            margin-top: 12px;
+            color:#333333;
+        }
+        #searchxincheng  .searchweizhi .tjheader .jtdz,
+        #searchxincheng  .searchweizhi .tjheader .jtdz0,
+        #searchxincheng  .searchweizhi .tjheader .jtdz1,
+        #searchxincheng  .searchweizhi .tjheader .jtdz2,
+        #searchxincheng  .searchweizhi .tjheader .jtdz3,
+        #searchxincheng  .searchweizhi .tjheader .jtdz4,
+        #searchxincheng  .searchweizhi .tjheader .jtdz5,
+        #searchxincheng  .searchweizhi .tjheader .jtdz6,
+        #searchxincheng  .searchweizhi .tjheader .jtdz7,
+        #searchxincheng  .searchweizhi .tjheader .jtdz8,
+        #searchxincheng  .searchweizhi .tjheader .jtdz9,{
+            height:36px;
+            width:100%;
+            text-align: top;
+            color:#999999;
+        }
+
+
+
+
+
+
+
+
