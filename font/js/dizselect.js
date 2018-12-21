@@ -10,10 +10,9 @@
         $("#containersearchtime").bind("focus",function(){
             containersearchtime();
         })
-        if(cityselectval.nowcity==""){
-            cityselectval.nowcity="常州"
-        }
+
         $(".dqcsval").text(cityselectval.nowcity);
+        
         $("#inxcbody").blur(function(){
             $("#inxcbody").val("");
         })
