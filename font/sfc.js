@@ -132,26 +132,7 @@
         `
     }
 
-    // DOM 和 节点操作 
-    /* 
-        目前暂不做处理 
-    */
-    let createNode =  {
-        
-        runpassengerNode:function(vownerData){
-            
-        },
-       
-        // 为车主创建DOM
-        vownerNode:function(vownerData){
-            // console.log(vownerData);
-          
-        },
-        runvownerNode:function(passengerData){
-           
-        },
-        
-    }
+    
 
     /*让时间绑定切换到页面的事件 */
     function formcontrol(){
@@ -228,7 +209,7 @@
             hashcreate();
             $("#searchcity").show();
         }else if(locationHash =="#s" || locationHash =="#m"|| locationHash =="#time" ||
-            locationHash == "#xxwz" ){
+            locationHash == "#xxwz" ||locationHash == "#sxxwz"||locationHash == "#mxxwz" ){
             hashcreate();
             $("#searchxincheng").show();
             if(locationHash =="#s"){
@@ -243,7 +224,7 @@
                 searchcfdhide();
                 $("#searchxincheng .nowcheckcity").hide();
                 $("#searchxincheng .searchtime").show();
-            }else if(locationHash == "#xxwz"){
+            }else if(locationHash == "#xxwz"||locationHash == "#sxxwz"||locationHash == "#mxxwz"){
                 searchcfdhide();
                 $("#searchxincheng .searchweizhi").show();
                 $("#searchxincheng .nowcheckcity").show();

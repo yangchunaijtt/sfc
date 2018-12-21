@@ -17,6 +17,13 @@
         $("#inxcbody").blur(function(){
             $("#inxcbody").val("");
         })
+        $("#inxcbody").focus(function(){
+            $("#inxcbody").val("");
+        })
+        /* 初始化条件 */
+        $("#chufadi").val("");
+        $("#address").val("");
+        
     })
 
     let searchcityval = {
@@ -190,116 +197,99 @@
      function inaddress(){
         window.location.hash = "#m";
      }
+
+    /* time处理地方 */
      /* 选择出发时间 */
      function containersearchtime(){
         window.location.hash = "#time";
+        $(".form_datetime").datetimepicker({
+            format: "dd MM yyyy - hh:ii",
+            autoclose: true,
+            todayBtn: true,
+            startDate: "2018-12-20 00:00",
+            minuteStep: 10
+        });
      }
 
      /* 始发地 目的地 点击后 赋值并给下一页*/
-         var  textval = "";
+         
         $("#searchxincheng .xzli1").bind("touch click",function(){
             var  textval =  $("#searchxincheng .xzli1").text();
-            $(".xcspanleft").text(textval);
-            searchcityval.citysfdmmd =  textval ;
-            $(".dqcsval").text(textval);
-            cityselectval.nowcity = textval;
-            $(".acityselect").text(textval);
-            window.location.hash = "#xxwz";
+            xzlichuli(textval);
+            
         })
         $("#searchxincheng .xzli2").bind("touch click",function(){
             var  textval =  $("#searchxincheng .xzli2").text();
-            $(".xcspanleft").text(textval);
-            searchcityval.citysfdmmd =  textval;
-            $(".dqcsval").text(textval);
-            cityselectval.nowcity = textval;
-            $(".acityselect").text(textval);
-            window.location.hash = "#xxwz";
+            xzlichuli(textval);
+            
         })
         $("#searchxincheng .xzli3").bind("touch click",function(){
             
             var  textval =  $("#searchxincheng .xzli3").text();
-            $(".xcspanleft").text(textval);
-            searchcityval.citysfdmmd =  textval ;
-            $(".dqcsval").text(textval);
-            cityselectval.nowcity = textval;
-            $(".acityselect").text(textval);
-            window.location.hash = "#xxwz";
+            xzlichuli(textval);
+            
         })
         $("#searchxincheng .xzli4").bind("touch click",function(){
           
             var  textval =  $("#searchxincheng .xzli4").text();
-            $(".xcspanleft").text(textval);
-            $(".dqcsval").text(textval);
-            searchcityval.citysfdmmd =  textval ;
-            $(".dqcsval").text(textval);
-            cityselectval.nowcity = textval;
-            $(".acityselect").text(textval);
-            window.location.hash = "#xxwz";
+            xzlichuli(textval);
+            
         })
         $("#searchxincheng .xzli5").bind("touch click",function(){
             
             var  textval =  $("#searchxincheng .xzli5").text();
-            $(".xcspanleft").text(textval);
-            searchcityval.citysfdmmd =  textval ;
-            $(".dqcsval").text(textval);
-            cityselectval.nowcity = textval;
-            $(".acityselect").text(textval);
-            window.location.hash = "#xxwz";
+            xzlichuli(textval);
+            
         })
         $("#searchxincheng .xzli6").bind("touch click",function(){
            
             var  textval =  $("#searchxincheng .xzli6").text();
-            $(".xcspanleft").text(textval);
-            searchcityval.citysfdmmd =  textval ;
-            $(".dqcsval").text(textval);
-            cityselectval.nowcity = textval;
-            $(".acityselect").text(textval);
-            window.location.hash = "#xxwz";
+            xzlichuli(textval);
+            
         })
         $("#searchxincheng .xzli7").bind("touch click",function(){
             
             var  textval =  $("#searchxincheng .xzli7").text();
-            $(".xcspanleft").text(textval);
-            searchcityval.citysfdmmd =  textval ;
-            $(".dqcsval").text(textval);
-            cityselectval.nowcity = textval;
-            $(".acityselect").text(textval);
-            window.location.hash = "#xxwz";
+            xzlichuli(textval);
+             
         })
         $("#searchxincheng .xzli8").bind("touch click",function(){
             
             var  textval =  $("#searchxincheng .xzli8").text();
-            $(".xcspanleft").text(textval);
-            searchcityval.citysfdmmd =  textval ;
-            $(".dqcsval").text(textval);
-            cityselectval.nowcity = textval;
-            $(".acityselect").text(textval);
-            window.location.hash = "#xxwz";
+            xzlichuli(textval);
+           
         })
         $("#searchxincheng .xzli9").bind("touch click",function(){
             
             var  textval =  $("#searchxincheng .xzli9").text();
-            $(".xcspanleft").text(textval);
-            searchcityval.citysfdmmd =  textval ;
-            $(".dqcsval").text(textval);
-            cityselectval.nowcity = textval;
-            $(".acityselect").text(textval);
-            window.location.hash = "#xxwz";
+            xzlichuli(textval);
+            
         })
         $("#searchxincheng .xzli10").bind("touch click",function(){
             
             var  textval =  $("#searchxincheng .xzli10").text();
+         /*    console.log(textval); */
+            xzlichuli(textval);
+             
+        })
+        function xzlichuli (textval){
+            
+            var locationhash = window.location.hash;
             $(".xcspanleft").text(textval);
             searchcityval.citysfdmmd =  textval ;
             $(".dqcsval").text(textval);
             cityselectval.nowcity = textval;
             $(".acityselect").text(textval);
-            window.location.hash = "#xxwz";
-        })
-
-     function sfdmddclick(){
-         
-     }
+            $("#inxcbody").val(textval);
+            autoInputsun();
+            if(locationhash=="#s"){
+                window.location.hash = "#sxxwz";
+            }else if (locationhash=="#m"){
+                window.location.hash = "#mxxwz";
+            }
+            
+        }
+     
 
      /* 点击取消，页面跳为地图页面 */
      $(".xcqx").bind("touch click",function(){
@@ -308,31 +298,38 @@
 
 
      /* 点击搜索功能的函数 */
+     let  autoInputsunval = {
+         result:{},   /*  autoInputsun的返回值result返回给需要的数据 */
+     }
      function autoInputsun(){
 
         var keywords = document.getElementById("inxcbody").value;
-        var searv = $(".xcspanleft").text();
+       
         AMap.plugin('AMap.Autocomplete', function(){
                 var autoOptions = {
-                    city:searv
+                    city:"常州"
                 }
           // 实例化Autocomplete
+        
           var searchval = $(".xcspanleft").text()+keywords;
-          console.log(searchval);
-
+          if(keywords==""||keywords==undefined){
+            searchval=$(".xcspanleft").text();
+          }
           var autoComplete = new AMap.Autocomplete(autoOptions);
-         
-          autoComplete.search(searchval, function(status, result) {
+          
+          autoComplete.search(searchval, function(status,result) {
             // 搜索成功时，result即是对应的匹配数据
            /*  var node = new PrettyJSON.view.Node({
                 el: document.querySelector("#input-info"),
                 data: result
             }); */
+            /* console.log(searchval,status,result); */
+            autoInputsunval.result = result;
             $(".searchweizhi").empty();
             for(var j = 0; j<result.tips.length;j++){
                 autosunnode(j,result);
             }
-            console.log(result);
+            
           })
         })
      }
@@ -340,21 +337,105 @@
      function autosunnode(i,result){
          /* 名字操作上去 */
         $(".searchweizhi").append(searchcityval.autoInputsuntmp);
-        $(".searchweizhi .dizi").text(result.tips[i].name);
-        $(".searchweizhi .jtdz").text(result.tips[i].district);
-        var dizi = "dizi"+i;
-        var   jtdz  ="jtdz"+i;
-        $(".searchweizhi .dizi").attr("class",dizi);
-        $(".searchweizhi .jtdz").attr("class",jtdz);
+        var tjheader = "tjheader"+i;
+        $(".tjheader").attr("class",tjheader);
+        var dizi ="."+tjheader+"  .dizi";
+        var jtdz ="."+tjheader+" .jtdz";
+        $(dizi).text(result.tips[i].name);
+        var jtdzval =result.tips[i].district+result.tips[i].address;
+        $(jtdz).text(jtdzval);
+        /* DOM创建出来再绑定事件 */
+        tjhbind();
+       
      }
+      /* 城市地点选择页初始化详细信息 */
+     
+
      /* 点击搜索功能的实现 */
      document.getElementById("inxcbody").oninput = autoInputsun;
+     document.getElementById("inxcbody").onchange = autoInputsun;
+     document.getElementById("inxcbody").propertychange = autoInputsun;
+     
 
 
      /* 点击返回选择城市页 */
-     $(".xcheader").bind("touch click ",function(){
-         window.location.hash = "#s";
-     })
+        $(".xcheader").bind("touch click ",function(){
+            window.location.hash = "#s";
+        })
+
+    
+     /* 选择城市后返回并把数据填上在表单是上 */
+     function tjhbind(){
+        $(".tjheader0").bind("touch click",function(){
+            xxwzclick(0);
+            touchchuli(autoInputsunval.result.tips[0]); 
+        })
+        $(".tjheader1").bind("touch click",function(){
+            xxwzclick(1);
+            touchchuli(autoInputsunval.result.tips[1]); 
+        })
+        $(".tjheader2").bind("touch click",function(){
+            xxwzclick(2);
+            touchchuli(autoInputsunval.result.tips[2]);  
+        })
+        $(".tjheader3").bind("touch click",function(){
+            xxwzclick(3);
+            touchchuli(autoInputsunval.result.tips[3]); 
+        })
+        $(".tjheader4").bind("touch click",function(){
+            xxwzclick(4);
+            touchchuli(autoInputsunval.result.tips[4]); 
+        })
+        $(".tjheader5").bind("touch click",function(){
+            xxwzclick(5);
+            touchchuli(autoInputsunval.result.tips[5]); 
+        })
+        $(".tjheader6").bind("touch click",function(){
+            xxwzclick(6);
+            touchchuli(autoInputsunval.result.tips[6]); 
+        })
+        $(".tjheader7").bind("touch click",function(){
+            xxwzclick(7);
+            touchchuli(autoInputsunval.result.tips[7]); 
+        })
+        $(".tjheader8").bind("touch click",function(){
+            xxwzclick(8);
+            touchchuli(autoInputsunval.result.tips[8]); 
+        })
+        $(".tjheader9").bind("touch click",function(){
+            xxwzclick(9);
+            touchchuli(autoInputsunval.result.tips[9]); 
+        })
+     }
+        
+        /* 点击时，要判断他是始发地  还是目的地 */
+        /* 
+            数据格式：{}
+        */
+        function xxwzclick(i){
+           
+            var result = autoInputsunval.result;
+            var tips = autoInputsunval.result.tips;  
+          /*   console.log(tips[i]); */
+            var locationhash = window.location.hash;
+           /*  console.log(locationhash); */
+            /* 出发地  始发地 */
+            if(locationhash=="#sxxwz"){
+                
+                $("#chufadi").val(tips[i].name);
+                $(".lnglat").val(tips[i].location);
+                locationhash = "#details";
+                
+            }else if(locationhash=="#mxxwz"){
+                
+                /* 目的地 目的地经纬度 */
+                $("#address").val(tips[i].name);
+                $("#mmdjwd").val(tips[i].location);
+               
+            }
+            window.location.hash = "#details";
+        }
+
 
      /* 获取?号后面的参数 */
 

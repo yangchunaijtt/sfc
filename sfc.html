@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta content="width=device-width,user-scalable=no,initial-scale=1.0, maximum-scale=1" name="viewport" />    
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- 公共的bootstrap组件 -->
     <link href="http://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-    
+    <!--  自己定义的css文件 -->
     <link rel="stylesheet" href="./font/css/react.css">
     <link rel="stylesheet" href="./font/css/sfc.css"> 
+    <!-- 图片 -->
     <link rel="shortcut icon" href="./font/img/sfc.jpg">   
-    <!-- 测试下 -->
     <title>顺风车</title>
     <style>
         .amap-touch-toolbar .amap-zoomcontrol {
@@ -58,10 +59,9 @@
                     <sapn class="glyphicon glyphicon-map-marker cylx-icon"></sapn>
                     <span class="circle">常用路线</span>
                 </div>
-                    <div id="passengerNode"  class="clearfix">
-                        <!-- 乘客div内容嵌套区 -->
-                    </div>
-                
+                <div id="passengerNode"  class="clearfix">
+                    <!-- 乘客div内容嵌套区 -->
+                </div>
             </div>
         </div>
         <!-- 车主的div -->
@@ -88,11 +88,9 @@
                     <span class="glyphicon glyphicon-volume-up top-icon"></span>
                     <span class="deng">待处理行程</span>
                 </div>
-                
-                    <div id="vownperNode"  class="clearfix">
-                        <!-- 复用添加地方 -->
-                    </div>
-                
+                <div id="vownperNode"  class="clearfix">
+                    <!-- 复用添加地方 -->
+                </div>
             </div>    
         </div>
         <!-- 全部行程的div -->
@@ -130,7 +128,6 @@
         <div class="details">
             <!-- 输入查询 -->
                 <div class="search-bar-inner clearfix">
-                      
                     <div class="city" id="cityselect">
                         <a href="#searchcity" class="acityselect"></a> 
                     </div>
@@ -245,7 +242,7 @@
                     </span>
                 </div>   
                 <div class="xcbody clearfix">
-                    <input type="text" id="inxcbody" class="form-control" placeholder="你在哪儿上车">    
+                    <input type="text" id="inxcbody" class="form-control" placeholder="查询地址">    
                 </div>     
                 <div class="xcqx">
                     取消 
@@ -298,30 +295,34 @@
                 </div>
             </div>
             <div class="searchweizhi clearfix">
-                <div class="tjheader clearfix">
-                    <div class="icon">
-                        <span class="glyphicon glyphicon-send iconone"></span>
-                    </div>
-                    <div class="show-weizhi clearfix">
-                        <p class="dizi">
-                            副食品大楼(县直街)
-                        </p>
-                        <p class="jtdz">
-                            江苏省常州市钟楼区荷花池街道延陵西路157号
-                        </p>
+                <!-- 显示具体城市的页面 -->
+            </div>
+            <div class="searchtime clearfix">
+                <!-- 出现时间选择的页面 -->
+                <div class="row">
+                    <div class='col-sm-12'>
+                        <div class="input-append date form_datetime" data-date="2018-12-20T15:25:00Z">
+                            <input size="16" type="text" value="" readonly>
+                            <span class="add-on"><i class="icon-remove"></i></span>
+                            <span class="add-on"><i class="icon-calendar"></i></span>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="searchtime clearfix">
-                选择时间
-            </div>
         </div>
     </div>
-</body>
+    <!-- 时间控件的四个js引入 -->
     <script src="./font/jquery-3.2.1.min.js"></script>
+    <script src="https://cdn.bootcss.com/twitter-bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    
+    <!-- 高德地图的两个引入 -->
     <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.11&key=5eeab4fb86fdb2ea40bb70b720de1927&plugin=AMap.Geocoder"></script>
     <script type="text/javascript" src="https://cache.amap.com/lbs/static/addToolbar.js"></script>
+
+    <!-- 自定义js的引入 -->
     <script src="./font/sfc.js"></script>
     <script src="./font/gaode.js"></script>
     <script src="./font/dizselect.js"></script>
+</body>
+    
 </html>

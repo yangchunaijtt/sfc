@@ -36,6 +36,10 @@
                 $("#address").attr("placeholder","不能为空！")
                 return false;
             }
+            if($("#containersearchtime").val()==""){
+                $("#containersearchtime").attr("placeholder","请选择出现时间");
+                return false;
+            }
             
             $(".xcspanleft").text($(".acityselect").text());
         })
@@ -98,6 +102,7 @@
                 var classsearchp = ".searchp"+i;
                 
             }
+            /* 定位maker实现的代码 */
             $(".searchp0").bind("touch click",function(){  touchchuli(result.tips[0])     });
             $(".searchp1").bind("touch click",function(){  touchchuli(result.tips[1])      });
             $(".searchp2").bind("touch click",function(){  touchchuli(result.tips[2])    });
@@ -108,12 +113,14 @@
             $(".searchp7").bind("touch click",function(){  touchchuli(result.tips[7])     });
             $(".searchp8").bind("touch click",function(){  touchchuli(result.tips[8])     });
             $(".searchp9").bind("touch click",function(){  touchchuli(result.tips[9])     });
+          
           })
         })
       }
-  
-      autoInput();
       
+      autoInput();
+     
+
       /* 绑定信息 */
       document.getElementById("citysearch").oninput = autoInput;
 
@@ -128,14 +135,14 @@
             maponbh(false);
         }else {
             /* {P: 31.774645, R: 119.97328400000004, lng: 119.973284, lat: 31.774645} */
-            console.log(result.location);
+           
             maponbh(result.location);
             $("#mmdjwd").val(result.location);
         }
       
      }
 
-      
+
     //定位功能 
     AMap.plugin('AMap.Geolocation', function() {
         var geolocation = new AMap.Geolocation({
@@ -178,7 +185,7 @@
         let geocoder,marker;
         function regeoCode() {
             let dingweiszcity = $(".acityselect").text();
-            console.log(dingweiszcity);
+           /*  console.log(dingweiszcity); */
             if(!geocoder){
                 geocoder = new AMap.Geocoder({
                     city: dingweiszcity, //城市设为北京，默认：“全国”
@@ -243,16 +250,18 @@
         function setdtCeneter(qjposition){
             //var position = new AMap.LngLat(116, 39);  // 标准写法
             // 简写
-            console.log(qjposition);
-
+           /*  console.log(qjposition); */
              var position = [qjposition.R, qjposition.P]; 
              map.setCenter(position); 
             // 获取地图中心点
             var currentCenter = map.getCenter(); 
         }
         
-        
-          
+    
+
+   
+         
+    
       
     
    

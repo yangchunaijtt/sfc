@@ -1,0 +1,792 @@
+/* header的部分 */
+.header{
+    display: flex;
+    font-size:20px;
+    background-color:#fff;
+    /* border-radius: 0px 0px 4px 4px ; */
+}
+.header .hpassenger,.hvowner,.hrun{
+    flex:1;
+    text-align: center;
+    height:60px;
+    line-height: 60px;
+}
+.header .hpassenger a,.header .hvowner a,.header .hrun a{
+    display: block;
+}
+.hactive{
+    /* border-bottom: 1px solid #e39f7a; */
+    /* border-radius: 4px ; */
+    /* background-color:#f2f2f2; */
+    color:#e39f7a;
+}
+
+
+/* center部分内容 */
+
+.center{
+    width:100%;
+}
+.center .passenger{
+    width:100%;
+}
+.center .passenger .select{
+    margin:8px 6px;
+    border-radius: 3px;
+    background-color:#fff;
+    /* //height:150px; */
+}  
+.form-control{
+    width:80%;
+    height: 30px;
+    display: inline-block;
+}
+.center .passenger .select .departure{
+    vertical-align: top;
+}
+.center .passenger .select .sfc-icon{
+    display: inline-block;
+    text-indent: 10px;
+}
+.center .passenger .select .sfc-brand{
+    display: inline-block;
+    text-indent: 10px;
+}
+.center .passenger .select .snav{
+    height:35px;
+    line-height: 35px;
+    text-indent: 10px;
+}
+.sbutton{
+    margin: 20px 15%;
+    width: 70%;
+    line-height: 23px;
+    font-size: 18px;
+    text-indent: 29%;
+    text-align: -webkit-auto;
+    letter-spacing: 68px;
+}
+
+/* 常用路线 */
+/* 图标部分 */
+.cylx{
+width:100%; 
+}
+.cylx .chd{
+    margin:8px 6px;
+    vertical-align: top;
+}
+.cylx .chd .cylx-icon{
+    font-size:18px;
+    color:#e39f7a;
+    display: inline-block;
+}
+.cylx .chd .circle{
+    display: inline-block;
+    text-indent: 16px;
+}
+/* 内容部分 */
+.cylx .cylx-cy{
+    margin:8px 6px;
+    border-radius: 3px;
+    background-color:#fff; 
+}
+.cylx .cylx-cy .cylx-cyheader{
+    margin-top:16px;   
+}
+.cylx .cylx-cy .cylx-cyheader .bt{
+    display: inline-block;
+    width:52px;
+    height:26px;
+    border-radius: 3px;
+    margin-left:10px;
+    background:#979797;
+    color:#fff;
+    text-align: center;
+    line-height: 26px;
+    font-size:14px;
+}
+.cylx .cylx-cy .cylx-cyheader .time{
+    display: inline-block;
+    margin-left:10px;   
+    
+}
+.cylx  .time .hours{
+    display: inline-block;
+}
+.cylx  .time .mao{
+    display: inline-block;
+width:5px;
+    text-align: center;
+}
+.cylx  .time .minti{
+    display: inline-block;
+}
+.cylx  .cylx-cycenter{
+padding-top:10px;
+    padding-bottom: 18px;
+    text-indent: 10px;
+}
+.cylx  .cylx-cycenter #cylx-departure
+{
+    display: inline-block;
+    width: 40%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.cylx  .cylx-cycenter .cycicon{
+    display: inline-block;
+    width:10%;
+}
+.cylx  .cylx-cycenter #cylx-Destination{
+    display: inline-block;
+    width:45%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}   
+
+
+
+/* cente车主select部分内容 */
+
+.center .vowner .select{
+    margin:8px 6px;
+    border-radius: 3px;
+    background-color:#fff;
+    /* //height:150px; */
+}  
+.form-control{
+    width:80%;
+    height: 30px;
+    display: inline-block;
+    margin-bottom:15px;
+}
+.center .vowner .select .departure{
+    vertical-align: top;
+}
+.center .vowner .select .sfc-icon{
+    display: inline-block;
+    text-indent: 10px;
+}
+.center .vowner .select .sfc-brand{
+    display: inline-block;
+    text-indent: 10px;
+}
+.center .vowner .select .snav{
+    height:35px;
+    line-height: 35px;
+    text-indent: 10px;
+}
+.sbutton{
+    margin: 10px 15%;
+    width: 70%;
+    line-height: 23px;
+    font-size: 18px;
+    text-indent: 29%;
+    text-align: -webkit-auto;
+    letter-spacing: 68px;
+    margin-bottom: 19px;
+}
+.runvownerleft {
+    width:80%;
+}
+/*车主待处理路程  */
+.vowner .dclxc{
+    margin:6px 6px;   
+}
+.vowner .dclxc .top{
+    margin-top:10px;
+    height:34px;
+    background:#FFF;
+    border-bottom: 1px solid #f0f0f0;
+}
+.vowner .dclxc .top .top-icon{
+    text-indent: 12px;
+    font-size:18px;
+    color:#f0935a;
+    line-height: 34px;
+}
+.vowner .dclxc .top .deng{
+    margin-left:12px;
+    line-height: 34px;
+}
+.vowner .dclxc .circle{
+    background:#fff;
+    margin-bottom: 20px;
+}
+.vowner .circle .time{
+    margin-top:10px;
+   
+}
+.vowner .circle .time .data{
+    display: inline-block;
+    font-size:18px;
+    font-weight: bold;
+    text-indent: 10px;
+}
+.vowner .circle .time .rq{
+    display: inline-block;
+    font-size:18px;
+    font-weight: bold;
+    margin-left:5px;
+}
+.vowner .circle .mdd{
+  
+    padding-bottom: 10px;   
+    width: 100%;
+    text-indent: 10px;
+}
+.vowner .circle .mdd .cfd{
+    display: inline-block;
+    width: 42%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.vowner .circle .mdd .mdd-icon{
+    display: inline-block;
+    width:10%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-top:10px;
+}
+.vowner .circle .mdd .df{
+    display: inline-block;
+    width:42%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+/* 右部分内容 */
+.vowner .circle .right{
+    padding-right: 15px;
+    width: 15%;
+    height: 82px;
+}
+.vowner .circle .right .divd{
+    width:10px;
+    margin:0 auto;
+   
+}
+.vowner .circle .right .ricon { 
+    width: 20px;
+    display: block;
+    font-size: 24px;
+    margin: 0 auto;
+    margin-top: 28px;
+}
+/* 全部行程 */
+.run{
+    width:100%;
+}
+  .run .dclxc{
+    margin:6px 6px;   
+}
+.run .dclxc .top{
+    margin-top:10px;
+    height:34px;
+    background:#FFF;
+    border-bottom: 1px solid #f0f0f0;
+}
+.run .dclxc .top .top-icon{
+    text-indent: 12px;
+    font-size:18px;
+    color:#f0935a;
+    line-height: 34px;
+}
+.run .dclxc .top .deng{
+    margin-left:12px;
+    line-height: 34px;
+}
+.run .dclxc .circle{
+    background:#fff;
+    margin-bottom: 14px;
+}
+.run .circle .time{
+    margin-top:10px;
+   
+}
+.run .circle .time .data{
+    display: inline-block;
+    font-size:18px;
+    font-weight: bold;
+    text-indent: 10px;
+}
+.run .circle .time .rq{
+    display: inline-block;
+    font-size:18px;
+    font-weight: bold;
+    margin-left:5px;
+}
+.run .circle .mdd{
+    padding-bottom: 10px;
+    text-indent: 10px;
+}
+.run .circle .mdd .cfd{
+    display: inline-block;
+    width: 45%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.run .circle .mdd .mdd-icon{
+    display: inline-block;
+    width: 10%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.run .circle .mdd .df{
+    display: inline-block;
+    width: 41%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+/* 右部分内容 */
+.run .circle .right{
+    width: 15%;
+    margin-right: 15px;
+    height: 82px;
+}
+.run .circle .right .divd{
+    width:10px;
+    margin:0 auto;
+   
+}
+.run .circle .right .ricon { 
+    
+    display: block;
+   
+    margin: 0 auto;
+    margin-top: 24px;
+}
+.runxian{
+    width:100%;
+    border:0px;
+    border-top:1px solid #f8acd2;
+}
+
+/* 订单详情页 */
+.details .table{
+    margin: 8px 5%;
+    width: 97%;
+    max-width: 90%;
+    margin-top: 37px;
+    border-radius: 4px;
+    background-color: #337ab7;
+    color:#fff;
+}
+.table-hover>tbody>tr:hover {
+    background-color: #71b9a8;
+}
+.details .table input{
+    color:#000;
+}
+.details .table .jied{
+    display: block;
+    margin:0 auto;
+   
+}
+/* a标签的设置 */
+#aPassengerDiv{
+    display: block;
+}
+#avownerDiv{
+    display: block;
+}
+#arunpassengerDiv,#arunpassengerDiv0,#arunpassengerDiv1,#arunpassengerDiv2,#arunpassengerDiv3{
+    display: inline-block;
+    width: 80%;
+}
+#arunpassengerDiv,#arunvownerDiv0,#arunvownerDiv1,#arunvownerDiv2,#arunvownerDiv3{
+    display: inline-block;
+    width: 80%;
+}
+/* 高德地图API  */
+#container{
+    width:100%;
+    height: 350px;
+}
+
+/* 样式替代 */
+select, input[type=text], input[type=date]{
+    width: 80%;
+}
+/* 地图api页设置 */
+.details .sbutton1 {
+    margin:0px 15%;
+    width: 70%;
+    line-height: 23px;
+    font-size: 18px;
+    text-indent: 29%;
+    text-align: -webkit-auto;
+    letter-spacing: 68px;
+}
+.details .search-bar-inner{
+    background: #fff;
+    height: 56px;
+    position: relative;
+    border-radius: 4px;
+    margin: 8px 6px;
+
+}
+.details #chufadi{
+    margin-top:10px;
+}
+.details .city{
+    display: inline-block;
+    background: #979797;
+    color: #fff;
+    margin-top: 13px;
+    margin-left: 16px;
+    border-radius: 2px;
+    width: 60px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+}
+.details .searchdiz{
+    position: absolute;
+    display: inline-block;
+    height: 30px;
+    margin-top: 13px;
+}
+.details .cityicon{
+    position: relative;
+    left: 24px;
+    font-size: 14px;
+    color: #c5c5c5;
+}
+#citysearch{
+    text-indent: 10px;
+}
+#ctxz{
+    color: #fff;
+    z-index: 999;
+    position: absolute;
+    top: 16px;
+    width: 130px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 16px;
+    background-color: #5cb85c;
+    text-align: center;
+    display: inline-block;
+    right: 15px;
+    line-height: 30px;
+    border-radius: 4px;
+}
+.input-card{
+    background-color: #fff;
+    margin-top: 20px;
+    border-radius: 4px;
+    margin: 10px 6px;
+}
+.details  .search-bar-inner .searchvalshow{
+    position: absolute;
+    z-index: 999;
+    top: 41px;
+    left: 96px;
+    width: 180px;
+    border-top: 1px solid #e2dfdf;
+    background-color: #fff;
+}
+.details  .search-bar-inner .searchvalshow p{
+    width: 90%;
+    margin: 0px 5%;
+    border-bottom: 1px solid #e2dfdf;
+    font-size: 18px;
+    height: 31px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.details  .search-bar-inner .xinxi{
+    display: inline-block;
+    background-color: #337ab7;
+    position: absolute;
+    right: 0px;
+    width: 20%;
+    height: 40px;
+    margin-right: 10px;
+    margin-top: 10px;
+    color: #fff;
+    border-radius: 4px;
+    text-align: center;
+}
+.details  .search-bar-inner .xinxi p {
+    line-height: 40px;
+}
+/*  页面测试阶段更改 */
+.runpassengerleft{
+    width:100%;
+}
+.runvownerleft{
+    width:100%;
+}
+.vownerleft{
+    width:80%;
+}
+/*  */
+.acityselect{
+    color:#fff; 
+    display: block;
+}
+/* 城市选择页面布局 */
+#searchcity{
+    width:100%;
+    height:100%;
+}
+#searchcity .nowcity{
+    width:100%;
+    height:90px;
+}
+#searchcity .nowcity .dangq{
+    height:30px;
+    width:100%;
+    text-indent: 10px;
+    background:#e8edf2;
+    line-height: 30px;
+}
+#searchcity .nowcity .nowcityval{
+    width:100%;
+    height:60px;
+    background:#fff;
+}
+#searchcity .nowcity .nowcityval div{
+    margin-left:15px;
+    width:106px;
+    height:40px;
+    background:#ff8700;
+    border-radius: 4px;
+    text-align: center;
+    line-height: 40px;
+    color:#fff;
+    box-shadow: 4px 4px 2px #c1c1c1;
+    -webkit-box-shadow: 4px 4px 2px #c1c1c1;
+    margin-top:10px;
+}
+#searchcity .xzcity{
+    width:100%;
+}
+#searchcity .xzcity .quanbu{
+    height:30px;
+    width:100%;
+    text-indent: 10px;
+    background:#e8edf2;
+    line-height: 30px;
+}
+#searchcity .xzcity .ulone,#searchcity .xzcity .ultwo,#searchcity .xzcity .ulthree{
+    width:100%;
+    background:#fff;
+    height:60px;
+    display: block;
+    border-bottom: 1px solid #c1c1c1;
+    margin-bottom: 20px;
+}
+#searchcity .xzcity .ulone li,#searchcity .xzcity .ultwo li,#searchcity .xzcity .ulthree li{
+    margin-left:15px;
+    width:106px;
+    height:40px;
+    background:#fff;
+    border-radius: 4px;
+    text-align: center;
+    line-height: 40px;
+    border:1px solid #c1c1c1;
+    box-shadow: 4px 4px 2px #c1c1c1;
+    -webkit-box-shadow: 4px 4px 2px #c1c1c1;
+    margin-top:10px;
+    display: inline-block;
+}
+#searchcity .xzcity .ulone .ulliactive,#searchcity .xzcity .ultwo .ulliactive,
+#searchcity .xzcity .ulthree .ulliactive{
+    color:#fff;
+    background:#ff8700;
+}
+/* 选择出发地 目的地页 */
+#searchxincheng{
+    width:100%;
+    height:100%;
+}
+#searchxincheng .nowcheckcity{
+    width:100%;
+    background: #fff;
+}
+#searchxincheng .nowcheckcity .xcheader{
+    display: inline-block;
+    width:78px;
+    height:42px;
+    position: relative;
+}
+#searchxincheng .nowcheckcity .xcheader .xcspanleft{
+    display: inline-block;
+    width:100%;
+    line-height: 47px;
+    text-indent: 20px;
+    height:100%;
+}
+#searchxincheng .nowcheckcity .xcheader .xcspanleft input{
+    width:100%;
+    height:100%;
+}
+#searchxincheng .nowcheckcity .xcheader .scspanright{
+    position: absolute;
+    top:16px;
+    right:14px;
+    font-size:12px;
+    color:#a1a1a1;
+}
+#searchxincheng .nowcheckcity .xcbody {
+    min-width:200px;
+    width:228px;
+    height: 42px;
+    max-width:228px;
+    display:inline-block;
+}
+#searchxincheng .nowcheckcity .xcbody  input{
+    width:100%;
+    height:100%;
+    border: 1px solid #fff;
+}
+#searchxincheng .nowcheckcity .xcqx{
+    display: inline-block;
+    width:50px;
+    text-align: center;
+    line-height: 45px;
+    text-indent: 20px;
+}
+.form-control{
+    border:none;
+}
+.form-control:active{
+    border-color:#fff;
+    border:none;
+}
+/* 第二部分设置 */
+    #searchxincheng .searchcfd{
+        margin:0px 10px ;
+        margin-top:10px;
+        background:#fff;
+    }
+    #searchxincheng .searchcfd .scheader{
+        width:100%;
+        height:50px;
+    }
+    #searchxincheng .searchcfd .scheader span{
+        display: inline-block;
+        width:30%;
+        text-align: center;
+        line-height: 50px;
+        height:100%;
+    }   
+    #searchxincheng .searchcfd .scheader .dqcsval{
+        display: inline-block;
+    }
+    #searchxincheng .searchcfd .scheader input{
+        display: inline-block;
+        width:68%;;
+        height:100%;
+    }
+    #searchxincheng .searchcfd .cityxuzhe{
+        width:100%;
+    }
+    #searchxincheng .searchcfd .cityxuzhe .cityxzone,
+    #searchxincheng .searchcfd .cityxuzhe .cityxztwo{
+        width:100%;
+        height:38px;
+        text-indent: 16px;
+        background:#f7f7f7;
+        line-height: 38px;
+
+    }
+    #searchxincheng .searchcfd .cityxuzhe .xzulone,
+    #searchxincheng .searchcfd .cityxuzhe .xzultwo{
+        display: block;
+        width:100%;
+    }
+    #searchxincheng .searchcfd .cityxuzhe .xzulone li,
+    #searchxincheng .searchcfd .cityxuzhe .xzultwo li{
+        height:50px;
+        border-bottom: 1px solid #f7f7f7;
+        border-top: 1px solid #f7f7f7;
+        text-indent: 16px;
+        line-height: 50px;
+    }
+    /* 具体详细信息 */
+    #searchxincheng  .searchweizhi{
+        margin:0px 10px;
+        margin-top:10px;
+        background: #fff;
+    }
+    #searchxincheng  .searchweizhi .tjheader,.tjheader0,
+    .tjheader1,.tjheader2,.tjheader3,.tjheader4,.tjheader5,.tjheader6,.tjheader7,
+    .tjheader8,.tjheader9{
+        width:100%;
+        height:62px;
+        position: relative;
+        border-bottom: 1px solid #d5d5d5;
+    }
+    #searchxincheng  .searchweizhi  .tjheader .icon,.tjheader0 .icon,
+    .tjheader1,.tjheader2 .icon,.tjheader3 .icon,.tjheader4 .icon,.tjheader5 .icon,
+    .tjheader6  .icon,.tjheader7 .icon,
+    .tjheader8 .icon,.tjheader9  .icon{
+        display: inline-block;
+        width:10%;
+        height:62px;
+        position:relative;
+        line-height: 62px;
+        text-align: center;
+        font-size:14px;
+       
+    }
+    #searchxincheng  .searchweizhi  .tjheader .show-weizhi,.tjheader0 .show-weizhi,
+    .tjheader1 .show-weizhi,.tjheader2 .show-weizhi,.tjheader3 .show-weizhi,
+    .tjheader4 .show-weizhi,.tjheader5 .show-weizhi,.tjheader6 .show-weizhi,.tjheader7 .show-weizhi,
+    .tjheader8 .show-weizhi,.tjheader9 .show-weizhi{
+        display: inline-block;
+        width:88%;
+        height:100%;
+        position: absolute;
+    }
+    #searchxincheng  .searchweizhi  .tjheader .icon span,.tjheader0 .icon span,
+    .tjheader1 .icon span,.tjheader2 .icon span,
+    .tjheader3 .icon span,.tjheader4 .icon span,.tjheader5 .icon span,
+    .tjheader6 .icon span,.tjheader7 .icon span,
+    .tjheader8 .icon span,.tjheader9 .icon span{
+        position: absolute;
+        top: 28px;
+        left:10px;
+    }
+
+    #searchxincheng  .searchweizhi .tjheader,.tjheader0,
+    .tjheader1,.tjheader2,.tjheader3,.tjheader4,.tjheader5,.tjheader6,.tjheader7,
+    .tjheader8,.tjheader9{
+        .dizi{
+            height: 20px;
+            width: 100%;
+            margin-top: 12px;
+            color:#333333;
+        }
+    }
+    #searchxincheng  .searchweizhi .tjheader,.tjheader0,
+    .tjheader1,.tjheader2,.tjheader3,.tjheader4,.tjheader5,.tjheader6,.tjheader7,
+    .tjheader8,.tjheader9{
+        .jtdz9,{
+            height:36px;
+            width:100%;
+            text-align: top;
+            color:#999999;
+        }
+    
+    } 
+
+
+
+
+
+
+
