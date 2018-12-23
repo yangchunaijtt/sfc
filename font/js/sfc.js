@@ -278,6 +278,7 @@
                 searchcfdhide();
                 $("#searchxincheng .nowcheckcity").hide();
                 $("#searchxincheng .searchtime").show();
+                $("#datetime").val("");
             }else if(locationHash == "#xxwz"||locationHash == "#sxxwz"||locationHash == "#mxxwz"){
                 searchcfdhide();
                 $("#searchxincheng .searchweizhi").show();

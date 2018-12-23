@@ -816,4 +816,45 @@
     text-align: top;
     color: #999999;
   }
+  /* 时间页面的设置 */
+  .searchtime{
+    width:100%;
+    height:100%;
+  }
+  .searchtime .timeheader{
+    height: 40px;
+    line-height: 40px;
+    background: #fff;
+    margin: 8px 6px;
+    border-radius: 4px;
+    font-size: 16px;
+    margin-top: 15px;
+  }
+  .searchtime .timeheader .timequx
+  {
+    display: inline-block;
+    width: 30%;
+    text-align: center;
+    color: #838282;
+  }
+  .searchtime .timeheader  .timexz{
+    display: inline-block;
+    width: 40%;
+    text-align: center;
+    color: #333;
+  }
+  .searchtime .timeheader  .timeqr{
+    display: inline-block;
+    width: 27%;
+    text-align: center;
+    color: #fc9153;
+  }
+  .searchtime .timebody{
+    width:100%;
+    margin-top: 20px;
+  }
+  .searchtime .timebody input{
+    text-align: center;
+  }
+  
   
