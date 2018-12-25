@@ -4,7 +4,7 @@
     
     $(function(){
         // 当 hash变化时切换显示
-        window.onhashchange = hashChange;
+        
         created();
         hactive();
         getPassenger();
@@ -22,27 +22,10 @@
         /* goods.js页面的数据 */
         $("#idxinxi").append("<P>请稍等</P>");
         /* 点击提价时 */
-        $("#gaodesubmit").bind("touch click",function(e){
-            // 当点击提交时，把获取到的值给他们 
-            console.log(location.hash);
-            gaode.formattedAddress = $("#chufadi").val();       
-            gaode.Destination = $("#address").val();
 
-            /* 判断一下目的地是否为空  */
-            if($("#chufadi").val() == ""){
-                $("#chufadi").attr("placeholder","请稍做等待！")
-                return false;
-            }
-            if($("#address").val() == "" ){
-                $("#address").attr("placeholder","不能为空！")
-                return false;
-            }
-            if($("#containersearchtime").val()==""){
-                $("#containersearchtime").attr("placeholder","请选择出现时间");
-                return false;
-            }
-            
-            $(".xcspanleft").text($(".acityselect").text());
+        /* 支付模块的功能 */
+        $("#gaodesubmit").bind("touch click",function(e){
+           paymentModular.payment();
         })
 
         /* 搜索功能的实现 */
@@ -52,7 +35,14 @@
         $("#citysearch").blur(function(){
              $("#citysearch").val("");
         })
+
+        /* 修改样式 */
+        $("#ctxz").css("display","none");
+        
+        window.onhashchange = hashChange;
     })
+
+   
 
     /* 选择城市的初始化函数 */
     let cityselectval = {
@@ -72,7 +62,9 @@
         citysearchSearchtips:[],   //搜索得到的数组结果
         dingweicity:"",  /* 搜索定位城市需要的城市名 */
     }
-
+    let localdiz = {
+        nowSignin:"http://qckj.czgdly.com/bus/MobileWeb/WxWeb-kongbatong/Register_content.html",      /* 登录地址 */
+    }
 
     // 全局静态 数据
     let sfcsj = {
@@ -82,9 +74,10 @@
         // 乘客数据的地址 
         vownerUrl:"https://www.easy-mock.com/mock/5bff7c57ec952807e8183f94/example/vowner",
         // 乘客数据的div
+        
         passengerDiv:`
             <div class="cylx-cy clearfix" id="passengerDiv">
-                <a href="#details" id="aPassengerDiv" class="clearfix">
+                <a href="#showdata" id="aPassengerDiv" target="_blank" class="clearfix">
                 <div class="cylx-cyheader">
                 <span class="bt">常用</span>
                 <div class="time">
@@ -104,7 +97,7 @@
         `,
         // 车主数据的 div 
         vownerDiv:`
-        <a href="#details" id="avownerDiv" class="clearfix">
+        <a href="#showdata" id="avownerDiv"  target="_blank"  class="clearfix">
             <div class="circle clearfix" id="vownerDiv">
            
             <div class="left vownerleft clearfix">
@@ -133,7 +126,7 @@
         // 全部行程中乘客 
         runpassengerDiv:`
         <div class="circle clearfix" id="runpassengerDiv">
-        <a href="#details" id="arunpassengerDiv" class="clearfix">
+        <a href="#showdata" id="arunpassengerDiv" class="clearfix">
             <div class="left runpassengerleft  clearfix">
                 <div class="time">
                     <span class="data">14号</span>
@@ -151,16 +144,15 @@
             </div>
             </a>
             <div class="right clearfix">
-                <form action="">
-                    <input type="submit" class="ricon left btn btn-success" value="抢单">
-                </form>
+                <button  class="ricon left btn btn-success " id="paymentbutton"
+                onclick="paymentbutton()">抢单</button>
             </div>
         </div>
         `,
         //全部行程中车主
         runvownerDiv:`
         <div class="circle clearfix" id="runvownerDiv">
-        <a href="#details" id="arunvownerDiv" class="clearfix">
+        <a href="#ownshowdata" id="arunvownerDiv"  target="_blank"  class="clearfix">
             <div class="left runvownerleft  clearfix" >
                 <div class="time">
                     <span class="data">14号</span>
@@ -176,12 +168,11 @@
                     <div class="df">新北区市政府</div>
                 </div>
             </div>
-        </a>
-        <div class="right clearfix">
-            <form action="">
-                <input type="submit" class="ricon left btn btn-primary " value="拼单">
-            </form>
-        </div>
+        
+            <div class="right clearfix">
+                <input type="submit" class="ricon left btn btn-primary " value="查看">
+            </div>
+            </a>
         </div> 
         `
     }
@@ -215,6 +206,7 @@
         $(".details").hide();
         $("#searchcity").hide();
         $("#searchxincheng").hide();
+        $(".showsjdata").hide();
     }
     //切换路由的初始化方法
     function hashcreate(){
@@ -224,6 +216,7 @@
         $(".details").hide();
         $("#searchcity").hide();
         $("#searchxincheng").hide();
+        $(".showsjdata").hide();
     }
     
     // 切换路由的方法
@@ -239,14 +232,15 @@
        // console.log(locationHash);
         // 处理一下参数
         // #details?a=3
-        if(locationHash=="#details?a=3" || locationHash=="#details?a=1" || locationHash=="#details?a=0"
-        || locationHash=="#details?a=2" || locationHash=="?nowcity=常州#details?a=p"){
-            locationHash = "#details";
-        }else if(locationHash=="#details?b=3" || locationHash=="#details?b=1" || locationHash=="#details?b=0"
-        || locationHash=="#details?b=2"){
-            locationHash = "#details";
-        }
+        console.log(locationHash);
+        var val1 = locationHash.split("?");
+        /* console.log(val1); */
 
+        /* 判断参数 */
+        if(val1[0]=="#ownshowdata"){
+            openxq();
+        }
+        
         if(locationHash=="#passenger"){
             hashcreate();
             $(".passenger").show();
@@ -257,6 +251,7 @@
             hashcreate();
             $(".run").show();
         }else if(locationHash=="#details"){
+            $("#ctxz").css("display","block");
             hashcreate();
             $(".details").show();
         }else if(locationHash == "#searchcity"){
@@ -284,6 +279,8 @@
                 $("#searchxincheng .searchweizhi").show();
                 $("#searchxincheng .nowcheckcity").show();
             }
+        }else if(locationHash =="#showdata"){
+            console.log("111");
         }
     }
     function searchcfdhide(){
@@ -310,12 +307,13 @@
             $(".htoggleone").removeClass("hactive");
             $(".htoggletwo").removeClass("hactive");
             $(".htogglethree").removeClass("hactive");
-          
-
+            
         };
        
     }
-     
+    
+    
+
     //获取乘客数据进行渲染
     function getPassenger(){
         $.ajax({
@@ -332,7 +330,10 @@
     function getVowner(){
         $.ajax({
             url: sfcsj.vownerUrl,
-           type: 'GET',
+            type: 'GET',
+            data:{
+
+            },
             success: function (data) {
                 sfcsj.vowner = data ;
                setVowner(data);
@@ -353,8 +354,9 @@
                 $("#passengerDiv").attr("id",idpassengerDiv);
 
                 // 改变a标签的编号
-                var aPassengerDivsj = "#details?"+"a="+i;
+                var aPassengerDivsj ="./font/html/xq.html#ownshowdata?"+"a="+i;
                 $("#aPassengerDiv").attr("href",aPassengerDivsj);
+               
                 var idaPassengerDiv = "aPassengerDiv"+i;
                 $("#aPassengerDiv").attr("id",idaPassengerDiv);
 
@@ -363,11 +365,12 @@
                 */
 
                 $("#runpassengerNode").append(sfcsj.runpassengerDiv);
-                var runaPassengerDivsj = "#details?"+"a="+i;
+                var runaPassengerDivsj = "#showdata?"+"a="+i;
                 $("#arunpassengerDiv").attr("href",runaPassengerDivsj);
                 var runidaPassengerDiv = "arunpassengerDiv"+i;
+                
                 $("#arunpassengerDiv").attr("id",runidaPassengerDiv);
-                // console.log(runaPassengerDivsj);
+
             }
         }
     }
@@ -380,7 +383,7 @@
             for(var i = 0 ;i<vownerData.length;i++){
                 $("#vownperNode").append(sfcsj.vownerDiv);
                 // 车主是?b=xxxx
-                var avownperNodesj = "#details?"+"b="+i;
+                var avownperNodesj = "./font/html/xq.html#ownshowdata?"+"b="+i;
                 $("#avownerDiv").attr("href",avownperNodesj);
                 var idaPassengerDiv = "aPassengerDiv"+i;
                 $("#avownerDiv").attr("id",idaPassengerDiv);
@@ -389,8 +392,11 @@
                     全部行程中的车主
                     #arunvownerDiv
                 */
+                /* 
+                    #ownshowdata?c = 0  全部行程中车主的数据
+                */
                 $("#runvownerNode").append(sfcsj.runvownerDiv);
-                var arunvownerDivsj = "#details?"+"b="+i;
+                var arunvownerDivsj = "./font/html/xq.html#ownshowdata?"+"c="+i;
                 $("#arunvownerDiv").attr("href",arunvownerDivsj);
                 var idarunvownerDiv = "arunvownerDiv"+i;
                 $("#arunvownerDiv").attr("id",idarunvownerDiv);
@@ -402,7 +408,8 @@
     /* 选择城市页 函数 searchcity */
     function cityselect(){
       cityselectval.nowcity =   $(".acityselect").text();
-      window.location.search = "?nowcity="+cityselectval.nowcity;
+      /* 这个导致的bug */
+      /* window.location.search = "?nowcity="+cityselectval.nowcity; */
       searchcity();
     }
     
@@ -614,7 +621,39 @@
             var currentCenter = map.getCenter(); 
         }
 
-   
 
+   
+     /* 提交功能模块的实现 */
+     let paymentModular = {
+         /* 初始化数据 */
+         states:0,  /* 
+         0默认代表未成功，填写的地址为空，
+         1代表成功，
+         2：未成功，支付问题*/
+        /* 初始化函数 */
+        payment:function(){
+             // 当点击提交时，把获取到的值给他们 
+             console.log(location.hash);
+             gaode.formattedAddress = $("#chufadi").val();       
+             gaode.Destination = $("#address").val();
+ 
+             /* 判断一下目的地是否为空  */
+             if($("#chufadi").val() == ""){
+                 $("#chufadi").attr("placeholder","请稍做等待！");
+                 paymentModular.states = 0;
+             }  
+             if($("#address").val() == "" ){
+                 $("#address").attr("placeholder","不能为空！");
+                 paymentModular.states = 0;
+             }
+            if($("#containersearchtime").val() == ""){
+                 $("#containersearchtime").attr("placeholder","请选择出现时间！");
+                 paymentModular.states = 0;
+             }
+             $(".xcspanleft").text($(".acityselect").text());
+        },
+
+
+    }
 
 
