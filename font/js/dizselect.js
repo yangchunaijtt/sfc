@@ -1,9 +1,11 @@
 
     $(function(){
         createlival();
+        /* 这里的问题 */
         $("#chufadi").bind("focus",function(){
             inchufadi();
         })
+        /* 这里的问题 */
         $("#address").bind("focus",function(){
             inaddress();
         })
@@ -299,6 +301,8 @@
      /* 点击搜索功能的函数 */
      let  autoInputsunval = {
          result:{},   /*  autoInputsun的返回值result返回给需要的数据 */
+         cfdresult:{},
+         mddresult:{},
      }
      function autoInputsun(){
 
@@ -323,7 +327,17 @@
                 data: result
             }); */
             /* console.log(searchval,status,result); */
-            autoInputsunval.result = result;
+            
+            
+            if(window.location.hash =="#sxxwz"){
+                autoInputsunval.cfdresult = result;
+                console.log(autoInputsunval.cfdresult);
+            }
+            if(window.location.hash =="#mxxwz"){
+                
+                autoInputsunval.mddresult = result;
+                console.log(autoInputsunval.mddresult);
+            }
             $(".searchweizhi").empty();
             for(var j = 0; j<result.tips.length;j++){
                 autosunnode(j,result);
@@ -413,25 +427,33 @@
         */
         function xxwzclick(i){
            
-            var result = autoInputsunval.result;
-            var tips = autoInputsunval.result.tips;  
+            /* var result = autoInputsunval.result;
+            var tips = autoInputsunval.result.tips;  */ 
           /*   console.log(tips[i]); */
             var locationhash = window.location.hash;
            /*  console.log(locationhash); */
             /* 出发地  始发地 */
-            if(locationhash=="#sxxwz"){
-                
-                $("#chufadi").val(tips[i].name);
-                $(".lnglat").val(tips[i].location);
-                locationhash = "#details";
-                
-            }else if(locationhash=="#mxxwz"){
-                
+            if(locationhash=="#mxxwz"){
+                let result = autoInputsunval.mddresult;
+                let tipstwo = autoInputsunval.mddresult.tips;  
+                /* 点击时，目的地的数据 */
+                fabuxiaoxi.mmddata =  autoInputsunval.mddresult.tips[i];
                 /* 目的地 目的地经纬度 */
-                $("#address").val(tips[i].name);
-                $("#mmdjwd").val(tips[i].location);
+                $("#address").val(tipstwo[i].name);
+                $("#mmdjwd").val(tipstwo[i].location);
                
             }
+            if(locationhash=="#sxxwz"){
+                let result = autoInputsunval.cfdresult;
+                let tipsone = autoInputsunval.cfdresult.tips;  
+                /*  #sxxwz 出发地 经纬度信息*/
+                fabuxiaoxi.cfddata  = autoInputsunval.cfdresult.tips[i];
+                $("#chufadi").val(tipsone[i].name);
+                $(".lnglat").val(tipsone[i].location);
+                locationhash = "#details";
+                
+            }
+             
             window.location.hash = "#details";
         }
 

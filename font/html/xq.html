@@ -8,7 +8,7 @@
     <!-- bootstrap样式表 -->
     <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"> 
     <!-- 图片 -->
-    <link rel="shortcut icon" href="./font/img/sfc.jpg">
+    <link rel="shortcut icon" href="../img/sfc.jpg">
     <!-- 公共的css -->
     <link rel="stylesheet" href="../css/react.css">
     <!-- 自定义样式表 -->
@@ -18,17 +18,23 @@
 <body>
     <!-- 详情页 -->
     <div class="showsjdata clearfix">
-            <!-- 输入查询 -->
+        <!-- 输入查询 -->
         <div class="srselect clearfix">
-            <div class="changz"> 常州</div>
-            <div class="fanhuisyj">返回</div>
+            <div class="changzleft cleafix">
+                <div class="changz"> 常州</div>
+            </div>
+            <div class="fanhuisyj clearfix">
+              <a href="../../sfc.html#ddxq">
+                <div class="fhusyjd">返回</div>
+              </a>
+            </div>
         </div>
         <!-- 地图显示图 -->
         <div id="sdcontainer">
         </div> 
         <div class="showmoredata clearfix" >
                 <div class="sdstatus clearfix">
-                    <span class="sdstatuss">单子情况:</span>
+                    <span class="sdstatuss">订单情况:</span>
                     <div class="sdstatusd">可接单</div>
                 </div>
                 <!-- 显示出发地 -->
@@ -52,8 +58,10 @@
                     <div class="cfdsdmd">测试数据测试数据测试数据</div>
                </div>
                <!-- 点击取消   -->
-               <div id="qxsfcxinxi">
-                   取消发布信息
+               <div class="clickqxx clearfix">
+                    <div id="qxsfcxinxi">
+                        取消订单
+                    </div>
                </div>
                <!-- 发送始发地经纬度的input  name="chufadijwd" -->
                <input id='lnglat' type="text" style="display:none" name="chufadijwd">

@@ -971,22 +971,18 @@ input[type=date] {
 .pdetails .pdetailsfh {
   margin: 6px 8px;
   background: #fff;
-  border-radius: 4px;
 }
 .pdetails .pdetailsfh .pdetailsfhicon {
   width: 20%;
   text-align: center;
   line-height: 66px;
   display: inline-block;
-  font-size: 20px;
-  color:#f0935a;
 }
 .pdetails .pdetailsfh .pdetailszdxq {
   width: 50%;
   text-align: center;
   line-height: 66px;
   display: inline-block;
-  font-size: 20px;
 }
 .pdetails .pdetailsfh .pdetailssyj {
   width: 25%;
@@ -1001,19 +997,16 @@ input[type=date] {
   margin-top: 18px;
   border-radius: 3px;
   background: #5cb85c;
-  text-align: center;
-  color: #fff;
 }
 .pdetails .pdetailsbody {
-  margin: 0px 8px;
+  width: 100%;
   background: #fff;
-  border-radius: 4px;
 }
 .pdetails .pdetailsbody .pdetailsdad {
   width: 100%;
 }
 .pdetails .pdetailsbody .pdetailsdad .pdetailspan {
-  width: 30%;
+  width: 20%;
   text-indent: 10px;
   display: inline-block;
   line-height: 38px;
@@ -1021,10 +1014,9 @@ input[type=date] {
 }
 .pdetails .pdetailsbody .pdetailsdad .pdetaildiv {
   text-indent: 8px;
-  width: 68%;
+  width: 78%;
   display: inline-block;
-  line-height: 38px;
-  /* overflow: hidden;
+  overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap; */
+  white-space: nowrap;
 }

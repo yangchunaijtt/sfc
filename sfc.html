@@ -31,6 +31,9 @@
         <div class="hvowner">
             <a href="#vowner"   class="htoggletwo">车主</a>
         </div>
+        <div id="ddxq">
+            <a href="#ddxq" class="htogglefour">支付</a>
+        </div>
         <div  class="hrun">
             <a href="#run" class="htogglethree">全部行程</a>
         </div>
@@ -321,10 +324,72 @@
             </div>
             
         </div>
+
+        <!-- 支付主页 -->
+        <div class="paymentzy clearfix" style="display: none">
+            <!-- 上不头部 -->
+            <div class="phdicon clearfix">
+                <span class="ptbicon  glyphicon glyphicon-comment"></span>
+                <div class="mypay">
+                    我的支付
+                </div>
+            </div>
+            <!-- 复用区 -->
+            <a href="#payment" class="aqkpayment clearfix">
+                <div class="paymentbody clearfix">
+                    <div class="paydate clearfix">
+                        <span class="paydateicon">订单时间:</span>
+                        <div class="paytime">
+                            2019-12-31 10:59
+                        </div>
+                    </div>
+                    <div class="paymoney clearfix">
+                        <div class="pmsl">支付金额:</div>
+                        <div class="payyiyuan">1.00</div>
+                    </div>
+                    <div class="paystate">
+                        <span class="payszfjg">支付结果:</span>
+                        <span class="payssuc">成功</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <!-- 支付详情页 -->
+        <div class="pdetails clearfix"  style="display: none">
+            <div class="pdetailsfh clearfix">
+                <span class="pdetailsfhicon glyphicon glyphicon-shopping-cart"></span>
+                <span class="pdetailszdxq">账单详情</span>
+                <a href="#ddxq" class="pdetailssyj">
+                    <span>返回</span>
+                </a>
+            </div>
+            <div class="pdetailsbody">
+                <div class="pdetailsdad pdetailsone clearfix">
+                    <span class="pdetailspan">付款号:</span>
+                    <div class="pdetaildiv pdtvpno">xxxxxxxx</div>
+                </div>
+                <div class="pdetailsdad pdetailstwo clearfix" >
+                    <span class="pdetailspan">支付价格:</span>
+                    <div class="pdetaildiv">1.00</div>
+                </div>  
+                <div  class="pdetailsdad pdetailsthree clearfix">
+                     <span class="pdetailspan">支付类型:</span>
+                     <div class="pdetaildiv">光大国旅</div>
+                </div>
+                <div  class="pdetailsdad pdetailsthree clearfix">
+                    <span class="pdetailspan">支付日期:</span>
+                    <div class="pdetaildiv">2019-12-31 10:59</div>
+               </div>
+               <div  class="pdetailsdad pdetailsfour clearfix">
+                    <span class="pdetailspan">支付情况:</span>
+                    <div class="pdetaildiv">成功</div>
+               </div>
+            </div>
+        </div>
     </div>
     
     <script src="./font/fontjs/jquery-3.2.1.min.js"></script>
-    
+   
     <!-- bootstrap脚本 -->
     <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!-- 时间选择器前置脚本 -->
@@ -347,7 +412,6 @@
     <script src="./font/js/sfc.js"></script>
     <script src="./font/js/dizselect.js"></script>
     <script src="./font/js/payment.js"></script>
-</body>
     <script type="text/javascript">
         /* 时间控件函数 */
        /*  var date = new Date(); */
@@ -358,15 +422,20 @@
             minDate: false, // 最小日期，如'2018/08/15'，则14号及14号前的日期都不可选
            
         });
-
+        
+        let nowusermsg = {
+            uid:111,         /* 用户id */
+            openid:"",
+        }
         /* 后台给的先调用下 这段js */
         getOpenid(function(openid){
-	       vMsg.uid = localCache("uid-kongbatong");
-	       vMsg.openid = openid;
-	       if(null == vMsg.uid || "" == vMsg.uid) {
+            nowusermsg.uid = localCache("uid-kongbatong");
+           console.log(nowusermsg.uid);
+	       nowusermsg.openid = openid;
+	       if(null == nowusermsg.uid || "" == nowusermsg.uid) {
                     register("http://qckj.czgdly.com/bus/MobileWeb/WxWeb-kongbatong/Register_content.html");   //返回注册登录页面
                 } else {
-                    initData(vMsg.uid); //加载页面数据
+                    initData(nowusermsg.uid); //加载页面数据
                 }
             },location.search);
             /* 先记录一下当前页面地址在跳转 */
@@ -379,4 +448,6 @@
             window.location.href = "Register_content.html";		/* 发送给他的地址 */	
 		}
     </script>  
+</body>
+    
 </html>

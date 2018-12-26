@@ -65,7 +65,17 @@
     let localdiz = {
         nowSignin:"http://qckj.czgdly.com/bus/MobileWeb/WxWeb-kongbatong/Register_content.html",      /* 登录地址 */
     }
+    /* 发布消息接受 */
 
+    let fabuxiaoxi = {
+        cfddata:{}, /* 存储出发地数据的地方 */
+        mmddata:{}, /* 存储目的地数据的地方 */
+    };
+
+    /* 点击得到的的数据 */
+    let clickresult = {
+        result:{}
+    }
     // 全局静态 数据
     let sfcsj = {
         passenger:{},  //乘客的数据
@@ -207,6 +217,8 @@
         $("#searchcity").hide();
         $("#searchxincheng").hide();
         $(".showsjdata").hide();
+        $(".paymentzy").hide();
+        $(".pdetails").hide();
     }
     //切换路由的初始化方法
     function hashcreate(){
@@ -217,6 +229,8 @@
         $("#searchcity").hide();
         $("#searchxincheng").hide();
         $(".showsjdata").hide();
+        $(".paymentzy").hide();
+        $(".pdetails").hide();
     }
     
     // 切换路由的方法
@@ -281,6 +295,12 @@
             }
         }else if(locationHash =="#showdata"){
             console.log("111");
+        }else if(locationHash=="#ddxq"){
+            hashcreate();
+            $(".paymentzy").show();
+        }else if(val1[0]=="#payment"){
+            hashcreate();
+            $(".pdetails").show();
         }
     }
     function searchcfdhide(){
@@ -427,8 +447,9 @@
    
     var map = new AMap.Map('container', {
         resizeEnable: true,
-        zoom:10,//级别
+        zoom:14,//级别
         center: [119.9,31.7],//中心点坐标
+
     });
 
         /* 城市出来地址 */
@@ -467,16 +488,36 @@
                 
             }
             /* 定位maker实现的代码 */
-            $(".searchp0").bind("touch click",function(){  touchchuli(result.tips[0])     });
-            $(".searchp1").bind("touch click",function(){  touchchuli(result.tips[1])      });
-            $(".searchp2").bind("touch click",function(){  touchchuli(result.tips[2])    });
-            $(".searchp3").bind("touch click",function(){  touchchuli(result.tips[3])     });
-            $(".searchp4").bind("touch click",function(){  touchchuli(result.tips[4])     });
-            $(".searchp5").bind("touch click",function(){  touchchuli(result.tips[5])     });
-            $(".searchp6").bind("touch click",function(){  touchchuli(result.tips[6])     });
-            $(".searchp7").bind("touch click",function(){  touchchuli(result.tips[7])     });
-            $(".searchp8").bind("touch click",function(){  touchchuli(result.tips[8])     });
-            $(".searchp9").bind("touch click",function(){  touchchuli(result.tips[9])     });
+            $(".searchp0").bind("touch click",function(){  
+                fabuxiaoxi.mmddata = result.tips[0];
+                touchchuli(result.tips[0])     });
+            $(".searchp1").bind("touch click",function(){ 
+                fabuxiaoxi.mmddata = result.tips[1];
+                 touchchuli(result.tips[1])      });
+            $(".searchp2").bind("touch click",function(){ 
+                fabuxiaoxi.mmddata = result.tips[2];
+                touchchuli(result.tips[2])    });
+            $(".searchp3").bind("touch click",function(){  
+                fabuxiaoxi.mmddata = result.tips[3];
+                touchchuli(result.tips[3])     });
+            $(".searchp4").bind("touch click",function(){
+                fabuxiaoxi.mmddata =result.tips[4]; 
+                 touchchuli(result.tips[4])     });
+            $(".searchp5").bind("touch click",function(){ 
+                fabuxiaoxi.mmddata = result.tips[5]; 
+                touchchuli(result.tips[5])     });
+            $(".searchp6").bind("touch click",function(){ 
+                fabuxiaoxi.mmddata =result.tips[6]; 
+                touchchuli(result.tips[6])     });
+            $(".searchp7").bind("touch click",function(){ 
+                fabuxiaoxi.mmddata = result.tips[7];
+                 touchchuli(result.tips[7])     });
+            $(".searchp8").bind("touch click",function(){ 
+                fabuxiaoxi.mmddata = result.tips[8];
+                 touchchuli(result.tips[8])     });
+            $(".searchp9").bind("touch click",function(){  
+                fabuxiaoxi.mmddata = result.tips[9];
+                touchchuli(result.tips[9])     });
           
           })
         })
@@ -501,7 +542,8 @@
             /* {P: 31.774645, R: 119.97328400000004, lng: 119.973284, lat: 31.774645} */
            
             maponbh(result.location);
-            $("#mmdjwd").val(result.location);
+            clickresult.result= result;
+            /* 这里的问题 */
         }
       
      }
@@ -520,6 +562,10 @@
         geolocation.getCurrentPosition(function(status,result){
             if(status=='complete'){
                 onComplete(result)
+
+                /* 定位时绑定到出发地的函数的值上 */
+                fabuxiaoxi.cfddata = result;
+
             }else{
                 onError(result)
             }
@@ -539,7 +585,7 @@
     function onError(data) {
         /* 失败后把失败的值给他 */
         /* data.message:失败原因 */
-        cosole.log("获取失败");
+        console.log("获取失败");
         gaode.errordata = data ;
     } 
 
@@ -641,16 +687,60 @@
              if($("#chufadi").val() == ""){
                  $("#chufadi").attr("placeholder","请稍做等待！");
                  paymentModular.states = 0;
+                 return false;
              }  
              if($("#address").val() == "" ){
                  $("#address").attr("placeholder","不能为空！");
                  paymentModular.states = 0;
+                 return false;
              }
             if($("#containersearchtime").val() == ""){
                  $("#containersearchtime").attr("placeholder","请选择出现时间！");
                  paymentModular.states = 0;
+                 return false;
              }
              $(".xcspanleft").text($(".acityselect").text());
+
+             
+            var departure = $("#departure").val();
+            /* 出发地的所有信息 */
+            var cfddata = fabuxiaoxi.cfddata;
+            /* 目的地所有信息 */
+             var mdata = fabuxiaoxi.mmddata;
+            console.log("出发地",cfddata);
+            console.log("目的地",mdata);
+            
+            let lyhash  = window.location.hash;
+            var valzhi  = lyhash.split("?");
+            var   pushType ="";
+            if(valzhi[1]=="b=v"){
+               pushType = "Passenger";  /* 判断是车主 还是乘客发布的 */
+            }else if(valzhi[1]=="a=p"){
+                pushType = "Driver";  /* 判断是车主 还是乘客发布的 */
+            }
+           
+            let departureTime = $("#containersearchtime").val(); /* 到达时间 */
+            $.ajax({
+                type:"post",
+                url:"http://qckj.czgdly.com/bus/MobileWeb/madeFreeRideOrders/saveMadeFROrders.asp",
+                data:{
+                    uid	:nowusermsg.uid,        /* 用户id  */
+                    departure:cfddata.name,   /* 出发地 */
+                    dLng :cfddata.location.lng,    /* 出发地经度 */
+                    dLat: cfddata.location.lat,   /* 出发地纬度 */
+                    arrival:mdata.name,     /* 目的地 */
+                    aLng:mdata.location.lng,    /* 目的地经度 */
+                    aLat:mdata.location.lat,  /* 目的地纬度 */
+                    departureTime:departureTime,    /* 发布时间 */
+                    pushType:pushType,        /* 发布类型 */
+                },
+                success:function(data){
+                    console.log("获取成功的数据",data);
+                },
+                error:function(data){
+                    console.log("失败的原因",data);
+                }
+            })
         },
 
 
