@@ -1,4 +1,6 @@
 $(function(){
+    
+
     /* 点击时  地图上添加一个maker点 并且聚焦 */
    $(".cfdsdmdiv").bind("touch click",function(){
        cfdsdmdivcl("cfd");
@@ -6,10 +8,117 @@ $(function(){
    $(".mddsdmdiv").bind("touch click",function(){
        cfdsdmdivcl("mdd");
    })
+   /* 绑取消订单的事件 */
+   $("#qxsfcxinxi").bind("touch click",function(){
+        qxsfcxinxi();
+   })
+   /* 获取路由的值 */
+   hqselectval();
    
+
 })
+/* 页面初始化的数据 */
+    let nowusermsg = {
+        uid:111,
+        id:111,
+        state:111,
+    }
+/* 获取向数据库获取值的定义id 和 uid */
+    function hqselectval(){
+        var hashval = window.location.hash;
+        var valone = hashval.split("?");
+        var valtwo = valone[1].split("&");
+        var valid = valtwo[0].split("=");
+        var valuid = valtwo[1].split("=");
+        nowusermsg.id =  parseInt(valid[1]);
+        nowusermsg.uid = parseInt(valuid[1]);
+        
+        console.log(hashval,typeof nowusermsg.id,typeof nowusermsg.uid);
+        ajaxhair(nowusermsg.id,nowusermsg.uid);
+    }
+/* 发送ajax的数据 */
+    function ajaxhair(id,uid){
+        $.ajax({
+            type:"post",
+            url:"http://qckj.czgdly.com/bus/MobileWeb/madeFreeRideOrders/getFROrderDetails.asp",
+            data:{
+              uid:uid,
+              id:id,
+            },
+            success:function(data){
+                console.log("获取成功的数据",data);
+                rendering(data);
+            },
+            error:function(data){
+                console.log("失败的原因",data);
+            }
+        })
+    }   
+/* 向页面渲染数据的函数 */
+    function rendering(data){
+        var sj = data.obj;
+        if(data.result>0){
+            /* 出发地 */
+                $(".cfdsdmdiv").text(sj.departure);
+            /* 目的地 */
+                $(".mddsdmdiv").text(sj.arrival);
+            /*出发时间  */
+                $(".cftimesdmd").text(sj.departureTime);
+            /* 期望时间 */
+                $(".cfdsdmd").text(sj.arrivalTime);
+            /* 身份 */
+                if(sj.pushType==="Passenger"){
+                    $(".sfvaldiv").text("乘客");
+                }else{
+                    $(".sfvaldiv").text("车主");
+                }
+            /* 订单结果 */
+            nowusermsg.state = sj.state ;
+            if(nowusermsg.state == 0){
+                $(".sdstatusd").text("发布成功");
+            }else if(nowusermsg.state == -1){
+                $(".sdstatusd").text("失效了");
+            }else if(nowusermsg.state == 1){
+                $(".sdstatusd").text("订单行程已完成");
+            }else{
+                $(".sdstatusd").text("未知的状态");
+            }
+        }
+    }
 
-
+/* 取消订单的操作 */
+    function qxsfcxinxi(){
+        if(nowusermsg.state===0){
+            $.ajax({
+                type:"post",
+                url:"http://qckj.czgdly.com/bus/MobileWeb/madeFreeRideOrders/updateFROrders.asp",
+                data:{
+                  uid:nowusermsg.uid,
+                  id:nowusermsg.id,
+                  state:-1,
+                },
+                success:function(data){
+                    console.log("获取成功的数据",data);
+                    if(data.result===-1){
+                        $(".qxiaovaldv").text("操作失败,请重新刷新");
+                    }else if(data.result===1){
+                        $(".qxiaovaldv").text("操作成功,请点返回");
+                    }
+                   
+                },
+                error:function(data){
+                    $(".qxiaovaldv").text("网络原因，刷新在试");
+                }
+            })
+        }else if(nowusermsg.state===-1){
+            $(".qxiaovaldv").text("种种原因,暂时不能取消");
+        }else if(nowusermsg.state===1){
+            $(".qxiaovaldv").text("订单已完成");
+        }else {
+            $(".qxiaovaldv").text("网络原因，刷新在试");
+        }
+        
+    }
 
 /* 地图的初始化 */
 var map = new AMap.Map('sdcontainer', {
@@ -137,3 +246,5 @@ function autocfdsdmdiv(val){
         }
         return true;
     }; 
+
+    /* 需求页获取详细信息 */

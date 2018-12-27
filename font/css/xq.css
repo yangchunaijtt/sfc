@@ -162,3 +162,21 @@
   border-radius: 6px;
   margin:0  auto;
 }
+.sfval,.qxiaoval{
+  width:100%;
+}
+  .sfvalspan,.qxiaovalspan{
+    width: 25%;
+    display: inline-block;
+    text-indent: 10px;
+    height: 40px;
+    line-height: 40px;
+    vertical-align: top;
+  }
+  .sfvaldiv,.qxiaovaldv{
+    width: 72%;
+    display: inline-block;
+    text-indent: 10px;
+    height: 40px;
+    line-height: 40px;
+  }

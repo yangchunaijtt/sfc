@@ -1,15 +1,55 @@
    /*  var myDate = new Date();
     var time = myDate.getDate().toString()+myDate.getHours().toString()+myDate.getMinutes().toString();
     console.log(time); */
-    
+
+      /* 时间控件函数 */
+       /*  var date = new Date(); */
+       var nowusermsg = {
+            uid:111,         /* 用户id */
+            openid:"",
+        }
+
     $(function(){
         // 当 hash变化时切换显示
+    /* 页面初始化时就执行这些数据 */
+    $(".searchtime #datetime").datetimepicker({
+        format: 'YYYY-MM-DD HH:mm',
+        locale: moment.locale('zh-CN'),
+    /*  startDate: new Date() */   //目前之前的时间都不能选
+        minDate: false, // 最小日期，如'2018/08/15'，则14号及14号前的日期都不可选
+    
+        });
         
-        created();
-        hactive();
-        getPassenger();
-        getVowner();
-        formcontrol();
+    
+        /* 后台给的先调用下 这段js */
+        getOpenid(function(openid){
+            nowusermsg.uid = localCache("uid-kongbatong");
+        console.log(nowusermsg.uid);
+            getPassenger();
+            getVowner();
+        nowusermsg.openid = openid;
+        if(null == nowusermsg.uid || "" == nowusermsg.uid) {
+                    register("http://qckj.czgdly.com/bus/MobileWeb/WxWeb-kongbatong/Register_content.html");   //返回注册登录页面
+                } else {
+                    // initData(nowusermsg.uid); //加载页面数据
+                    created();
+                    hactive();
+                    formcontrol();
+                }
+            },location.search);
+            /* 先记录一下当前页面地址在跳转 */
+            /* http://qckj.czgdly.com/bus/MobileWeb/WxWeb-kongbatong/Register_content.html
+                记录在本地
+            */
+        function register(val){
+            var nowhref = window.location.href;
+            localCache("page",nowhref);     /* 存储在本地的地址 */
+            window.location.href = "Register_content.html";		/* 发送给他的地址 */	
+        }
+
+
+
+        
         /* 点击id可以选择城市 */
         $("#cityselect").bind("touch click",function(){
             cityselect();
@@ -49,6 +89,10 @@
         nowcity:"",  
     }
 
+    /* 存储乘客和车主的路由值 */
+    let locationqjval = {
+        val:"",     /* 存储是车主还是乘客的路由值 */
+    }
 
     /* goods.js页面的数据合并 */
     let gaode = {
@@ -80,9 +124,9 @@
     let sfcsj = {
         passenger:{},  //乘客的数据
         vowner:{},       // 车主的数据
-        passengerUrl:"https://www.easy-mock.com/mock/5bff7c57ec952807e8183f94/example/passenger",
+        passengerUrl:"http://qckj.czgdly.com/bus/MobileWeb/madeFreeRideOrders/queryPageMadeFROrders.asp",
         // 乘客数据的地址 
-        vownerUrl:"https://www.easy-mock.com/mock/5bff7c57ec952807e8183f94/example/vowner",
+        vownerUrl:"http://qckj.czgdly.com/bus/MobileWeb/madeFreeRideOrders/queryPageMadeFROrders.asp",
         // 乘客数据的div
         
         passengerDiv:`
@@ -91,15 +135,13 @@
                 <div class="cylx-cyheader">
                 <span class="bt">常用</span>
                 <div class="time">
-                    <span class="hours">07</span>
-                    <span class="mao clearfix"> : </span>
-                    <span class="minti">50</span>
+                    <span class="hours" id="psghours"></span>
                 </div>
                 </div>
                 <div class="cylx-cycenter clearfix">
-                    <div id="cylx-departure">常州市新北区万达</div>
+                    <div id="cylx-departure" class="psgdeparture">常州市新北区万达</div>
                     <span class="glyphicon glyphicon-arrow-right cycicon"></span>
-                    <div id="cylx-Destination">常州市汽车总站</div>
+                    <div id="cylx-Destination"  class="psgdestination">常州市汽车总站</div>
                 </div>
             </a>
             </div>
@@ -109,22 +151,19 @@
         vownerDiv:`
         <a href="#showdata" id="avownerDiv"  target="_blank"  class="clearfix">
             <div class="circle clearfix" id="vownerDiv">
-           
-            <div class="left vownerleft clearfix">
-                <div class="time">
-                    <span class="data">14号</span>
-                    <div class="rq">
-                        <span class="hours">14</span>
-                        <span class="mao">:</span>
-                        <span class="minti">35</span>
+                <div class="left vownerleft clearfix">
+                    <div class="time">
+                        <span class="data" id="vdata"></span>
+                        <div class="rq">
+                            <span class="hours" id="vdhours"></span>
+                        </div>
+                    </div>
+                    <div class="mdd clearfix">
+                        <div class="cfd" id="vdcfd"></div>
+                        <span class="glyphicon glyphicon-arrow-right mdd-icon"></span>
+                        <div class="df" id="vdf"></div>
                     </div>
                 </div>
-                <div class="mdd clearfix">
-                    <div class="cfd">新北市万达广场</div>
-                    <span class="glyphicon glyphicon-arrow-right mdd-icon"></span>
-                    <div class="df">新北区市政府</div>
-                </div>
-            </div>
             <div class="right clearfix">
                 <span class="ricon left glyphicon glyphicon-menu-right"></span>
                 </div>
@@ -139,17 +178,15 @@
         <a href="#showdata" id="arunpassengerDiv" class="clearfix">
             <div class="left runpassengerleft  clearfix">
                 <div class="time">
-                    <span class="data">14号</span>
+                    <span class="data" id="rpsgdata"></span>
                     <div class="rq">
-                        <span class="hours">14</span>
-                        <span class="mao">:</span>
-                        <span class="minti">35</span>
+                        <span class="hours" id="rpsghours"></span>
                     </div>
                 </div>
                 <div class="mdd clearfix">
-                    <div class="cfd">新北市万达广场</div>
+                    <div class="cfd" id="rpsgcfd"></div>
                     <span class="glyphicon glyphicon-arrow-right mdd-icon"></span>
-                    <div class="df">新北区市政府</div>
+                    <div class="df" id="rpsgdf"></div>
                 </div>
             </div>
             </a>
@@ -165,20 +202,17 @@
         <a href="#ownshowdata" id="arunvownerDiv"  target="_blank"  class="clearfix">
             <div class="left runvownerleft  clearfix" >
                 <div class="time">
-                    <span class="data">14号</span>
+                    <span class="data" id="rvdata">14号</span>
                     <div class="rq">
-                        <span class="hours">14</span>
-                        <span class="mao">:</span>
-                        <span class="minti">35</span>
+                        <span class="hours" id="rvdhours"></span>
                     </div>
                 </div>
                 <div class="mdd clearfix">
-                    <div class="cfd">新北市万达广场</div>
+                    <div class="cfd" id="rvdcfd"></div>
                     <span class="glyphicon glyphicon-arrow-right mdd-icon"></span>
-                    <div class="df">新北区市政府</div>
+                    <div class="df" id="rvdf"></div>
                 </div>
             </div>
-        
             <div class="right clearfix">
                 <input type="submit" class="ricon left btn btn-primary " value="查看">
             </div>
@@ -195,15 +229,22 @@
             绑定事件
         */
         $("#pformcontrolsr").bind("focus",function(){
+            locationqjval.val = "a=p";
             hashChange("#details?a=p");
+            
         });
         $("#pformcontrolsc").bind("focus",function(){
+            locationqjval.val = "a=p";
             hashChange("#details?a=p");
+            
         })  
         $("#vformcontrolsr").bind("focus",function(){
+            locationqjval.val = "b=v";
             hashChange("#details?b=v");
+            
         });
         $("#vformcontrolsc").bind("focus",function(){
+            locationqjval.val = "b=v";
             hashChange("#details?b=v");
         });
     }
@@ -334,13 +375,23 @@
     
     
 
+    /* 获取数据的地方 */
     //获取乘客数据进行渲染
     function getPassenger(){
         $.ajax({
              url: sfcsj.passengerUrl,
-            type: 'GET',
+            type: 'post',
+            data:{
+                cur:1,  /* 默认取第一页 */
+                pushType:"Passenger",   /* 乘客 */
+                uid:nowusermsg.uid, /* id号 */
+                dateRange:"month",      /* 日期范围，默认取一个月之内的 */
+            },
              success: function (data) {
                 sfcsj.passenger = data;
+                /* 获取成功，但是数据暂时为空 */
+                console.log("乘客的数据",data);
+                /* setPassenger() 处理 乘客端数据的函数*/
                 setPassenger(data);
             }
            });
@@ -350,64 +401,114 @@
     function getVowner(){
         $.ajax({
             url: sfcsj.vownerUrl,
-            type: 'GET',
+            type: 'post',
             data:{
-
+                cur:1,  /* 默认取第一页 */
+                pushType:"Driver",   /* 车主身份*/
+                uid:nowusermsg.uid, /* id号 */
+                dateRange:"month",      /* 日期范围，默认取一个月之内的 */
             },
             success: function (data) {
                 sfcsj.vowner = data ;
+                /* 获取成功，但是数据暂时为空 */
+                console.log("车主",data);
+                /* setVowner() 处理车主端的数据 */
                setVowner(data);
            }
         });
     }
 
+
+
     // 乘客页  对数据渲染到页面的 函数 
     function  setPassenger(data){
-        let passengerData = data.data.data;
+        let passengerData = data.obj.frOrders;
         // 先判断状态码 
-        if(data.data.errno===0){ //为0才可以进行操作
+        if(data.result>0){ //为0才可以进行操作
             for(var i = 0 ;i<passengerData.length;i++){
-                /* 乘客页中  行程的变化 */
+             /* 乘客页中  行程的变化 */
                 $("#passengerNode").append(sfcsj.passengerDiv);
                 // 改变div的编号
                 var idpassengerDiv = "passengerDiv"+i;
                 $("#passengerDiv").attr("id",idpassengerDiv);
 
                 // 改变a标签的编号
-                var aPassengerDivsj ="./font/html/xq.html#ownshowdata?"+"a="+i;
+                var aPassengerDivsj ="./font/html/xq.html#ownshowdata?"+"id="+passengerData[i].id+"&uid="+nowusermsg.uid;
                 $("#aPassengerDiv").attr("href",aPassengerDivsj);
                
                 var idaPassengerDiv = "aPassengerDiv"+i;
                 $("#aPassengerDiv").attr("id",idaPassengerDiv);
-
-                /* 
-                    全部行程中 值的变化
-                */
+                
+                /* 对乘客页数据的渲染操作 */
+                setPassengerval(i,passengerData);
+            /* 
+                全部行程中 值的变化
+            */
 
                 $("#runpassengerNode").append(sfcsj.runpassengerDiv);
-                var runaPassengerDivsj = "#showdata?"+"a="+i;
+                var runaPassengerDivsj = "#showdata?"+"id="+passengerData[i].id+"&uid="+nowusermsg.uid;
                 $("#arunpassengerDiv").attr("href",runaPassengerDivsj);
                 var runidaPassengerDiv = "arunpassengerDiv"+i;
                 
                 $("#arunpassengerDiv").attr("id",runidaPassengerDiv);
-
+            /* 全部行程中的数据的操作 */
+                setPassengerqbval(i,passengerData);
             }
         }
     }
-
+    /* 对乘客页书记的渲染操作函数 */
+        function setPassengerval(i,passengerData){
+        /* 先获取，在修改 */
+            /* 操作时间 */
+            $("#psghours").text(passengerData[i].departureTime);
+            var psghours = "psghours"+i;
+            $("#psghours").attr("id",psghours);
+            /* 操作出发地 */
+            $(".psgdeparture").text(passengerData[i].departure);
+            var psgdeparture = "psgdeparture"+i;
+            $(".psgdeparture").attr("class",psgdeparture);
+            /* 操作目的地 */
+            $(".psgdestination").text(passengerData[i].arrival);
+            var psgdestination = "psgdestination"+i;
+            $(".psgdestination").attr("class",psgdestination);
+        }
+    /* <a href="#showdata" id="arunpassengerDiv" class="clearfix"> */
+    /* 对全部行程中乘客数据的渲染 */
+        function setPassengerqbval(i,passengerData){
+            var sj = passengerData[i].departureTime.split(" ");
+            console.log(sj)
+            /* 对号数的操作 */
+                $("#rpsgdata").text(sj[0]);
+                var rpsgdata  = "rpsgdata"+i;
+                $("#rpsgdata").attr("id",rpsgdata);
+            /* 对细分时间的操作 */
+                $("#rpsghours").text(sj[1]);
+                var rpsghours  = "rpsghours"+i;
+                $("#rpsghours").attr("id",rpsghours);
+            /* 对出发地的操作 */
+                $("#rpsgcfd").text(passengerData[i].departure);
+                var rpsgcfd  = "rpsgcfd"+i;
+                $("#rpsgcfd").attr("id",rpsgcfd);
+            /* 对目的地的操作 */
+                $("#rpsgdf").text(passengerData[i].arrival);
+                var rpsgdf  = "rpsgdf"+i;
+                $("#rpsgdf").attr("id",rpsgdf);
+        }
     // 车主页  对数据渲染到页面的 函数 
     function  setVowner(data){
-        var vownerData = data.data.data;
+        var vownerData = data.obj.frOrders;
+        console.log(vownerData);
         // 先判断状态码 
-        if(data.data.errno===0){ //为0才可以进行操作
+        if(data.result>0){ //为0才可以进行操作
             for(var i = 0 ;i<vownerData.length;i++){
                 $("#vownperNode").append(sfcsj.vownerDiv);
                 // 车主是?b=xxxx
-                var avownperNodesj = "./font/html/xq.html#ownshowdata?"+"b="+i;
+                var avownperNodesj = "./font/html/xq.html#ownshowdata?"+"id="+vownerData[i].id+"&uid="+nowusermsg.uid;;
                 $("#avownerDiv").attr("href",avownperNodesj);
                 var idaPassengerDiv = "aPassengerDiv"+i;
                 $("#avownerDiv").attr("id",idaPassengerDiv);
-
+            /* 车主页的行程 */
+                setVownercz(i,vownerData);
                 /* 
                     全部行程中的车主
                     #arunvownerDiv
@@ -416,15 +517,57 @@
                     #ownshowdata?c = 0  全部行程中车主的数据
                 */
                 $("#runvownerNode").append(sfcsj.runvownerDiv);
-                var arunvownerDivsj = "./font/html/xq.html#ownshowdata?"+"c="+i;
+                var arunvownerDivsj = "./font/html/xq.html#ownshowdata?"+"id="+vownerData[i].id+"&uid="+nowusermsg.uid;;
                 $("#arunvownerDiv").attr("href",arunvownerDivsj);
                 var idarunvownerDiv = "arunvownerDiv"+i;
                 $("#arunvownerDiv").attr("id",idarunvownerDiv);
+            /* 全部行程页的车主信息 */
+                setqbVowner(i,vownerData);
             }
         }
     }
-
+    /* 车主页的信息 */
+        function setVownercz(i,vownerData){
+            var sj = vownerData[i].departureTime.split(" ");
+            /* 大的时间的操作 */
+                $("#vdata").text(sj[0]);
+                var vdata = "vdata"+i;
+                $("#vdata").attr("id",vdata);
+            /* 细分的时间的操作 */
+                $("#vdhours").text(sj[1]);
+                var vdhours = "vdhours"+i;
+                $("#vdhours").attr("id",vdhours);
+            /* 出发地的操作*/
+                $("#vdcfd").text(vownerData[i].departure);
+                var vdcfd = "vdcfd"+i;
+                $("#vdcfd").attr("id",vdcfd);
+            /* 目的地的操作 */
+                $("#vdf").text(vownerData[i].arrival);
+                var vdf = "vdf"+i;
+                $("#vdf").attr("id",vdf);
+        }
+    /* 全部行程页的车主信息 */
+        function setqbVowner(i,vownerData){
+            var sj = vownerData[i].departureTime.split(" ");
+            /* 全部行程中大的时间 */
+                $("#rvdata").text(sj[0]);
+                var rvdata = "rvdata"+i;
+                $("#rvdata").attr("id",rvdata);
+            /* 全部行程中小的时间 */
+                $("#rvdhours").text(sj[1]);
+                var rvdhours = "rvdhours"+i;
+                $("#rvdhours").attr("id",rvdhours);
+            /* 全部行程总的出发地 */
+                $("#rvdcfd").text(vownerData[i].departure);
+                var rvdcfd = "rvdcfd"+i;
+                $("#rvdcfd").attr("id",rvdcfd);
+            /* 全部行程中的目的地 */
+                $("#rvdf").text(vownerData[i].arrival);
+                var rvdf = "rvdf"+i;
+                $("#rvdf").attr("id",rvdf);
+        }
     
+
     /* 选择城市页 函数 searchcity */
     function cityselect(){
       cityselectval.nowcity =   $(".acityselect").text();
@@ -712,13 +855,18 @@
             
             let lyhash  = window.location.hash;
             var valzhi  = lyhash.split("?");
+           
             var   pushType ="";
-            if(valzhi[1]=="b=v"){
+
+            if(locationqjval.val=="a=p"){   /* b=c是车主 */
                pushType = "Passenger";  /* 判断是车主 还是乘客发布的 */
-            }else if(valzhi[1]=="a=p"){
+            }
+            
+            if(locationqjval.val=="b=v"){ /* a=p 是乘客 */
                 pushType = "Driver";  /* 判断是车主 还是乘客发布的 */
             }
-           
+            console.log(locationqjval.val);
+           console.log("pushtype值",pushType);
             let departureTime = $("#containersearchtime").val(); /* 到达时间 */
             $.ajax({
                 type:"post",
@@ -729,9 +877,10 @@
                     dLng :cfddata.location.lng,    /* 出发地经度 */
                     dLat: cfddata.location.lat,   /* 出发地纬度 */
                     arrival:mdata.name,     /* 目的地 */
+                    arrivalTime:departureTime,      /* 到达时间问题 */
                     aLng:mdata.location.lng,    /* 目的地经度 */
                     aLat:mdata.location.lat,  /* 目的地纬度 */
-                    departureTime:departureTime,    /* 发布时间 */
+                    departureTime:departureTime,    /* 发布时间问题后解决*/
                     pushType:pushType,        /* 发布类型 */
                 },
                 success:function(data){

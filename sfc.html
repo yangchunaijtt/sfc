@@ -184,6 +184,9 @@
                                     <input type="text" style="
                                     float: right;" placeholder="选择出发时间" class="form-control" id="containersearchtime">
                             </div>
+                            <div class="qwsjselectime clearfix">
+                                
+                            </div>
                         <div id="gaodesubmit"  class="sbutton1">发布</div>
                     </div>
                 </form>   
@@ -412,42 +415,6 @@
     <script src="./font/js/sfc.js"></script>
     <script src="./font/js/dizselect.js"></script>
     <script src="./font/js/payment.js"></script>
-    <script type="text/javascript">
-        /* 时间控件函数 */
-       /*  var date = new Date(); */
-        $(".searchtime #datetime").datetimepicker({
-            format: 'YYYY-MM-DD HH:mm',
-            locale: moment.locale('zh-CN'),
-           /*  startDate: new Date() */   //目前之前的时间都不能选
-            minDate: false, // 最小日期，如'2018/08/15'，则14号及14号前的日期都不可选
-           
-        });
-        
-        let nowusermsg = {
-            uid:111,         /* 用户id */
-            openid:"",
-        }
-        /* 后台给的先调用下 这段js */
-        getOpenid(function(openid){
-            nowusermsg.uid = localCache("uid-kongbatong");
-           console.log(nowusermsg.uid);
-	       nowusermsg.openid = openid;
-	       if(null == nowusermsg.uid || "" == nowusermsg.uid) {
-                    register("http://qckj.czgdly.com/bus/MobileWeb/WxWeb-kongbatong/Register_content.html");   //返回注册登录页面
-                } else {
-                    initData(nowusermsg.uid); //加载页面数据
-                }
-            },location.search);
-            /* 先记录一下当前页面地址在跳转 */
-            /* http://qckj.czgdly.com/bus/MobileWeb/WxWeb-kongbatong/Register_content.html
-                记录在本地
-            */
-        function register(val){
-            var nowhref = window.location.href;
-            localCache("page",nowhref);     /* 存储在本地的地址 */
-            window.location.href = "Register_content.html";		/* 发送给他的地址 */	
-		}
-    </script>  
 </body>
     
 </html>

@@ -390,7 +390,14 @@
 #arunpassengerDiv0,
 #arunpassengerDiv1,
 #arunpassengerDiv2,
-#arunpassengerDiv3 {
+#arunpassengerDiv3,
+#arunpassengerDiv4,
+#arunpassengerDiv5,
+#arunpassengerDiv6,
+#arunpassengerDiv7,
+#arunpassengerDiv8,
+#arunpassengerDiv9,
+#arunpassengerDiv10{
   display: inline-block;
   width: 80%;
 }
@@ -398,7 +405,12 @@
 #arunvownerDiv0,
 #arunvownerDiv1,
 #arunvownerDiv2,
-#arunvownerDiv3 {
+#arunvownerDiv3,
+#arunvownerDiv4,
+#arunvownerDiv5,
+#arunvownerDiv6,
+#arunvownerDiv7,
+#arunvownerDiv8{
   display: inline-block;
   width: 100%;
 }
