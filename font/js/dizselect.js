@@ -1,5 +1,4 @@
-
-    $(function(){
+   $(function(){
         createlival();
         /* 这里的问题 */
         $("#chufadi").bind("focus",function(){
@@ -482,45 +481,79 @@
 
 /* 支付功能的实现 */
         
+
      /* 支付button的实现 */
      /* 以后多个就这样实现 */
-    function paymentbutton(){
-        
-        /* 连接BeeCloud appId、 title、 amount、
-         out_trade_no、 BeeCloud appSecret, 然后计算连接后的字符串的32位MD5 
-         appId：dbf34cab-2454-4f97-88f0-0a7e34aa426e
-        appSecret: 9712e23a-8802-47c6-ac9f-67b4b37ba75e
+     let paymentbttsj  = {
+         title:nowusermsg.uid+"的订单",
+         amount:100,
+         billno: "FRO",   /* 生成订单号 */
+         instant_channel:"wx", /* 订单支付形式 */
+         openid:{},  /* openid的存储 */
+         usource:"Wx_Kbt",   /* 用户的来源 */
+         FROID:111,     /* 发布单号，取当前信息的id值 */
+     }
 
-         */
+    function paymentbutton(FROID){
+        paymentbttsj.FROID = FROID; 
+        console.log("id值",paymentbttsj.FROID);
+         var bSign = "";
+         var rand = "";
+        for(var i = 0; i < 3; i++){
+            var r = Math.floor(Math.random() * 10);
+            rand += r;
+        }
+        /* 生成时间戳 "yyyyMMddhhmmss" 格式*/
+        function pad2(n) { return n < 10 ? '0' + n : n };
+        function generateTimeReqestNumber() {
+            var date = new Date();
+            return date.getFullYear().toString() + pad2(date.getMonth() + 1) + pad2(date.getDate()) + pad2(date.getHours()) + pad2(date.getMinutes()) + pad2(date.getSeconds());
+        }
+        var sjc = generateTimeReqestNumber();
+        paymentbttsj.billno = paymentbttsj.billno + generateTimeReqestNumber() + rand;
+        console.log("传入的数据",paymentbttsj.billno);
+
+// 参数
+var param = {"title" : paymentbttsj.title,"amount" : paymentbttsj.amount,"outtradeno" : paymentbttsj.billno};
+
+// 地址
+/* POST http://qckj.czgdly.com/bus/
+common/getBSign-kongbatong.asp 404 (Not Found)*/
+var url = "../common/getBSign-kongbatong.asp";
+
+/* sfcsj.passenger 存储着用户的信息 */
+        /* openid 需要传入的数据的定义*/
+        paymentbttsj.openid = {
+            uid:nowusermsg.uid,
+            phone:nowusermsg.phone,
+            usource:paymentbttsj.usource,
+            FROID:paymentbttsj.FROID,
+        };
+$.post(url,param,function(data){
+    if (!((typeof (data) == 'object') && data.constructor == Object)) {
+        data = eval("(" + data + ")");
+    }
+
+    if(data.BSign) {
+        bSign = data.BSign;
+
         BC.err = function(data) {
             //注册错误信息接受
             showMessage1btn(data["ERROR"],"",0);
         }
-
-        var appId  =  "dbf34cab-2454-4f97-88f0-0a7e34aa426e";
-        var appSecret  = "9712e23a-8802-47c6-ac9f-67b4b37ba75e";
-        var out_trade_notime =  new Date().getTime();
-        var title = "光大国旅的订单";
-        var amount = 100;
-        var sign = md5(appId+title+amount+out_trade_notime+appSecret);
-        /**
-        * 需要支付时调用BC.click接口传入参数
-        */
-        /* optional	Object	支付完成后，webhook将收到的自定义订单相关信息	
-        目前只支持javascript基本类型的{key:value}, 不支持嵌套对象 */
+        
         BC.click({
             //"return_url" : "http://qckj.czgdly.com/bus/MobileWeb/WxWeb/myTickets_content.html",
-            "instant_channel" : "wx",
+            "instant_channel" : paymentbttsj.instant_channel,
             "debug" : true,
             "need_ali_guide" : true,
             "use_app" : true,
-            "title" : title, //商品名
-            "amount" :amount,  //总价（分）
-            "out_trade_no" : out_trade_notime, //自定义订单号
-            "sign" : sign, //商品信息hash值，含义和生成方式见下文
-            "openid" : nowusermsg.openid,
-            "optional" :{}, //可选，自定义webhook的optional回调参数
-            "return_url":"http://payservice.beecloud.cn/spay/result.php",  /* return url */
+            "title" : paymentbttsj.title, //商品名
+            "amount" : paymentbttsj.amount,  //总价（分）
+            "out_trade_no" : paymentbttsj.billno, //自定义订单号
+            "sign" : bSign, //商品信息hash值，含义和生成方式见下文
+            "openid" : nowusermsg.uid,
+            "optional" : paymentbttsj.openid, //可选，自定义webhook的optional回调参数
         },
         {
             wxJsapiFinish : function(res) {
@@ -536,33 +569,67 @@
                     case "get_brand_wcpay_request:cancel":
                         showMessage1btn("已取消支付！","Back()",0);
                         break;
+                    }
                 }
+                });
+                /**
+                * click调用错误返回：默认行为console.log(err)
+                */
+                BC.err = function(err) {
+                    //alert(JSON.stringify(err))
+                    //err 为object, 例 ｛”ERROR“ : "xxxx"｝;
+                    showMessage1btn(err.ERROR,"",0);
+                }
+            }else{
+                showMessage1btn("后台参数错误！","",0);
             }
-        });
-        /**
-        * click调用错误返回：默认行为console.log(err)
-        */
-        BC.err = function(err) {
-            //alert(JSON.stringify(err))
-            //err 为object, 例 ｛”ERROR“ : "xxxx"｝;
-            showMessage1btn(err.ERROR,"",0);
-        }
+                                            
+            // 删除dialog
+            clearDialog();
+        },"json")
+    
     }   
-
-    function getoptiona(data){
+    
+    /* 发送成功回调的处理 */
+    function getAttach(data){
         console.log("what",data);
     }
 
 
-
-    /* 打开详情页函数 */
+/* 打开详情页函数 */
     function  openxq(){
-        /* window.open("http://google.com/",'新开googleWin',"fullscreen=1"); */
-        console.log("1111");
+        /* 暂时没发挥作用 */
     }
 
 
+    
+/*  实现页面滑动到底部加载*/
+    /* 滑动需要的全局函数 */
+    let infiniteScroll = {
+        winHeight:111,  /* 滑动距离顶部的距离 */
+    }
+    $('body').on("touchstart",function(ev){
+        infiniteScroll.winHeight = $(window).scrollTop();
+        $('body').on("touchmove",function(ev){
+           /*  console.log(infiniteScroll.winHeight); */
+        })
+    });
+    /** 处理获取到值的函数 
+     *  当用户滑动时 就判断，
+     *   当滚动条距顶部有一定的距离时，就调用读取下一页的页码数据，动态加载在后面。
+     * 
+     */ 
 
+
+
+/* 时间页面的组件 */
+    /**
+     * 用户点击选择时间时，跳到时间选择页面，
+     */
+    /* 时间选择所需要的数据 */
+    let mobiscroll = {
+
+    }
 
 
     

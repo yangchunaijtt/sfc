@@ -3,6 +3,8 @@
        var nowusermsg = {
             uid:111,         /* 用户id */
             openid:111,
+            phone:111,  /* 用户的手机号 */
+            
         }
 
     $(function(){
@@ -21,7 +23,8 @@
         getOpenid(function(openid){
             nowusermsg.uid = localCache("uid-kongbatong");
             nowusermsg.openid = localCache("openid-kongbatong");
-        console.log(nowusermsg.uid,localCache("openid-kongbatong"),nowusermsg.openid);
+            nowusermsg.phone = localCache("mobile-kongbatong");
+        console.log(nowusermsg.uid,localCache("openid-kongbatong"),nowusermsg.openid,nowusermsg.phone);
             getPassenger();
             getVowner();
             paymentpage(nowusermsg.uid);
@@ -196,8 +199,7 @@
             </div>
             </a>
             <div class="right clearfix">
-                <button  class="ricon left btn btn-success " id="paymentbutton"
-                onclick="paymentbutton()">抢单</button>
+                <button  class="ricon left btn btn-success " id="paymentbutton">抢单</button>
             </div>
         </div>
         `,
@@ -489,6 +491,8 @@
     /* 对乘客页书记的渲染操作函数 */
         function setPassengerval(i,passengerData){
         /* 先获取，在修改 */
+           
+            
             /* 操作时间 */
             $("#psghours").text(passengerData[i].departureTime);
             var psghours = "psghours"+i;
@@ -528,8 +532,17 @@
             
         }
     /* <a href="#showdata" id="arunpassengerDiv" class="clearfix"> */
+    /* <button  class="ricon left btn btn-success " id="paymentbutton"
+                onclick="paymentbutton()">抢单</button> */
     /* 对全部行程中乘客数据的渲染 */
         function setPassengerqbval(i,passengerData){
+            /* 给他动态添加点击事件 */
+                var oclickid = passengerData[i].id;
+                var paymentbuttonsh = "paymentbutton("+passengerData[i].id+")";
+                $("#paymentbutton").attr("onclick",paymentbuttonsh);
+                var paymentbutton = "paymentbutton"+ passengerData[i].id;
+                $("#paymentbutton").attr("id",paymentbutton);
+            /*切分数据 */
             var sj = passengerData[i].departureTime.split(" ");
             console.log(sj)
             /* 对号数的操作 */
