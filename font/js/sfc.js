@@ -1,12 +1,8 @@
-   /*  var myDate = new Date();
-    var time = myDate.getDate().toString()+myDate.getHours().toString()+myDate.getMinutes().toString();
-    console.log(time); */
-
-      /* 时间控件函数 */
+    /* 时间控件函数 */
        /*  var date = new Date(); */
        var nowusermsg = {
             uid:111,         /* 用户id */
-            openid:"",
+            openid:111,
         }
 
     $(function(){
@@ -24,9 +20,11 @@
         /* 后台给的先调用下 这段js */
         getOpenid(function(openid){
             nowusermsg.uid = localCache("uid-kongbatong");
-        console.log(nowusermsg.uid);
+            nowusermsg.openid = localCache("openid-kongbatong");
+        console.log(nowusermsg.uid,localCache("openid-kongbatong"),nowusermsg.openid);
             getPassenger();
             getVowner();
+            paymentpage(nowusermsg.uid);
         nowusermsg.openid = openid;
         if(null == nowusermsg.uid || "" == nowusermsg.uid) {
                     register("http://qckj.czgdly.com/bus/MobileWeb/WxWeb-kongbatong/Register_content.html");   //返回注册登录页面
@@ -139,9 +137,13 @@
                 </div>
                 </div>
                 <div class="cylx-cycenter clearfix">
-                    <div id="cylx-departure" class="psgdeparture">常州市新北区万达</div>
+                    <div id="cylx-departure" class="psgdeparture"></div>
                     <span class="glyphicon glyphicon-arrow-right cycicon"></span>
-                    <div id="cylx-Destination"  class="psgdestination">常州市汽车总站</div>
+                    <div id="cylx-Destination"  class="psgdestination"></div>
+                </div>
+                <div class="cydstate clearfix">
+                    <span class="cydstates">订单情况:</span>
+                    <div class="cydstated" id="cydstatedzt"></div>
                 </div>
             </a>
             </div>
@@ -164,10 +166,13 @@
                         <div class="df" id="vdf"></div>
                     </div>
                 </div>
-            <div class="right clearfix">
-                <span class="ricon left glyphicon glyphicon-menu-right"></span>
+                <div class="right clearfix">
+                    <span class="ricon left glyphicon glyphicon-menu-right"></span>
                 </div>
-           
+                <div class="cydstate clearfix">
+                    <span class="cydstates">订单情况:</span>
+                    <div class="cydstated" id="cirstatedzt"></div>
+                </div>
             </div>
             </a>
         
@@ -175,7 +180,7 @@
         // 全部行程中乘客 
         runpassengerDiv:`
         <div class="circle clearfix" id="runpassengerDiv">
-        <a href="#showdata" id="arunpassengerDiv" class="clearfix">
+        <a href="#showdata" id="arunpassengerDiv" class="arunpassengerDivclass clearfix">
             <div class="left runpassengerleft  clearfix">
                 <div class="time">
                     <span class="data" id="rpsgdata"></span>
@@ -199,7 +204,8 @@
         //全部行程中车主
         runvownerDiv:`
         <div class="circle clearfix" id="runvownerDiv">
-        <a href="#ownshowdata" id="arunvownerDiv"  target="_blank"  class="clearfix">
+        
+        <a href="#ownshowdata" id="arunvownerDiv"  target="_blank"  class="arunvownerDivclass clearfix">
             <div class="left runvownerleft  clearfix" >
                 <div class="time">
                     <span class="data" id="rvdata">14号</span>
@@ -218,7 +224,28 @@
             </div>
             </a>
         </div> 
-        `
+        `,
+        /* 支付页的模板 */
+        paymentpage:`
+        <a href="#payment" class="aqkpayment clearfix" id="pmaqkpayment">
+            <div class="paymentbody clearfix">
+                <div class="paydate clearfix">
+                    <span class="paydateicon">订单时间:</span>
+                    <div class="paytime" id="pmpaytime">
+                        
+                    </div>
+                </div>
+                <div class="paymoney clearfix">
+                    <div class="pmsl">支付金额:</div>
+                    <div class="payyiyuan" id="pmpayyiyuan"></div>
+                </div>
+                <div class="paystate">
+                    <span class="payszfjg">支付结果:</span>
+                    <span class="payssuc" id="pmpayssuc"></span>
+                </div>
+            </div>
+        </a>
+        `,
     }
 
     
@@ -385,7 +412,7 @@
                 cur:1,  /* 默认取第一页 */
                 pushType:"Passenger",   /* 乘客 */
                 uid:nowusermsg.uid, /* id号 */
-                dateRange:"month",      /* 日期范围，默认取一个月之内的 */
+                dateRange:"",      /* 日期范围，默认取一个月之内的 */
             },
              success: function (data) {
                 sfcsj.passenger = data;
@@ -406,7 +433,7 @@
                 cur:1,  /* 默认取第一页 */
                 pushType:"Driver",   /* 车主身份*/
                 uid:nowusermsg.uid, /* id号 */
-                dateRange:"month",      /* 日期范围，默认取一个月之内的 */
+                dateRange:"",      /* 日期范围，默认取一个月之内的 */
             },
             success: function (data) {
                 sfcsj.vowner = data ;
@@ -440,19 +467,22 @@
                 $("#aPassengerDiv").attr("id",idaPassengerDiv);
                 
                 /* 对乘客页数据的渲染操作 */
-                setPassengerval(i,passengerData);
-            /* 
-                全部行程中 值的变化
-            */
-
-                $("#runpassengerNode").append(sfcsj.runpassengerDiv);
-                var runaPassengerDivsj = "#showdata?"+"id="+passengerData[i].id+"&uid="+nowusermsg.uid;
-                $("#arunpassengerDiv").attr("href",runaPassengerDivsj);
-                var runidaPassengerDiv = "arunpassengerDiv"+i;
-                
-                $("#arunpassengerDiv").attr("id",runidaPassengerDiv);
+               
+                    setPassengerval(i,passengerData);
+               
             /* 全部行程中的数据的操作 */
-                setPassengerqbval(i,passengerData);
+                if(passengerData[i].state > -1){
+                    /* 
+                        全部行程中 值的变化
+                    */
+                    $("#runpassengerNode").append(sfcsj.runpassengerDiv);
+                    var runaPassengerDivsj = "#showdata?"+"id="+passengerData[i].id+"&uid="+nowusermsg.uid;
+                    $("#arunpassengerDiv").attr("href",runaPassengerDivsj);
+                    var runidaPassengerDiv = "arunpassengerDiv"+i;
+                    
+                    $("#arunpassengerDiv").attr("id",runidaPassengerDiv);
+                    setPassengerqbval(i,passengerData);
+                }
             }
         }
     }
@@ -471,6 +501,31 @@
             $(".psgdestination").text(passengerData[i].arrival);
             var psgdestination = "psgdestination"+i;
             $(".psgdestination").attr("class",psgdestination);
+            /* 乘客页状态的判断显示 */
+                if(passengerData[i].state === -1){
+                    $("#cydstatedzt").text("失效");
+                    var cydstatedzt = "cydstatedzt"+i;
+                    $("#cydstatedzt").attr("id",cydstatedzt);
+                }else if(passengerData[i].state === 0){
+                    $("#cydstatedzt").text("发布");
+                    var cydstatedzt = "cydstatedzt"+i;
+                    $("#cydstatedzt").attr("id",cydstatedzt);
+                    var cydstatedztcl = "#"+cydstatedzt;
+                    $(cydstatedztcl).css('color',"#5cb85c");
+                }else  if(passengerData[i].state === 1){
+                    $("#cydstatedzt").text("结束");
+                    var cydstatedzt = "cydstatedzt"+i;
+                    $("#cydstatedzt").attr("id",cydstatedzt);
+                    var cydstatedztcl = "#"+cydstatedzt;
+                    $(cydstatedztcl).css('color',"#f0ad4e");
+                }else {
+                    $("#cydstatedzt").text("未知情况");
+                    var cydstatedzt = "cydstatedzt"+i;
+                    $("#cydstatedzt").attr("id",cydstatedzt);
+                    var cydstatedztcl = "#"+cydstatedzt;
+                    $(cydstatedztcl).css('color',"#d9534f");
+                }
+            
         }
     /* <a href="#showdata" id="arunpassengerDiv" class="clearfix"> */
     /* 对全部行程中乘客数据的渲染 */
@@ -508,21 +563,26 @@
                 var idaPassengerDiv = "aPassengerDiv"+i;
                 $("#avownerDiv").attr("id",idaPassengerDiv);
             /* 车主页的行程 */
-                setVownercz(i,vownerData);
-                /* 
-                    全部行程中的车主
-                    #arunvownerDiv
-                */
-                /* 
-                    #ownshowdata?c = 0  全部行程中车主的数据
-                */
-                $("#runvownerNode").append(sfcsj.runvownerDiv);
-                var arunvownerDivsj = "./font/html/xq.html#ownshowdata?"+"id="+vownerData[i].id+"&uid="+nowusermsg.uid;;
-                $("#arunvownerDiv").attr("href",arunvownerDivsj);
-                var idarunvownerDiv = "arunvownerDiv"+i;
-                $("#arunvownerDiv").attr("id",idarunvownerDiv);
+                
+                    setVownercz(i,vownerData);
+                
+                
             /* 全部行程页的车主信息 */
-                setqbVowner(i,vownerData);
+                if(vownerData[i].state > -1){
+                        /* 
+                        全部行程中的车主
+                        #arunvownerDiv
+                    */
+                    /* 
+                        #ownshowdata?c = 0  全部行程中车主的数据
+                    */
+                    $("#runvownerNode").append(sfcsj.runvownerDiv);
+                    var arunvownerDivsj = "./font/html/xq.html#ownshowdata?"+"id="+vownerData[i].id+"&uid="+nowusermsg.uid;;
+                    $("#arunvownerDiv").attr("href",arunvownerDivsj);
+                    var idarunvownerDiv = "arunvownerDiv"+i;
+                    $("#arunvownerDiv").attr("id",idarunvownerDiv);
+                    setqbVowner(i,vownerData);
+                }
             }
         }
     }
@@ -545,6 +605,32 @@
                 $("#vdf").text(vownerData[i].arrival);
                 var vdf = "vdf"+i;
                 $("#vdf").attr("id",vdf);
+            /* 车主页状态的操作 */
+               /*  #cirstatedzt */
+                if(vownerData[i].state === -1){
+                    $("#cirstatedzt").text("失效");
+                    var cirstatedzt = "cirstatedzt"+i;
+                    $("#cirstatedzt").attr("id",cirstatedzt);
+                }else if(vownerData[i].state === 0){
+                    $("#cirstatedzt").text("发布");
+                    var cirstatedzt = "cirstatedzt"+i;
+                    $("#cirstatedzt").attr("id",cirstatedzt);
+                    var cirstatedztcl = "#"+cirstatedzt;
+                    $(cirstatedztcl).css('color',"#5cb85c");
+                }else  if(vownerData[i].state === 1){
+                    $("#cirstatedzt").text("结束");
+                    var cirstatedzt = "cirstatedzt"+i;
+                    $("#cirstatedzt").attr("id",cirstatedzt);
+                    var cirstatedztcl = "#"+cirstatedzt;
+                    $(cirstatedztcl).css('color',"#f0ad4e");
+                }else {
+                    $("#cirstatedzt").text("未知情况");
+                    var cirstatedzt = "cirstatedzt"+i;
+                    $("#cirstatedzt").attr("id",cirstatedzt);
+                    var cirstatedztcl = "#"+cirstatedzt;
+                    $(cirstatedztcl).css('color',"#d9534f");
+                }
+                
         }
     /* 全部行程页的车主信息 */
         function setqbVowner(i,vownerData){
@@ -838,7 +924,7 @@
                  return false;
              }
             if($("#containersearchtime").val() == ""){
-                 $("#containersearchtime").attr("placeholder","请选择出现时间！");
+                 $("#containersearchtime").attr("placeholder","请选择出发时间！");
                  paymentModular.states = 0;
                  return false;
              }
@@ -877,7 +963,7 @@
                     dLng :cfddata.location.lng,    /* 出发地经度 */
                     dLat: cfddata.location.lat,   /* 出发地纬度 */
                     arrival:mdata.name,     /* 目的地 */
-                    arrivalTime:departureTime,      /* 到达时间问题 */
+                    arrivalTime:"2019-01-01 8:59:00",      /* 到达时间问题 */
                     aLng:mdata.location.lng,    /* 目的地经度 */
                     aLat:mdata.location.lat,  /* 目的地纬度 */
                     departureTime:departureTime,    /* 发布时间问题后解决*/
@@ -885,14 +971,74 @@
                 },
                 success:function(data){
                     console.log("获取成功的数据",data);
+                    window.location.hash = "#passenger";
                 },
                 error:function(data){
                     console.log("失败的原因",data);
                 }
             })
         },
-
-
     }
+
+
+/* 支付页逻辑的实现 */
+    /* 存储获取到的支付页的信息，供支付详情页掉欧阳 */
+    let paymentpageval = {
+        result:{},  /* 数据 */
+    }
+    function paymentpage(uid){
+        /* uid         用户id
+            dateRange   日期范围（"today","weekday","month"） */
+        $.ajax({
+            type:"post",
+            url:"http://qckj.czgdly.com/bus/MobileWeb/madeFROViewPayments/queryPageMadeFROVPayments.asp",
+            data:{
+                cur:1, /* 查看页码 */
+                id:uid,
+                dateRange:"",  /* 查看日期，查看所有 */
+            },
+            success:function(data){
+                console.log("支付222成功的数据",data);
+                paymentpageval.result = data ;
+                if(data.result === 1 ){
+                    for(var jj = 0 ;jj<data.obj.froViewPayments.length;jj++){
+                        $(".phdiconfyq").empty();
+                        $(".phdiconfyq").append(sfcsj.paymentpage);
+                    /* 处理支付页面的数据 */
+                        paymentpcl(jj,data);
+                    }
+                }
+            },
+            error:function(data){
+                console.log("支付失败的原因",data);
+            }
+        })
+    }
+    /* 支付成功处理的页面的数据 */
+    function paymentpcl(i,data){
+        var sj = data.obj.froViewPayments[i];
+        /* 处理订单时间 */
+            $("#pmpaytime").text(sj.payPrice);
+            var pmpaytime = "pmpaytime"+i;
+            $("#pmpaytime").attr("id",pmpaytime);
+        /* 处理支付金额 */
+            $("#pmpayyiyuan").text(sj.payPrice);
+            var pmpayyiyuan = "pmpayyiyuan"+i;
+            $("#pmpayyiyuan").attr("id",pmpayyiyuan);
+        /* 处理支付结果 */
+            var jg = "";   /* 处理结果 */
+            /* 支付状态只有 -1 和 1 两个状态 */
+            if(sj.payState === 1){
+                jg ="成功"
+            }else if (sj.payState === -1){
+                jg ="失败"
+            }else {
+                jg = "出现问题";
+            }
+            $("#pmpayssuc").text(jg);
+            var pmpayssuc = "pmpayssuc"+i;
+            $("#pmpayssuc").attr("id",pmpayssuc);
+    }   
+
 
 
