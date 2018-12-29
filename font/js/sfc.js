@@ -4,10 +4,13 @@
             uid:111,         /* 用户id */
             openid:111,
             phone:111,  /* 用户的手机号 */
-            
         }
 
     $(function(){
+        /* 无需id值，直接取全部数据 */
+        getqbVowner();
+        getqbPassenger();
+
         // 当 hash变化时切换显示
     /* 页面初始化时就执行这些数据 */
     $(".searchtime #datetime").datetimepicker({
@@ -17,8 +20,8 @@
         minDate: false, // 最小日期，如'2018/08/15'，则14号及14号前的日期都不可选
     
         });
+
         
-    
         /* 后台给的先调用下 这段js */
         getOpenid(function(openid){
             nowusermsg.uid = localCache("uid-kongbatong");
@@ -71,7 +74,7 @@
 
         /* 搜索功能的实现 */
         $("#citysearch").focus(function(){
-            console.log("1111") 
+           
         })
         $("#citysearch").blur(function(){
              $("#citysearch").val("");
@@ -195,6 +198,7 @@
                     <div class="cfd" id="rpsgcfd"></div>
                     <span class="glyphicon glyphicon-arrow-right mdd-icon"></span>
                     <div class="df" id="rpsgdf"></div>
+                    <div class="runpassengerDivuid" style="display:none" id="idrunpassengerDivuid"></div>
                 </div>
             </div>
             </a>
@@ -306,29 +310,25 @@
     // 切换路由的方法
     function hashChange(hashzhi){
         var locationHash = location.hash;
-        //console.log(hashzhi);
         if(hashzhi=="#details?a=p" || hashzhi=="#details?b=v"){
             locationHash="#details";
             window.location.hash= hashzhi;
             $("#address").val("");
         }
         
-       // console.log(locationHash);
         // 处理一下参数
         // #details?a=3
-        console.log(locationHash);
         var val1 = locationHash.split("?");
-        /* console.log(val1); */
-
         /* 判断参数 */
         if(val1[0]=="#ownshowdata"){
             openxq();
         }
         
-        if(locationHash=="#passenger"){
+        if(val1[0]=="#passenger" || locationHash =="#passenger" ){
+           
             hashcreate();
             $(".passenger").show();
-        }else if(locationHash=="#vowner"){
+        }else if(val1[0]=="#vowner" ||locationHash=="#vowner"){
             hashcreate();
             $(".vowner").show();
         }else if(locationHash=="#run"){
@@ -364,11 +364,13 @@
                 $("#searchxincheng .nowcheckcity").show();
             }
         }else if(locationHash =="#showdata"){
-            console.log("111");
+            
         }else if(locationHash=="#ddxq"){
             hashcreate();
             $(".paymentzy").show();
         }else if(val1[0]=="#payment"){
+            /* 处理支付详情页 */
+            passengercli();
             hashcreate();
             $(".pdetails").show();
         }
@@ -447,7 +449,93 @@
         });
     }
 
+    /* 全部行程中的数据 */
+    let qbxcvalsj = {
+        passenger:{}, /* 乘客数据 */
+        vowner:{},  /* 车主数据 */
+    }
+    /* 全部行程中的乘客 */
+    function getqbPassenger(){
+        $.ajax({
+            url: sfcsj.passengerUrl,
+           type: 'post',
+           data:{
+               cur:1,  /* 默认取第一页 */
+               pushType:"Passenger",   /* 乘客 */
+               uid:"",  /* id号   默认为空就是取全部的数据*/
+               dateRange:"",      /* 日期范围，默认取一个月之内的 */
+           },
+            success: function (data) {
+                qbxcvalsj.passenger = data;
+               /* 获取成功，但是数据暂时为空 */
+               console.log("全部乘客的数据",data);
+               /* setPassenger() 处理 乘客端数据的函数*/
+               setqbPassenger(data);
+           }
+          });
+    }
+        /* 处理全部行程中乘客的信息 */
+            function setqbPassenger(data){
+                let passengerData = data.obj.frOrders;
+                if(data.result>0){ //为0才可以进行操作
+                    for(var i = 0 ;i<passengerData.length;i++){
+                            /* 全部行程中的数据的操作 */
+                        if(passengerData[i].state > -1){
+                            /* 
+                                全部行程中 值的变化
+                            */
+                            $("#runpassengerNode").append(sfcsj.runpassengerDiv);
 
+                            /* 全部行程中的uid应该不是本地的uid，而是ajax时的uid */
+
+                            var runaPassengerDivsj = "#showdata?"+"id="+passengerData[i].id+"&uid="+nowusermsg.uid;
+                            $("#arunpassengerDiv").attr("href",runaPassengerDivsj);
+                            var runidaPassengerDiv = "arunpassengerDiv"+i;
+                            
+                            $("#arunpassengerDiv").attr("id",runidaPassengerDiv);
+                            setPassengerqbval(i,passengerData);
+                        }
+                    }
+                }
+            }
+
+    /* 全部行程中的车主数据  */
+    function getqbVowner(){
+        $.ajax({
+            url: sfcsj.vownerUrl,
+           type: 'post',
+           data:{
+               cur:1,  /* 默认取第一页 */
+               pushType:"Driver",   /* 乘客 */
+               uid:"",  /* id号   默认为空就是取全部的数据*/
+               dateRange:"",      /* 日期范围，取全部的 */
+           },
+            success: function (data) {
+               qbxcvalsj.vowner = data;
+               /* 获取成功，但是数据暂时为空 */
+               console.log("全部车主的数据",data);
+               /* setPassenger() 处理 乘客端数据的函数*/
+               setqbVowneraa(data);
+           }
+          });
+    }
+        /* 处理全部行程中车主的信息 */
+            function setqbVowneraa(data){
+                var vownerData = data.obj.frOrders;
+                // 先判断状态码 
+                if(data.result>0){ //为0才可以进行操作
+                    for(var i = 0 ;i<vownerData.length;i++){
+                        if(vownerData[i].state > -1){
+                            $("#runvownerNode").append(sfcsj.runvownerDiv);
+                            var arunvownerDivsj = "./font/html/xq.html#ownshowdata?"+"id="+vownerData[i].id+"&uid="+nowusermsg.uid+"&sf=run";
+                            $("#arunvownerDiv").attr("href",arunvownerDivsj);
+                            var idarunvownerDiv = "arunvownerDiv"+i;
+                            $("#arunvownerDiv").attr("id",idarunvownerDiv);
+                            setqbVowner(i,vownerData); 
+                        }
+                    }
+                }
+            }
 
     // 乘客页  对数据渲染到页面的 函数 
     function  setPassenger(data){
@@ -469,30 +557,13 @@
                 $("#aPassengerDiv").attr("id",idaPassengerDiv);
                 
                 /* 对乘客页数据的渲染操作 */
-               
                     setPassengerval(i,passengerData);
-               
-            /* 全部行程中的数据的操作 */
-                if(passengerData[i].state > -1){
-                    /* 
-                        全部行程中 值的变化
-                    */
-                    $("#runpassengerNode").append(sfcsj.runpassengerDiv);
-                    var runaPassengerDivsj = "#showdata?"+"id="+passengerData[i].id+"&uid="+nowusermsg.uid;
-                    $("#arunpassengerDiv").attr("href",runaPassengerDivsj);
-                    var runidaPassengerDiv = "arunpassengerDiv"+i;
-                    
-                    $("#arunpassengerDiv").attr("id",runidaPassengerDiv);
-                    setPassengerqbval(i,passengerData);
-                }
             }
         }
     }
     /* 对乘客页书记的渲染操作函数 */
         function setPassengerval(i,passengerData){
         /* 先获取，在修改 */
-           
-            
             /* 操作时间 */
             $("#psghours").text(passengerData[i].departureTime);
             var psghours = "psghours"+i;
@@ -538,13 +609,23 @@
         function setPassengerqbval(i,passengerData){
             /* 给他动态添加点击事件 */
                 var oclickid = passengerData[i].id;
-                var paymentbuttonsh = "paymentbutton("+passengerData[i].id+")";
+
+                /* 点击时还要传用户的uid，
+                uid和当前uid不一样，没有点击取消订单的权限。
+                uid的当前uid一样，拥有点击取消叮当的权限。 */
+
+                var paymentbuttonsh = "paymentbutton("+passengerData[i].id+","+passengerData[i].uid+")";
                 $("#paymentbutton").attr("onclick",paymentbuttonsh);
                 var paymentbutton = "paymentbutton"+ passengerData[i].id;
                 $("#paymentbutton").attr("id",paymentbutton);
             /*切分数据 */
-            var sj = passengerData[i].departureTime.split(" ");
-            console.log(sj)
+                var sj = passengerData[i].departureTime.split(" ");
+
+            /* 这是数据的发布者的id号 */
+           /* 对uid号进行操作 */
+                $(".runpassengerDivuid").text(passengerData[i].uid);
+                var runpassengerDivuid  = "runpassengerDivuid"+passengerData[i].uid;
+                $(".runpassengerDivuid").attr("class",runpassengerDivuid);
             /* 对号数的操作 */
                 $("#rpsgdata").text(sj[0]);
                 var rpsgdata  = "rpsgdata"+i;
@@ -565,7 +646,7 @@
     // 车主页  对数据渲染到页面的 函数 
     function  setVowner(data){
         var vownerData = data.obj.frOrders;
-        console.log(vownerData);
+       
         // 先判断状态码 
         if(data.result>0){ //为0才可以进行操作
             for(var i = 0 ;i<vownerData.length;i++){
@@ -576,26 +657,7 @@
                 var idaPassengerDiv = "aPassengerDiv"+i;
                 $("#avownerDiv").attr("id",idaPassengerDiv);
             /* 车主页的行程 */
-                
                     setVownercz(i,vownerData);
-                
-                
-            /* 全部行程页的车主信息 */
-                if(vownerData[i].state > -1){
-                        /* 
-                        全部行程中的车主
-                        #arunvownerDiv
-                    */
-                    /* 
-                        #ownshowdata?c = 0  全部行程中车主的数据
-                    */
-                    $("#runvownerNode").append(sfcsj.runvownerDiv);
-                    var arunvownerDivsj = "./font/html/xq.html#ownshowdata?"+"id="+vownerData[i].id+"&uid="+nowusermsg.uid;;
-                    $("#arunvownerDiv").attr("href",arunvownerDivsj);
-                    var idarunvownerDiv = "arunvownerDiv"+i;
-                    $("#arunvownerDiv").attr("id",idarunvownerDiv);
-                    setqbVowner(i,vownerData);
-                }
             }
         }
     }
@@ -675,14 +737,6 @@
       searchcity();
     }
     
-
-
-
-
-
-
-
-
     /* 地图API页面处理逻辑 */
          
     /* 定位存储的字符串 */
@@ -837,7 +891,7 @@
         let geocoder,marker;
         function regeoCode() {
             let dingweiszcity = $(".acityselect").text();
-           /*  console.log(dingweiszcity); */
+
             if(!geocoder){
                 geocoder = new AMap.Geocoder({
                     city: dingweiszcity, //城市设为北京，默认：“全国”
@@ -902,7 +956,7 @@
         function setdtCeneter(qjposition){
             //var position = new AMap.LngLat(116, 39);  // 标准写法
             // 简写
-           /*  console.log(qjposition); */
+           
              var position = [qjposition.R, qjposition.P]; 
              map.setCenter(position); 
             // 获取地图中心点
@@ -919,9 +973,11 @@
          1代表成功，
          2：未成功，支付问题*/
         /* 初始化函数 */
+        successdata:{},
+        errdata:{},
         payment:function(){
              // 当点击提交时，把获取到的值给他们 
-             console.log(location.hash);
+             
              gaode.formattedAddress = $("#chufadi").val();       
              gaode.Destination = $("#address").val();
  
@@ -949,8 +1005,7 @@
             var cfddata = fabuxiaoxi.cfddata;
             /* 目的地所有信息 */
              var mdata = fabuxiaoxi.mmddata;
-            console.log("出发地",cfddata);
-            console.log("目的地",mdata);
+            
             
             let lyhash  = window.location.hash;
             var valzhi  = lyhash.split("?");
@@ -964,9 +1019,8 @@
             if(locationqjval.val=="b=v"){ /* a=p 是乘客 */
                 pushType = "Driver";  /* 判断是车主 还是乘客发布的 */
             }
-            console.log(locationqjval.val);
-           console.log("pushtype值",pushType);
             let departureTime = $("#containersearchtime").val(); /* 到达时间 */
+
             $.ajax({
                 type:"post",
                 url:"http://qckj.czgdly.com/bus/MobileWeb/madeFreeRideOrders/saveMadeFROrders.asp",
@@ -984,6 +1038,7 @@
                 },
                 success:function(data){
                     console.log("获取成功的数据",data);
+                /* 提交的元素 */
                     window.location.hash = "#passenger";
                 },
                 error:function(data){
@@ -999,7 +1054,9 @@
     let paymentpageval = {
         result:{},  /* 数据 */
     }
+   
     function paymentpage(uid){
+        console.log("用户的uid",uid);
         /* uid         用户id
             dateRange   日期范围（"today","weekday","month"） */
         $.ajax({
@@ -1007,31 +1064,38 @@
             url:"http://qckj.czgdly.com/bus/MobileWeb/madeFROViewPayments/queryPageMadeFROVPayments.asp",
             data:{
                 cur:1, /* 查看页码 */
-                id:uid,
+                uid:uid,
                 dateRange:"",  /* 查看日期，查看所有 */
             },
             success:function(data){
-                console.log("支付222成功的数据",data);
+                console.log("支付表成功的数据",data);
                 paymentpageval.result = data ;
-                if(data.result === 1 ){
+               if(data.result>0){
                     for(var jj = 0 ;jj<data.obj.froViewPayments.length;jj++){
-                        $(".phdiconfyq").empty();
                         $(".phdiconfyq").append(sfcsj.paymentpage);
                     /* 处理支付页面的数据 */
                         paymentpcl(jj,data);
                     }
-                }
+               }
+                 
             },
             error:function(data){
-                console.log("支付失败的原因",data);
+                console.log("支付表失败的原因",data);
             }
         })
     }
     /* 支付成功处理的页面的数据 */
+    /*    <a href="#payment" class="aqkpayment clearfix" id="pmaqkpayment"> */ 
     function paymentpcl(i,data){
         var sj = data.obj.froViewPayments[i];
+        /* 处理点击支付的数据 */
+            /* 传递参数 */
+            var pmaqkpayment  = "#payment?id="+sj.id;
+            $("#pmaqkpayment").attr("href",pmaqkpayment);
+            var pmaqkpaymentid = "#pmaqkpayment"+i;
+            $("#pmaqkpayment").attr("id",pmaqkpaymentid);
         /* 处理订单时间 */
-            $("#pmpaytime").text(sj.payPrice);
+            $("#pmpaytime").text(sj.payDate);
             var pmpaytime = "pmpaytime"+i;
             $("#pmpaytime").attr("id",pmpaytime);
         /* 处理支付金额 */
@@ -1054,4 +1118,68 @@
     }   
 
 
+/* 点击路由时 读取信息 */
+    /* "#payment?id=1 */
+    function passengercli(){
+        var winhash = window.location.hash;
+       
+        var sjone = winhash.split("?");
+        var sjid = sjone[1].split("="); /* id  1 */
+        var sjval = sjid[1];    /* 1,2,3 */
+        if(sjid===""){
+            return false;
+        }else {
+            for(var a  = 0; a < paymentpageval.result.obj.froViewPayments.length;a++){
+                if(sjval == paymentpageval.result.obj.froViewPayments[a].id ){
+                   
+                    passengerclival(paymentpageval.result.obj.froViewPayments[a]);
+                }
+            }
+        }
+    }
+    /* 具体填充的函数 */
+        function passengerclival(val){
+            /* 付款号： */
+                $("#pdfkh").text(val.vpNo);
+            /* 支付价格 */
+                $("#pdzfjo").text(val.payPrice);
+            /* 支付情况 */
+                var zfqk = "成功";
+                var jg = "";   /* 处理结果 */
+                /* 支付状态只有 -1 和 1 两个状态 */
+                if(val.payState === 1){
+                    jg ="成功"
+                }else if (val.payState === -1){
+                    jg ="失败"
+                }else {
+                    jg = "出现问题";
+                }
+                $("#pdzfqk").text(jg);
+            /* 支付类型 */
+                $("#pdzflx").text(val.payType);
+            /* 支付日期 */
+                $("#pdzfrq").text(val.payDate);
+            
+            /* 订单退款 有的话则赋值  没有的话 保持原来的值 */
+                if(val.refundNo === ""){
+                    /* 退款订单情况 */
+                        $("#pdddtk").text("已查看，不能退款");
+                    /* 退款单号 */
+                        $("#pdtkdh").text("无");
+                    /* 退款价格 */
+                        $("#pdtkjg").text("0.00");
+                    /* 退款日期 */
+                        $("#pdttime").text("无");
+                }else {
+            /* 有的话则赋值 */
+                   /* 订单情况 */
+                   $("#pdddtk").text("已退款,注意查收");
+                   /* 退款单号 */
+                       $("#pdtkdh").text(val.refundNo);
+                   /* 退款价格 */
+                       $("#pdtkjg").text(val.refundPrice);
+                   /* 退款日期 */
+                       $("#pdttime").text(val.refundDate);
+                }
+        }
 

@@ -59,7 +59,7 @@
     /* 给当前城市赋值的 */
     function searchcity() {
         searchcityval.searchval =   window.location.search ;
-        console.log(searchcityval.searchval);
+        
         $(".nowcity .nowcityval div").text(cityselectval.nowcity);
     }
 
@@ -88,7 +88,7 @@
         /* 点击之后在指定地方花maker */
         function zhidimaker(val){
             var lival = $(val).text();
-            console.log(lival);
+           
             AMap.plugin('AMap.Geocoder', function() {
                 var geocoder = new AMap.Geocoder({
                   // city 指定进行编码查询的城市，支持传入城市名、adcode 和 citycode
@@ -98,7 +98,7 @@
                 geocoder.getLocation(lival, function(status, result) {
                   if (status === 'complete' && result.info === 'OK') {
                     // result中对应详细地理坐标信息
-                    console.log("具体信息",result);
+                    
                     /* 获取到了指定的指标值 */
                     searchcityval.dijival = result.geocodes[0].location;
                     /* 在获取到的地方花个maker */
@@ -275,7 +275,7 @@
         $("#searchxincheng .xzli10").bind("touch click",function(){
             
             var  textval =  $("#searchxincheng .xzli10").text();
-         /*    console.log(textval); */
+         
             xzlichuli(textval);
              
         })
@@ -332,17 +332,17 @@
                 el: document.querySelector("#input-info"),
                 data: result
             }); */
-            /* console.log(searchval,status,result); */
+            
             
             
             if(window.location.hash =="#sxxwz"){
                 autoInputsunval.cfdresult = result;
-                console.log(autoInputsunval.cfdresult);
+              
             }
             if(window.location.hash =="#mxxwz"){
                 
                 autoInputsunval.mddresult = result;
-                console.log(autoInputsunval.mddresult);
+                
             }
             $(".searchweizhi").empty();
             for(var j = 0; j<result.tips.length;j++){
@@ -435,9 +435,9 @@
            
             /* var result = autoInputsunval.result;
             var tips = autoInputsunval.result.tips;  */ 
-          /*   console.log(tips[i]); */
+          
             var locationhash = window.location.hash;
-           /*  console.log(locationhash); */
+           
             /* 出发地  始发地 */
             if(locationhash=="#mxxwz"){
                 let result = autoInputsunval.mddresult;
@@ -463,8 +463,6 @@
             window.location.hash = "#details";
         }
 
-    
-
     /*  时间选择页的操作 */  
       
         $(".timequx").bind("touch click",function(){
@@ -485,8 +483,8 @@
      /* 支付button的实现 */
      /* 以后多个就这样实现 */
      let paymentbttsj  = {
-         title:nowusermsg.uid+"的订单",
-         amount:100,
+         title:"",
+         amount:1,
          billno: "FRO",   /* 生成订单号 */
          instant_channel:"wx", /* 订单支付形式 */
          openid:{},  /* openid的存储 */
@@ -494,9 +492,28 @@
          FROID:111,     /* 发布单号，取当前信息的id值 */
      }
 
-    function paymentbutton(FROID){
+    function paymentbutton(FROID,qmguid){
+        /*首先取消所有 */
+        
+        /* qmguid： 数据的发布者的id号  */
+        /* 如果uid一直 ，则不需要付钱，点击时直接看  */
+        if(qmguid == nowusermsg.uid){
+            showMessage1btn("支付成功！如需退单，请提前发班时间24小时退定！","Back()",1);
+            /* 支付成功  可以观看用户的信息 */
+            /* 如果一样，直接用本地的id就好 */
+            let jwxxone = "#ownshowdata?id="+FROID+"&uid="+nowusermsg.uid+"&sf=run";
+            
+            let wlgrefone = "http://qckj.czgdly.com/bus/MobileWeb/WxWeb-kongbatong/font/html/xq.html"+jwxxone;
+          
+            window.location.href = wlgrefone ;
+            
+            return ;
+        }
+
+
+        paymentbttsj.title = nowusermsg.uid+"的订单";
         paymentbttsj.FROID = FROID; 
-        console.log("id值",paymentbttsj.FROID);
+     
          var bSign = "";
          var rand = "";
         for(var i = 0; i < 3; i++){
@@ -510,8 +527,9 @@
             return date.getFullYear().toString() + pad2(date.getMonth() + 1) + pad2(date.getDate()) + pad2(date.getHours()) + pad2(date.getMinutes()) + pad2(date.getSeconds());
         }
         var sjc = generateTimeReqestNumber();
+        paymentbttsj.billno = "FRO";
         paymentbttsj.billno = paymentbttsj.billno + generateTimeReqestNumber() + rand;
-        console.log("传入的数据",paymentbttsj.billno);
+        
 
 // 参数
 var param = {"title" : paymentbttsj.title,"amount" : paymentbttsj.amount,"outtradeno" : paymentbttsj.billno};
@@ -529,6 +547,7 @@ var url = "../common/getBSign-kongbatong.asp";
             usource:paymentbttsj.usource,
             FROID:paymentbttsj.FROID,
         };
+       
 $.post(url,param,function(data){
     if (!((typeof (data) == 'object') && data.constructor == Object)) {
         data = eval("(" + data + ")");
@@ -552,7 +571,7 @@ $.post(url,param,function(data){
             "amount" : paymentbttsj.amount,  //总价（分）
             "out_trade_no" : paymentbttsj.billno, //自定义订单号
             "sign" : bSign, //商品信息hash值，含义和生成方式见下文
-            "openid" : nowusermsg.uid,
+            "openid" : nowusermsg.openid,
             "optional" : paymentbttsj.openid, //可选，自定义webhook的optional回调参数
         },
         {
@@ -562,6 +581,12 @@ $.post(url,param,function(data){
                 switch(res.err_msg){
                     case "get_brand_wcpay_request:ok":
                         showMessage1btn("支付成功！如需退单，请提前发班时间24小时退定！","Back()",1);
+                        /* 支付成功  可以观看用户的信息 */
+                        let jwxx = "#ownshowdata?id="+paymentbttsj.FROID+"&uid="+nowusermsg.uid;
+                        
+                        let wlgref = "http://qckj.czgdly.com/bus/MobileWeb/WxWeb-kongbatong/font/html/xq.html"+jwxx;
+                      
+                        window.location.href = wlgref ;
                         break;
                     case "get_brand_wcpay_request:fail":
                         showMessage1btn("系统出错，请联系我们！","Back()",0);
@@ -573,10 +598,10 @@ $.post(url,param,function(data){
                 }
                 });
                 /**
-                * click调用错误返回：默认行为console.log(err)
+                * click调用错误返回：默认行为
                 */
                 BC.err = function(err) {
-                    //alert(JSON.stringify(err))
+                    
                     //err 为object, 例 ｛”ERROR“ : "xxxx"｝;
                     showMessage1btn(err.ERROR,"",0);
                 }
@@ -592,7 +617,7 @@ $.post(url,param,function(data){
     
     /* 发送成功回调的处理 */
     function getAttach(data){
-        console.log("what",data);
+       
     }
 
 
@@ -611,7 +636,7 @@ $.post(url,param,function(data){
     $('body').on("touchstart",function(ev){
         infiniteScroll.winHeight = $(window).scrollTop();
         $('body').on("touchmove",function(ev){
-           /*  console.log(infiniteScroll.winHeight); */
+          
         })
     });
     /** 处理获取到值的函数 

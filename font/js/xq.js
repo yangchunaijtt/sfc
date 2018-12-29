@@ -15,10 +15,33 @@ $(function(){
    /* 获取路由的值 */
    hqselectval();
    
+   /* 初始化 */
+   /* 初始化的数据 */
+   $(".qxiaoval").append(qxiaoval);
+   $(".clickqxx").append(clickqxx);
 
+   if(nowusermsg.valone == "sf=run"){
+        $(".qxiaoval").empty();
+        $(".clickqxx").empty();
+   }
 })
+/* 数据 */
+    let qxiaoval = `
+        <span class="qxiaovalspan">
+        取消结果:
+        </span>
+        <span class="qxiaovaldv">
+            大佬~取消要慎重、！、
+        </span>
+    `;
+    let clickqxx = `
+    <div id="qxsfcxinxi">
+    取消订单
+    </div>`;
+
 /* 页面初始化的数据 */
     let nowusermsg = {
+        valone:'',
         uid:111,
         id:111,
         state:111,
@@ -27,12 +50,17 @@ $(function(){
     function hqselectval(){
         var hashval = window.location.hash;
         var valone = hashval.split("?");
+        nowusermsg.valone  = valone[0];
         var valtwo = valone[1].split("&");
         var valid = valtwo[0].split("=");
         var valuid = valtwo[1].split("=");
         nowusermsg.id =  parseInt(valid[1]);
         nowusermsg.uid = parseInt(valuid[1]);
         
+        var sjaaa = hashval.split("&");
+        nowusermsg.valone= sjaaa[2]
+        console.log(sjaaa);
+
         console.log(hashval,typeof nowusermsg.id,typeof nowusermsg.uid);
         ajaxhair(nowusermsg.id,nowusermsg.uid);
     }
