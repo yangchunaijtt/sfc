@@ -1,5 +1,7 @@
    $(function(){
         createlival();
+        /* 绑定时间函数 */
+        setTimeWheel();
         /* 这里的问题 */
         $("#chufadi").bind("focus",function(){
             inchufadi();
@@ -9,6 +11,9 @@
             inaddress();
         })
         $("#containersearchtime").bind("focus",function(){
+            containersearchtime();
+        })
+        $("#searchsetdate").bind("focus",function(){
             containersearchtime();
         })
 
@@ -30,7 +35,21 @@
         /* 初始化条件 */
         $("#chufadi").val("");
         $("#address").val("");
+
+
+     /*  时间选择页的操作 */  
+      
+    $(".timequx").bind("touch click",function(){
+         timequxfunction();
+     })
+     
+     $(".timeqr").bind("touch click",function(){
+         timeqrfunction();
+     })
         
+
+
+
     })
 
     let searchcityval = {
@@ -209,13 +228,6 @@
      /* 选择出发时间 */
      function containersearchtime(){
         window.location.hash = "#time";
-        $(".form_datetime").datetimepicker({
-            format: "dd MM yyyy - hh:ii",
-            autoclose: true,
-            todayBtn: true,
-            startDate: "2018-12-20 00:00",
-            minuteStep: 10
-        });
      }
 
      /* 始发地 目的地 点击后 赋值并给下一页*/
@@ -463,20 +475,6 @@
             window.location.hash = "#details";
         }
 
-    /*  时间选择页的操作 */  
-      
-        $(".timequx").bind("touch click",function(){
-            $("#datetime").val("");
-            window.location.hash = "#details";
-        })
-        $(".timeqr").bind("touch click",function(){
-            $("#containersearchtime").val($("#datetime").val());
-            $("#datetime").val("");
-            window.location.hash = "#details";
-        })
-
-
-
 /* 支付功能的实现 */
         
 
@@ -652,9 +650,113 @@ $.post(url,param,function(data){
      * 用户点击选择时间时，跳到时间选择页面，
      */
     /* 时间选择所需要的数据 */
-    let mobiscroll = {
-
+    function setTimeWheel(){            
+        var dd = new Date();
+        var currYear = dd.getFullYear();  
+        var opt={};
+        //opt.datetime = { preset : 'datetime', minDate: new Date(2012,3,10,9,22), maxDate: new Date(2014,7,30,15,44), stepMinute: 5  };
+        dd.setDate(dd.getDate()+1);//获取AddDayCount天后的日期
+        opt.sdatetime = {minDate: dd};
+        opt.sdtdefault_0 = {
+            dateOrder: 'yymmddDD',
+            theme: 'android-ics light', //皮肤样式
+            display: 'bottom', //显示方式 
+            mode: 'scroller', //日期选择模式
+            lang:'zh',
+            dateFormat: 'yyyy-mm-dd',
+            startYear:currYear, //开始年份
+            endYear:currYear + 1, //结束年份
+            stepMinute: 1,  // More info about stepMinute: http://docs.mobiscroll.com/2-16-1/datetime#!opt-stepMinute
+            onSelect: function (valueText, inst) {  
+                var sday = inst.getDate();  
+                var today = new Array('周日','周一','周二','周三','周四','周五','周六'); 
+                
+                //获取当前日期
+                var tmpNow = new Date();
+                tmpNow.setDate(tmpNow.getDate()+1);//获取AddDayCount天后的日期
+                                    
+                var dateArray = inst.getArrayVal();
+                var week = today[sday.getDay()];  
+                var year = dateArray[0];
+                var Month = parseInt(dateArray[1]) + 1;
+                var day = dateArray[2];
+                var hour = dateArray[3];
+                var minute = dateArray[4];
+                
+                if (sday < tmpNow){
+                    opt.sdatetime = {minDate: tmpNow};
+                    week = today[tmpNow.getDay()];
+                    year = tmpNow.getFullYear();
+                    Month = tmpNow.getMonth() + 1;
+                    day = tmpNow.getDate();
+                    hour = tmpNow.getHours();
+                    minute = tmpNow.getMinutes();
+                }
+                
+                if (parseInt(Month) < 10) {
+                    Month = "0" + Month;
+                }
+                
+                if (parseInt(hour) < 10) {
+                    hour = "0" + hour;
+                }
+                
+                if (parseInt(minute) < 10) {
+                    minute = "0" + minute;
+                }
+                
+                if ($(this).hasClass("start_time_default")){
+                    $(this).removeClass("start_time_default").addClass("start_time only_one_time");
+                }
+                var tmpStr = "<span class='date'>" + Month + "月" + day + "日" + "<b class='week'>" + week + "</b>" + hour + ":" + minute + "</span>"
+                $(this).html(tmpStr);
+                $(this).attr("data-val",valueText);
+                
+                var optSDateTime_tmp = $.extend(opt['sdatetime'], opt['sdtdefault_0']);
+                $("#dt-a-0").mobiscroll().datetime(optSDateTime_tmp);
+                $("#dt-c-1").mobiscroll().datetime(optSDateTime_tmp);
+               
+                changePriceByUCar();
+               
+            }  
+        };
+        var optSDateTime_0 = $.extend(opt['sdatetime'], opt['sdtdefault_0']);
+        $("#dt-a-0").mobiscroll().datetime(optSDateTime_0);  
+        $("#dt-c-1").mobiscroll().datetime(optSDateTime_0); 
     }
+    /* 存储值的地方 */
+    let changePriceByUCarval = {
+        cfsj:"",    /* 存储出发时间的值 */
+        qwsj:"",    /* 存储期望到达的时间 */
+    }
+    /* 值变化取值 */
+        function changePriceByUCar(){
+          
+        }
+    /* 时间取值函数 */
+        /* 取消方法 */
+            function timequxfunction(){
+                $("#dt-a-0").data("val"," ");
+                $("#dt-c-1").data("val"," ");
+                window.location.hash = "#details";
+            }
+        /* 点击确认时的操作 */
+            function timeqrfunction(){
+                var cfsj =  $("#dt-a-0").attr("data-val");
+                var mdsj =  $("#dt-c-1").attr("data-val");
+                
+                if(Date.parse(mdsj)>Date.parse(cfsj)){
+                    $("#containersearchtime").val(cfsj);
+                    $("#searchsetdate").val(mdsj);
+                    $("#dt-a-0").data("val"," ");
+                    $("#dt-c-1").data("val"," ");
+                    window.location.hash = "#details";
+                }else {
+                    alert("期望到达时间不能小于出发时间!");
+                }
+            }
+    
+
 
 
     

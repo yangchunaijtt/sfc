@@ -1037,3 +1037,70 @@ input[type=date] {
   .phdiconfyq{
     width:100%;
   }
+/* 时间选择css样式 */
+  .timebody{
+    width:100%;
+    background: #fff;
+    margin-bottom: 10px;
+    border-radius: 5px;
+  }
+  .timebody .timebodyicon{
+    width: 20%;
+    
+    display: inline-block;
+    
+    text-align: center;
+    
+    font-size: 23px;
+    
+    line-height: 60px;
+    
+    color: #23beae;
+    
+    vertical-align: top;
+  }
+  .timebody  #dt-a-0{
+    width: 78%;
+    
+    font-size: 20px;
+    
+    line-height: 60px;
+    
+    color: #9a9a9a;
+    
+    display: inline-block;
+    
+    vertical-align: top;
+    
+    text-indent: 20px;
+  }
+  .timebodytwoicon{
+    width: 20%;
+    
+    display: inline-block;
+    
+    text-align: center;
+    
+    font-size: 23px;
+    
+    line-height: 60px;
+    
+    color: #ff4a39;
+    
+    vertical-align: top;
+  }
+  #dt-c-1{
+    width: 78%;
+    
+    font-size: 20px;
+    
+    line-height: 60px;
+    
+    color: #9a9a9a;
+    
+    display: inline-block;
+    
+    vertical-align: top;
+    
+    text-indent: 20px;
+  }

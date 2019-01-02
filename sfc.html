@@ -14,6 +14,9 @@
     <link rel="stylesheet" href="./font/css/sfc.css"> 
     <!-- 图片 -->
     <link rel="shortcut icon" href="./font/img/sfc.jpg">   
+    <!-- 时间css的引入 -->
+    <link rel="stylesheet" href="css/mobiscroll.custom-2.16.1.min.css">
+    <link rel="stylesheet" href="css/mobiscroll.android-ics-2.5.2.css">
     <title>顺风车</title>
     <style>
         .amap-touch-toolbar .amap-zoomcontrol {
@@ -184,6 +187,13 @@
                                     <input type="text" style="
                                     float: right;" placeholder="选择出发时间" class="form-control" id="containersearchtime">
                             </div>
+                                <div class="ctsearchtime clearfix">
+                                        <span class="left" style="
+                                        line-height: 30px;
+                                        text-indent: 5px;" >期望时间:</span>
+                                        <input type="text" style="
+                                        float: right;" placeholder="选择期望到达时间" class="form-control" id="searchsetdate">
+                                </div>
                             <div class="qwsjselectime clearfix">
                                 
                             </div>
@@ -319,9 +329,17 @@
                             确认
                         </div>
                     </div>
-                    <div class="col-sm-12 timebody">
-                        <input type="text" id="datetime" value="" placeholder="请选择时间"
-                        class="form-control" />
+                    <div class="timebody clearfix">
+                        <div class="glyphicon glyphicon-time timebodyicon"></div>
+                        <div id="dt-a-0" class="start_time_default pfull" data-val="">
+                            选择出发时间
+                         </div>
+                    </div>
+                    <div class="timebody clearfix">
+                        <div class="glyphicon glyphicon-time timebodytwoicon"></div>
+                        <div  id="dt-c-1" class="start_time_default pfull" data-val="">
+                            选择期望到达时间
+                        </div>
                     </div>
             </div>
             </div>
@@ -414,8 +432,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.10.0/js/md5.js"></script>
 
     <!-- jquery时间插件 的使用 -->
-        <script src="js/mobiscroll.custom-2.16.1.min.js"></script>
-        <script src="js/mobiscroll.android-ics-2.5.2.js"></script>
+        <script src="js/mobiscroll.custom-2.16.1.min.js"></script>
+        <script src="js/mobiscroll.android-ics-2.5.2.js"></script>
+    <!-- 无限滚动插件的使用 -->
+        <script src="js/infinite-scroll.pkgd.min.js"></script>
     <!-- 自定义js的引入 -->
     <script src="./font/js/sfc.js"></script>
     <script src="./font/js/dizselect.js"></script>

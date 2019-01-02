@@ -49,7 +49,7 @@
             var nowhref = window.location.href;
             localCache("page",nowhref);     /* 存储在本地的地址 */
             window.location.href = "Register_content.html";		/* 发送给他的地址 */	
-        }
+        }  
 
 
 
@@ -997,6 +997,12 @@
                  paymentModular.states = 0;
                  return false;
              }
+             if($("#searchsetdate").val()==""){
+                $("#searchsetdate").attr("placeholder","请选择期望到达时间！");
+                paymentModular.states = 0;
+                return false;
+             }
+
              $(".xcspanleft").text($(".acityselect").text());
 
              
@@ -1019,8 +1025,9 @@
             if(locationqjval.val=="b=v"){ /* a=p 是乘客 */
                 pushType = "Driver";  /* 判断是车主 还是乘客发布的 */
             }
-            let departureTime = $("#containersearchtime").val(); /* 到达时间 */
-
+            let departureTime = $("#containersearchtime").val(); /* 出发时间 */
+            let arrivalTime = $("#searchsetdate").val();     /* 到达时间 */
+            console.log(departureTime,pushType,arrivalTime);
             $.ajax({
                 type:"post",
                 url:"http://qckj.czgdly.com/bus/MobileWeb/madeFreeRideOrders/saveMadeFROrders.asp",
@@ -1030,13 +1037,15 @@
                     dLng :cfddata.location.lng,    /* 出发地经度 */
                     dLat: cfddata.location.lat,   /* 出发地纬度 */
                     arrival:mdata.name,     /* 目的地 */
-                    arrivalTime:"2019-01-01 8:59:00",      /* 到达时间问题 */
+                    arrivalTime:arrivalTime,      /* 到达时间问题 */
                     aLng:mdata.location.lng,    /* 目的地经度 */
                     aLat:mdata.location.lat,  /* 目的地纬度 */
-                    departureTime:departureTime,    /* 发布时间问题后解决*/
+                    departureTime:departureTime,    /* 出发时间问题后解决*/
                     pushType:pushType,        /* 发布类型 */
                 },
                 success:function(data){
+                    $("#containersearchtime").val("");
+                    $("#searchsetdate").val("");
                     console.log("获取成功的数据",data);
                 /* 提交的元素 */
                     window.location.hash = "#passenger";

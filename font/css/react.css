@@ -21,7 +21,11 @@ html {overflow-y: scroll;}
 .divw{width:100%}
 .autow{ margin:0 auto;}
 a{color:#5E5E5E;}
-
+.clear {
+	clear: both;
+	height: 0;
+	display: block;
+}
 a:focus, a:hover{
     color:#e39f7a;
 }
