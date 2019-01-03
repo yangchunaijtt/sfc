@@ -7,6 +7,14 @@
         }
 
     $(function(){
+/* 给滑动元素获取高度 */
+        /* 乘客页的高度 */
+        $(".cylx").outerHeight($(document.body).outerHeight()-$(".passenger .select").outerHeight()-$(".header").outerHeight());
+        /* 车主页的高度 */
+        /* 这里容易出问题，最后在改改 */
+        $(".vonpondclxc").outerHeight($(document.body).outerHeight()-$(".passenger .select").outerHeight()-$(".header").outerHeight());
+
+
         /* 无需id值，直接取全部数据 */
         getqbVowner();
         getqbPassenger();
@@ -31,6 +39,10 @@
             getPassenger();
             getVowner();
             paymentpage(nowusermsg.uid);
+            /* 获取到Uid后，乘客页添加滑动效果 */
+            hdpassengerNode();
+            /* 给车主页添加无限滚动效果 */
+            hdvownperNode();
         nowusermsg.openid = openid;
         if(null == nowusermsg.uid || "" == nowusermsg.uid) {
                     register("http://qckj.czgdly.com/bus/MobileWeb/WxWeb-kongbatong/Register_content.html");   //返回注册登录页面
@@ -331,9 +343,17 @@
         }else if(val1[0]=="#vowner" ||locationHash=="#vowner"){
             hashcreate();
             $(".vowner").show();
-        }else if(locationHash=="#run"){
+        }else if(val1[0]=="#run"){
+
             hashcreate();
             $(".run").show();
+            if(val1[1]=="diver"){
+                $(".runpassenger").hide();
+                $(".runvowner").show();
+            }else if(val1[1]=="passger"){
+                $(".runpassenger").show();
+                $(".runvowner").hide();
+            }
         }else if(locationHash=="#details"){
             $("#ctxz").css("display","block");
             hashcreate();
@@ -649,16 +669,21 @@
        
         // 先判断状态码 
         if(data.result>0){ //为0才可以进行操作
-            for(var i = 0 ;i<vownerData.length;i++){
-                $("#vownperNode").append(sfcsj.vownerDiv);
-                // 车主是?b=xxxx
-                var avownperNodesj = "./font/html/xq.html#ownshowdata?"+"id="+vownerData[i].id+"&uid="+nowusermsg.uid;;
-                $("#avownerDiv").attr("href",avownperNodesj);
-                var idaPassengerDiv = "aPassengerDiv"+i;
-                $("#avownerDiv").attr("id",idaPassengerDiv);
-            /* 车主页的行程 */
-                    setVownercz(i,vownerData);
+            if(data.obj===""){
+                return false;
+            }else{
+                for(var i = 0 ;i<vownerData.length;i++){
+                    $("#vownperNode").append(sfcsj.vownerDiv);
+                    // 车主是?b=xxxx
+                    var avownperNodesj = "./font/html/xq.html#ownshowdata?"+"id="+vownerData[i].id+"&uid="+nowusermsg.uid;;
+                    $("#avownerDiv").attr("href",avownperNodesj);
+                    var idaPassengerDiv = "aPassengerDiv"+i;
+                    $("#avownerDiv").attr("id",idaPassengerDiv);
+                /* 车主页的行程 */
+                        setVownercz(i,vownerData);
+                }
             }
+            
         }
     }
     /* 车主页的信息 */
@@ -1191,4 +1216,3 @@
                        $("#pdttime").text(val.refundDate);
                 }
         }
-

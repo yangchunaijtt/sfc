@@ -209,26 +209,26 @@
   width: 80%;
 }
 /*车主待处理路程  */
-.vowner .dclxc {
+.vowner .vonpondclxc {
   margin: 6px 6px;
 }
-.vowner .dclxc .top {
+.vowner .vonpondclxc .top {
   margin-top: 10px;
   height: 34px;
   background: #FFF;
   border-bottom: 1px solid #f0f0f0;
 }
-.vowner .dclxc .top .top-icon {
+.vowner .vonpondclxc .top .top-icon {
   text-indent: 12px;
   font-size: 18px;
   color: #f0935a;
   line-height: 34px;
 }
-.vowner .dclxc .top .deng {
+.vowner .vonpondclxc .top .deng {
   margin-left: 12px;
   line-height: 34px;
 }
-.vowner .dclxc .circle {
+.vowner .vonpondclxc .circle {
   background: #fff;
   margin-bottom: 20px;
 }
@@ -1104,3 +1104,38 @@ input[type=date] {
     
     text-indent: 20px;
   }
+  .runluyouaa{
+    width:100%;
+    border-radius: 6px;
+    background: #fff;
+    margin-top:10px;
+
+  }
+  .runpsgone, .rundvone{
+    display: inline-block;
+    width: 47%;
+    line-height: 46px;
+    text-align: center;
+    font-size: 17px;
+  }
+/* 加载页面的显示 */
+  .jzxsjgaa{
+    width: 100%;
+    text-align: center;
+    color: #23beae;
+    margin-top: 10px;
+  }
+/* 滚动条效果 */
+  html,body{
+    height:100%;overflow:hidden
+  }
+  /* 乘客页 */
+  .cylx{
+    overflow-y:auto;
+  }
+  /* 车主页 */
+  .vonpondclxc{
+    overflow-y:auto;
+  }
+  
+

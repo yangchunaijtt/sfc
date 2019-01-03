@@ -482,7 +482,7 @@
      /* 以后多个就这样实现 */
      let paymentbttsj  = {
          title:"",
-         amount:1,
+         amount:100,
          billno: "FRO",   /* 生成订单号 */
          instant_channel:"wx", /* 订单支付形式 */
          openid:{},  /* openid的存储 */
@@ -496,7 +496,7 @@
         /* qmguid： 数据的发布者的id号  */
         /* 如果uid一直 ，则不需要付钱，点击时直接看  */
         if(qmguid == nowusermsg.uid){
-            showMessage1btn("支付成功！如需退单，请提前发班时间24小时退定！","Back()",1);
+          
             /* 支付成功  可以观看用户的信息 */
             /* 如果一样，直接用本地的id就好 */
             let jwxxone = "#ownshowdata?id="+FROID+"&uid="+nowusermsg.uid+"&sf=run";
@@ -505,10 +505,12 @@
           
             window.location.href = wlgrefone ;
             
-            return ;
+            /* 现在判断解决， */
+            return false;
+            /* 判断if else  */
         }
 
-
+                
         paymentbttsj.title = nowusermsg.uid+"的订单";
         paymentbttsj.FROID = FROID; 
      
@@ -605,12 +607,11 @@ $.post(url,param,function(data){
                 }
             }else{
                 showMessage1btn("后台参数错误！","",0);
-            }
-                                            
-            // 删除dialog
-            clearDialog();
-        },"json")
-    
+            }                                           
+                // 删除dialog
+                clearDialog();
+            },"json")
+        
     }   
     
     /* 发送成功回调的处理 */
@@ -623,25 +624,6 @@ $.post(url,param,function(data){
     function  openxq(){
         /* 暂时没发挥作用 */
     }
-
-
-    
-/*  实现页面滑动到底部加载*/
-    /* 滑动需要的全局函数 */
-    let infiniteScroll = {
-        winHeight:111,  /* 滑动距离顶部的距离 */
-    }
-    $('body').on("touchstart",function(ev){
-        infiniteScroll.winHeight = $(window).scrollTop();
-        $('body').on("touchmove",function(ev){
-          
-        })
-    });
-    /** 处理获取到值的函数 
-     *  当用户滑动时 就判断，
-     *   当滚动条距顶部有一定的距离时，就调用读取下一页的页码数据，动态加载在后面。
-     * 
-     */ 
 
 
 
@@ -756,7 +738,99 @@ $.post(url,param,function(data){
                 }
             }
     
+    
+/*  实现页面滑动到底部加载*/
+
+    /* 滑动需要的全局函数 */
+    /* 乘客passengerNode的滑动效果 */
+    let passengerNodeval = {
+        page:2,    /* 当前页，用于向页面发送请求的页码参数 第一次发送的为2 */
+        loadcount:3,   /* 页面展示的为第几页的数据 */
+    }
+    function hdpassengerNode(){
+        var useruid =  nowusermsg.uid;
+        var $passenger = $('#passengerNode').infiniteScroll({     //#content是包含所有图或块的容器
+            path: function(){
+                /* 如果用户滑动时，当前页面展示的数据页码小于等于后台的数据页码 */
+                /* 这里判断有问题 */
+                if(  passengerNodeval.page <= passengerNodeval.loadcount){
+                    return "http://qckj.czgdly.com/bus/MobileWeb/madeFreeRideOrders/queryPageMadeFROrders_get.asp?cur="+passengerNodeval.page+"&pushType=Passenger"+"&uid="+useruid+"&dateRange=''";
+                }
+            },
+            history: false,
+            scrollThreshold:50,
+            elementScroll:".cylx",
+            status:".page-load-status",
+            responseType:"json",
+            debug:true,
+        });
+        $passenger.on( 'load.infiniteScroll', function( event, response ) {
+            var data = response;
+            /* 获取成功后，要把页面加1，方便用户在滑动，在触发获取函数*/
+            
+            console.log("乘客页滑动效果",passengerNodeval.page,passengerNodeval.loadcount,data);
+            passengerNodeval.page++;
+            /* 开始处理结果 */
+             /* 赋值最大页数 */
+            passengerNodeval.loadcount = data.page;
+           
+                 /* 调用处理乘客页的函数 */
+                setPassenger(data);   
+        })
+    }
+
+     /* 车主页vownperNode的滑动效果 */
+     let vownperNodeval = {
+        page:2,    /* 当前页，用于向页面发送请求的页码参数 第一次发送的为2 */
+        loadcount:3,   /* 页面展示的为第几页的数据 */
+    }
+    function hdvownperNode(){
+        var useruid =  nowusermsg.uid;
+        var $vownper = $('#vownperNode').infiniteScroll({     //#content是包含所有图或块的容器
+            path: function(){
+                /* 如果用户滑动时，当前页面展示的数据页码小于等于后台的数据页码 */
+                /* 数据量很小情况下  报错了 */
+                if(  vownperNodeval.page <= vownperNodeval.loadcount){
+                    /* 获取全部时间的行程，失效页没有关系 */
+                    return "http://qckj.czgdly.com/bus/MobileWeb/madeFreeRideOrders/queryPageMadeFROrders_get.asp?cur="+vownperNodeval.page+"&pushType=Driver"+"&uid="+useruid+"&dateRange=''";
+                }
+            },
+            history: false,
+            elementScroll:".vonpondclxc",
+            scrollThreshold:50,
+            status:".vowpage-load-status",
+            responseType:"json",
+            debug:true,
+        });
+        $vownper.on( 'load.infiniteScroll', function( event, response ) {
+            var data = response;
+            /* 获取成功后，要把页面加1，方便用户在滑动，在触发获取函数*/
+                                            /* 10     2 */
+            console.log("车主页滑动效果",vownperNodeval.page,vownperNodeval.loadcount,data);
+            
+            /* 开始处理结果 */
+             /* 赋值最大页数 */
+            vownperNodeval.loadcount = data.page;
+            vownperNodeval.page = vownperNodeval.page+1;
+                 /* 调用处理车主页的函数 */
+                 setVowner(data);
+        })
+    }
+
+/* 全部行程中 乘客页滑动效果 */
+
+/* 全部行程中 车主的滑动效果 */
+
+/* 支付页 滑动获取数据效果 */
 
 
 
+
+    /* 设置页面滑动的效果 */
+        /* 禁用效果 */
+        $(document.body).css({
+            "overflow-x":"hidden",
+            "overflow-y":"hidden"
+          });
+     
     

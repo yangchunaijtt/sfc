@@ -71,6 +71,11 @@
                 <div id="passengerNode"  class="clearfix">
                     <!-- 乘客div内容嵌套区 -->
                 </div>
+                <div class="page-load-status">
+                    <p class="infinite-scroll-request jzxsjgaa">稍等...</p>
+                    <p class="infinite-scroll-last jzxsjgaa" style="display:none">加载内容结束</p>
+                    <p class="infinite-scroll-error jzxsjgaa" style="display:none">没有数据加载页面了！去其他地方逛逛吧！</p>
+                </div>
             </div>
         </div>
         <!-- 车主的div -->
@@ -92,7 +97,7 @@
                         <button class="sbutton btn btn-info">发布</button>
                 </form>
             </div>
-            <div class="dclxc clearfix">
+            <div class="vonpondclxc clearfix">
                 <div class="top clearfix"> 
                     <span class="glyphicon glyphicon-volume-up top-icon"></span>
                     <span class="deng">待处理行程</span>
@@ -100,16 +105,25 @@
                 <div id="vownperNode"  class="clearfix">
                     <!-- 复用添加地方 -->
                 </div>
+                <div class="vowpage-load-status">
+                    <p class="infinite-scroll-request jzxsjgaa" >稍等...</p>
+                    <p class="infinite-scroll-last jzxsjgaa" style="display:none">加载内容结束</p>
+                    <p class="infinite-scroll-error jzxsjgaa" style="display:none">没有数据加载页面了！去其他地方逛逛吧！</p>
+                </div>
             </div>    
         </div>
         <!-- 全部行程的div -->
         <div class="run clearfix" style="display:none;">
+            <div class="runluyouaa clearfix">
+               <a href="#run?passger" class="runpsgone">全部乘客行程</a> 
+                <a href="#run?diver" class="rundvone">全部车主行程</a>
+            </div>
             <!-- 乘客全部行程 -->
             <div class="runpassenger clearfix">
                 <div class="dclxc clearfix">
                     <div class="top clearfix"> 
                         <span class="glyphicon glyphicon-user top-icon"></span>
-                        <span class="deng">乘客全部行程</span>
+                        <span class="deng">全部乘客行程</span>
                     </div>
                     <!-- 复用创建部分 -->
                     <div id="runpassengerNode" class="clearfix">
@@ -119,12 +133,12 @@
             </div>
             <!-- <div class="runxian"></div> -->
             <!-- 车主全部行程 -->
-            <div class="runvowner clearfix">         
+            <div class="runvowner clearfix" style="display:none">         
                     <div class="dclxc clearfix">
                             <div class="top clearfix"> 
                                 <span class="glyphicon glyphicon-plane
                                 top-icon"></span>
-                                <span class="deng">车主全部行程</span>
+                                <span class="deng">全部车主行程</span>
                             </div>
                             <!-- 复用创建部分 -->
                             <div id="runvownerNode" class="clearfix" >
