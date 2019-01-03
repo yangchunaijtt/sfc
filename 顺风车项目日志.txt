@@ -1,9 +1,4 @@
-一：网址
-	1：https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx8973eff2c1fb5cb2&redirect_uri=http%3a%2f%2fqckj%2Eczgdly%2Ecom%2fbus%2fMobileWeb%2fWxWeb-kongbatong%2fuserCenter_content%2Ehtml&response_type=code&scope=snsapi_base&connect_redirect=1#wechat_redirect
-	2：本顺风车网址：
-		http://qckj.czgdly.com/bus/MobileWeb/WxWeb-kongbatong/sfc.html
-二：工作项目历程：
-	顺风车业务暂定
+顺风车业务暂定
 最好12.30号完成
 延迟解决：1月初
 未解决剩余主要功能：
@@ -459,11 +454,55 @@ FROID 发布单号：支付的id
 车主页 和	乘客页	和  全部行程中的乘客信息  和 车主信息
 2：jquery时间插件的应用：Mobiscroll 插件
 乘客页 和 车主页 发布消息时，要 填写 出发时间和期望到达时间
+
++
+1.2号
+
+滑动加载infiniteScroll
+陈骏?2018/12/27?9:58:10
+参考这个页面里面
+不想用插件就参考?我的车票?页面 
+
+	var $container = $( '#tasks .item').infiniteScroll({
+		path: function() { 
+			if (this.loadCount < pageCount){
+				return "http://qckj.czgdly.com/bus/MobileWeb/madeCommission/queryPageMadeCommission_get.asp?uid=" + uid + "&cur=" + this.pageIndex;//cs.asp?page=
+			}
+		},
+  		history: false,
+		responseType: 'json',//格式要和itemSelector保持一致
+		elementScroll: "#tasks",
+		scrollThreshold: 50,
+		//elementScroll: '#tasks',
+		status: '.page-load-status',
+		debug: true
+		//hideNav: '#pages',
+		//loadOnScroll: true,
+		//checkLastPage: true
+	});
+
+
+
+
+
+
+1.3号
+滑动加载infiniteScroll
+乘客页 	车主页		支付页 	全部行程中的乘客页
+全部行程中的车主页
+1.(1)：查看用户发布信息列表
+http://qckj.czgdly.com/bus/MobileWeb/madeFreeRideOrders/queryPageMadeFROrders_get.asp?
+
+（2）：查看发布信息后产生的支付信息列表
+
+http://qckj.czgdly.com/bus/MobileWeb/madeFROViewPayments/queryPageMadeFROVPayments_get.asp
+
+
 注意：
 1：上次网页的地址：
 \\192.168.1.101\qckj\bus\MobileWeb\WxWeb-kongbatong
 2：浏览的地址：
 http://qckj.czgdly.com/bus/MobileWeb/WxWeb-kongbatong/sfc.html
-
+       
 
 https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx8973eff2c1fb5cb2&redirect_uri=http%3a%2f%2fqckj%2Eczgdly%2Ecom%2fbus%2fMobileWeb%2fWxWeb-kongbatong%2fuserCenter_content%2Ehtml&response_type=code&scope=snsapi_base&connect_redirect=1#wechat_redirect
