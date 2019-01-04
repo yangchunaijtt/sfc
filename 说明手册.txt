@@ -1,0 +1,4 @@
+一：先要注册账号才能使用顺风车功能
+	注册网址：https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx8973eff2c1fb5cb2&redirect_uri=http%3a%2f%2fqckj%2Eczgdly%2Ecom%2fbus%2fMobileWeb%2fWxWeb-kongbatong%2fuserCenter_content%2Ehtml&response_type=code&scope=snsapi_base&connect_redirect=1#wechat_redirect
+二：本网址是面向手机端，主要为公众号设计的，电脑端支付功能和一些样式会有问题
+	本业务网址：http://qckj.czgdly.com/bus/MobileWeb/WxWeb-kongbatong/sfc.html
