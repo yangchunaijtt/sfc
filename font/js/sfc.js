@@ -471,7 +471,6 @@
         $("#searchxincheng .searchcfd").hide();
         $("#searchxincheng .searchweizhi").hide();
         $("#searchxincheng .searchtime").hide();
-
     }
     //header 中 ctive 的选择
     function hactive(){
@@ -954,14 +953,16 @@
         });
         map.addControl(geolocation);
         geolocation.getCurrentPosition(function(status,result){
-            if(status=='complete'){
+            
+            if(status=='complete'&& result!=null && result!=undefined&&result!=""){
                 onComplete(result)
-
+            
                 /* 定位时绑定到出发地的函数的值上 */
                 fabuxiaoxi.cfddata = result;
 
             }else{
-                onError(result)
+                onError(result);
+             
             }
         });
     });
@@ -973,7 +974,8 @@
         gaode.successdata = data;
         $("#idxinxi").empty();
         $("#idxinxi").append("<P>定位成功</P>");
-        $("#chufadi").val(data.formattedAddress);
+        /* 先隐藏起来，等后面看需求，解解决出发地的问题 */
+       /*  $("#chufadi").val(data.formattedAddress); */
     }
     //解析定位错误信息
     function onError(data) {
@@ -1111,7 +1113,10 @@
             var cfddata = fabuxiaoxi.cfddata;
             /* 目的地所有信息 */
              var mdata = fabuxiaoxi.mmddata;
-            
+            /* 多一层判断，解决城市定位问题 */
+            if(!fabuxiaoxi.cfddata.district){
+                fabuxiaoxi.cfddata.district = "";
+            }
             
             let lyhash  = window.location.hash;
             var valzhi  = lyhash.split("?");
