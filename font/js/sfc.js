@@ -938,10 +938,9 @@
             clickresult.result= result;
             /* 这里的问题 */
         }
-      
      }
 
-
+     
     //定位功能 
     AMap.plugin('AMap.Geolocation', function() {
         var geolocation = new AMap.Geolocation({
