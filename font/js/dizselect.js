@@ -754,7 +754,7 @@ $.post(url,param,function(data){
                 /* 如果用户滑动时，当前页面展示的数据页码小于等于后台的数据页码 */
                 /* 这里判断有问题 */
                 if(  passengerNodeval.page <= passengerNodeval.loadcount){
-                    return "http://qckj.czgdly.com/bus/MobileWeb/madeFreeRideOrders/queryPageMadeFROrders_get.asp?cur="+passengerNodeval.page+"&pushType=Passenger"+"&uid="+useruid+"&dateRange=''";
+                    return "http://qckj.czgdly.com/bus/MobileWeb/madeFreeRideOrders/queryPageMadeFROrders_get.asp?cur="+passengerNodeval.page+"&pushType=Passenger"+"&uid="+useruid+"&dateRange="+"&dpCity="+"&arCity=";
                 }
             },
             history: false,
@@ -792,7 +792,7 @@ $.post(url,param,function(data){
                 /* 数据量很小情况下  报错了 */
                 if(  vownperNodeval.page <= vownperNodeval.loadcount){
                     /* 获取全部时间的行程，失效页没有关系 */
-                    return "http://qckj.czgdly.com/bus/MobileWeb/madeFreeRideOrders/queryPageMadeFROrders_get.asp?cur="+vownperNodeval.page+"&pushType=Driver"+"&uid="+useruid+"&dateRange=''";
+                    return "http://qckj.czgdly.com/bus/MobileWeb/madeFreeRideOrders/queryPageMadeFROrders_get.asp?cur="+vownperNodeval.page+"&pushType=Driver"+"&uid="+useruid+"&dateRange="+"&dpCity="+"&arCity=";
                 }
             },
             history: false,
@@ -818,11 +818,130 @@ $.post(url,param,function(data){
     }
 
 /* 全部行程中 乘客页滑动效果 */
-
+     /* 全部行程中 乘客页滑动效果runpassengerNode的滑动效果 */
+     let runpassengerval = {
+        page:2,    /* 当前页，用于向页面发送请求的页码参数 第一次发送的为2 */
+        loadcount:3,   /* 页面展示的为第几页的数据 */
+    }
+    function hdrunpassenger(){
+        var useruid =  nowusermsg.uid;
+        var $runpassengerval = $('#runpassengerNode').infiniteScroll({     //#content是包含所有图或块的容器
+            path: function(){
+                /* 如果用户滑动时，当前页面展示的数据页码小于等于后台的数据页码 */
+                /* 数据量很小情况下  报错了 */
+                if(  runpassengerval.page <= runpassengerval.loadcount){
+                    /* 获取全部时间的行程，失效页没有关系 */
+                    return "http://qckj.czgdly.com/bus/MobileWeb/madeFreeRideOrders/queryPageMadeFROrders_get.asp?cur="+runpassengerval.page+"&pushType=Passenger"+"&uid="+"&dateRange="+"&dpCity=''"+"&arCity=";
+                }
+            },
+            history: false,
+            elementScroll:".runpassenger",
+            scrollThreshold:50,
+            status:".runpaspage-load-status",
+            responseType:"json",
+            debug:true,
+        });
+        $runpassengerval.on( 'load.infiniteScroll', function( event, response ) {
+            var data = response;
+            /* 获取成功后，要把页面加1，方便用户在滑动，在触发获取函数*/
+                                            /* 10     2 */
+            console.log("全部乘客页滑动效果",runpassengerval.page,runpassengerval.loadcount,data);
+            
+            /* 开始处理结果 */
+             /* 赋值最大页数 */
+            runpassengerval.loadcount = data.page;
+            runpassengerval.page = vownperNodeval.page+1;
+                 /* 调用处理车主页的函数 */
+                 setqbPassenger(data);
+        })
+    }
 /* 全部行程中 车主的滑动效果 */
+     /* 滑动需要的全局函数 */
+    /* 全部行程中 乘客页滑动效果runvowner的滑动效果 */
+    let runvownerval = {
+        page:2,    /* 当前页，用于向页面发送请求的页码参数 第一次发送的为2 */
+        loadcount:3,   /* 页面展示的为第几页的数据 */
+    }
+    function hdrunvowner(){
+        var useruid =  nowusermsg.uid;
+        var $runpassengerval = $('#runvownerNode').infiniteScroll({     //#content是包含所有图或块的容器
+            path: function(){
+                /* 如果用户滑动时，当前页面展示的数据页码小于等于后台的数据页码 */
+                /* 数据量很小情况下  报错了 */
+                if(  runvownerval.page <= runvownerval.loadcount){
+                    /* 获取全部时间的行程，失效页没有关系 */
+                
+                    return "http://qckj.czgdly.com/bus/MobileWeb/madeFreeRideOrders/queryPageMadeFROrders_get.asp?cur="+runvownerval.page+"&pushType=Driver"+"&uid="+"&dateRange="+"&dpCity="+"&arCity=";
+                }
+            },
+            history: false,
+            elementScroll:".runvowner",
+            scrollThreshold:50,
+            status:".runvownerNode-load-status",
+            responseType:"json",
+            debug:true,
+        });
+        $runpassengerval.on( 'load.infiniteScroll', function( event, response ) {
+            var data = response;
+            /* 获取成功后，要把页面加1，方便用户在滑动，在触发获取函数*/
+                                            /* 10     2 */
+            console.log("全部车主页滑动效果",runvownerval.page,runvownerval.loadcount,data);
+            
+            /* 开始处理结果 */
+             /* 赋值最大页数 */
+            runvownerval.loadcount = data.page;
+            runvownerval.page = runvownerval.page+1;
+                 /* 调用处理全部车主页的函数 */
+                 setqbVowneraa(data);
+        })
+    }
+
+
 
 /* 支付页 滑动获取数据效果 */
-
+        let paymentzyval = {
+            page:2,    /* 当前页，用于向页面发送请求的页码参数 第一次发送的为2 */
+            loadcount:3,   /* 页面展示的为第几页的数据 */
+        }
+        function hdpaymentzy(){
+            var useruid =  nowusermsg.uid;
+            var $runpassengerval = $('.phdiconfyq').infiniteScroll({     //#content是包含所有图或块的容器
+                path: function(){
+                    /* 如果用户滑动时，当前页面展示的数据页码小于等于后台的数据页码 */
+                    /* 数据量很小情况下  报错了 */
+                    if(  paymentzyval.page <= paymentzyval.loadcount){
+                        /* 获取全部时间的行程，失效页没有关系 */
+                    
+                        return "http://qckj.czgdly.com/bus/MobileWeb/madeFROViewPayments/queryPageMadeFROVPayments.asp?cur="+paymentzyval.page+"&uid="+useruid+"&dateRange=";
+                    }
+                },
+                history: false,
+                elementScroll:".paymentzy",
+                scrollThreshold:50,
+                responseType:"json",
+                debug:true,
+            });
+            $runpassengerval.on( 'load.infiniteScroll', function( event, response ) {
+                var data = response;
+                /* 获取成功后，要把页面加1，方便用户在滑动，在触发获取函数*/
+                                                /* 10     2 */
+                console.log("支付页滑动效果",paymentzyval.page,paymentzyval.loadcount,data);
+                
+                /* 开始处理结果 */
+                /* 赋值最大页数 */
+                paymentzyval.loadcount = data.page;
+                paymentzyval.page = paymentzyval.page+1;
+                    /* 调用处理全部车主页的函数 */
+                    paymentpageval.result = data ;
+                    if(data.result>0){
+                         for(var jj = 0 ;jj<data.obj.froViewPayments.length;jj++){
+                             $(".phdiconfyq").append(sfcsj.paymentpage);
+                         /* 处理支付页面的数据 */
+                             paymentpcl(jj,data);
+                         }
+                    }
+            })
+        }
 
 
 

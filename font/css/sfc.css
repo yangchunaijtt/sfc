@@ -1137,5 +1137,24 @@ input[type=date] {
   .vonpondclxc{
     overflow-y:auto;
   }
+  /* 全部行程车主页 */
+  .runpassenger{
+    overflow-y:auto;
+  }
+  .runvowner{
+    overflow-y:auto;
+  }
+  /* 支付页滑动效果 */
+  .paymentzy{
+    overflow-y:auto;
+  }
+/* 解决有些页面内容多溢出的问题，无法点击的问题 */
+  /* 地图页发布消息地方 */
+  .details{
+    overflow-y:auto;
+  }
+  /* 选择城市页 */
+  #searchxincheng{
+    overflow-y:auto;
+  }
   
-

@@ -13,12 +13,21 @@
         /* 车主页的高度 */
         /* 这里容易出问题，最后在改改 */
         $(".vonpondclxc").outerHeight($(document.body).outerHeight()-$(".passenger .select").outerHeight()-$(".header").outerHeight());
-
+        /* 全部行程页 乘客页的高度 */
+        $(".runpassenger").outerHeight($(document.body).outerHeight()-$(".runluyouaa").outerHeight()-$(".header").outerHeight());
+        /* 全部行程页 车主页的高度 */
+        $(".runvowner").outerHeight($(document.body).outerHeight()-$(".runluyouaa").outerHeight()-$(".header").outerHeight());
+        /* 支付页 */
+        $(".paymentzy").outerHeight($(document.body).outerHeight()-$(".header").outerHeight());
+    /* 解决一些页面内容太多无法滑动的问题 */
+        $(".details").outerHeight($(document.body).outerHeight()-$(".header").outerHeight());
+        
+        $("#searchxincheng").outerHeight($(document.body).outerHeight()-$(".header").outerHeight());
 
         /* 无需id值，直接取全部数据 */
         getqbVowner();
         getqbPassenger();
-
+       
         // 当 hash变化时切换显示
     /* 页面初始化时就执行这些数据 */
     $(".searchtime #datetime").datetimepicker({
@@ -43,6 +52,13 @@
             hdpassengerNode();
             /* 给车主页添加无限滚动效果 */
             hdvownperNode();
+            /* 全部乘客行程添加滑动效果 */
+            hdrunpassenger();
+            /* 处理全部车主页 */
+            hdrunvowner();
+            /* 处理支付页 */
+            hdpaymentzy();
+
         nowusermsg.openid = openid;
         if(null == nowusermsg.uid || "" == nowusermsg.uid) {
                     register("http://qckj.czgdly.com/bus/MobileWeb/WxWeb-kongbatong/Register_content.html");   //返回注册登录页面
@@ -437,6 +453,8 @@
                 pushType:"Passenger",   /* 乘客 */
                 uid:nowusermsg.uid, /* id号 */
                 dateRange:"",      /* 日期范围，默认取一个月之内的 */
+                arCity:"",      /* 到达城市 */
+                dpCity:"",      /* 出发城市 */
             },
              success: function (data) {
                 sfcsj.passenger = data;
@@ -458,6 +476,8 @@
                 pushType:"Driver",   /* 车主身份*/
                 uid:nowusermsg.uid, /* id号 */
                 dateRange:"",      /* 日期范围，默认取一个月之内的 */
+                arCity:"",      /* 到达城市 */
+                dpCity:"",      /* 出发城市 */
             },
             success: function (data) {
                 sfcsj.vowner = data ;
@@ -483,7 +503,9 @@
                cur:1,  /* 默认取第一页 */
                pushType:"Passenger",   /* 乘客 */
                uid:"",  /* id号   默认为空就是取全部的数据*/
-               dateRange:"",      /* 日期范围，默认取一个月之内的 */
+               dateRange:"",      
+               arCity:"",      /* 到达城市 */
+               dpCity:"",      /* 出发城市 */
            },
             success: function (data) {
                 qbxcvalsj.passenger = data;
@@ -529,6 +551,8 @@
                pushType:"Driver",   /* 乘客 */
                uid:"",  /* id号   默认为空就是取全部的数据*/
                dateRange:"",      /* 日期范围，取全部的 */
+               arCity:"",      /* 到达城市 */
+               dpCity:"",      /* 出发城市 */
            },
             success: function (data) {
                qbxcvalsj.vowner = data;
@@ -1005,7 +1029,9 @@
              
              gaode.formattedAddress = $("#chufadi").val();       
              gaode.Destination = $("#address").val();
- 
+            
+             console.log("发布",fabuxiaoxi);
+
              /* 判断一下目的地是否为空  */
              if($("#chufadi").val() == ""){
                  $("#chufadi").attr("placeholder","请稍做等待！");
@@ -1040,7 +1066,9 @@
             
             let lyhash  = window.location.hash;
             var valzhi  = lyhash.split("?");
-           
+             
+            
+
             var   pushType ="";
 
             if(locationqjval.val=="a=p"){   /* b=c是车主 */
@@ -1067,6 +1095,8 @@
                     aLat:mdata.location.lat,  /* 目的地纬度 */
                     departureTime:departureTime,    /* 出发时间问题后解决*/
                     pushType:pushType,        /* 发布类型 */
+                    arCity:cfddata.district,      /* 到达城市 */
+                    dpCity:mdata.district,      /* 出发城市 */
                 },
                 success:function(data){
                     $("#containersearchtime").val("");
