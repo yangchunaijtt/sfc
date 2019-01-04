@@ -5,7 +5,12 @@
             openid:111,
             phone:111,  /* 用户的手机号 */
         }
-
+         /* 禁用效果 */
+         $(document.body).css({
+            "overflow-x":"hidden",
+            "overflow-y":"hidden"
+          });
+     
     $(function(){
 /* 给滑动元素获取高度 */
         /* 乘客页的高度 */
@@ -79,9 +84,6 @@
             window.location.href = "Register_content.html";		/* 发送给他的地址 */	
         }  
 
-
-
-        
         /* 点击id可以选择城市 */
         $("#cityselect").bind("touch click",function(){
             cityselect();
@@ -112,9 +114,58 @@
         $("#ctxz").css("display","none");
         
         window.onhashchange = hashChange;
-    })
 
-   
+
+
+        /* 另外js的初始化数据 */
+        createlival();
+        /* 绑定时间函数 */
+        setTimeWheel();
+        /* 这里的问题 */
+        $("#chufadi").bind("focus",function(){
+            inchufadi();
+        })
+        /* 这里的问题 */
+        $("#address").bind("focus",function(){
+            inaddress();
+        })
+        $("#containersearchtime").bind("focus",function(){
+            containersearchtime();
+        })
+        $("#searchsetdate").bind("focus",function(){
+            containersearchtime();
+        })
+
+        $(".dqcsval").text(cityselectval.nowcity);
+        
+        $("#inxcbody").blur(function(){
+            $("#inxcbody").val("");
+        })
+        $("#inxcbody").focus(function(){
+            var lctionhash = window.location.hash;
+            $("#inxcbody").val("");
+            if(lctionhash==="#s"){
+                window.location.hash  = "#sxxwz";
+            }
+            if(lctionhash==="#m"){
+                window.location.hash  = "#mxxwz";
+            }
+        })
+            /* 初始化条件 */
+            $("#chufadi").val("");
+            $("#address").val("");
+
+
+        /*  时间选择页的操作 */  
+        
+        $(".timequx").bind("touch click",function(){
+            timequxfunction();
+        })
+        
+        $(".timeqr").bind("touch click",function(){
+            timeqrfunction();
+        })
+    })
 
     /* 选择城市的初始化函数 */
     let cityselectval = {
@@ -282,7 +333,6 @@
         `,
     }
 
-    
 
     /*让时间绑定切换到页面的事件 */
     function formcontrol(){
@@ -411,6 +461,12 @@
             $(".pdetails").show();
         }
     }
+    
+/* 打开详情页函数 */
+        function  openxq(){
+            /* 暂时没发挥作用 */
+        }    
+
     function searchcfdhide(){
         $("#searchxincheng .searchcfd").hide();
         $("#searchxincheng .searchweizhi").hide();
@@ -509,7 +565,6 @@
            },
             success: function (data) {
                 qbxcvalsj.passenger = data;
-               /* 获取成功，但是数据暂时为空 */
                console.log("全部乘客的数据",data);
                /* setPassenger() 处理 乘客端数据的函数*/
                setqbPassenger(data);
@@ -646,9 +701,7 @@
                 }
             
         }
-    /* <a href="#showdata" id="arunpassengerDiv" class="clearfix"> */
-    /* <button  class="ricon left btn btn-success " id="paymentbutton"
-                onclick="paymentbutton()">抢单</button> */
+
     /* 对全部行程中乘客数据的渲染 */
         function setPassengerqbval(i,passengerData){
             /* 给他动态添加点击事件 */
@@ -816,10 +869,6 @@
          
           autoComplete.search(searchval, function(status, result) {
             // 搜索成功时，result即是对应的匹配数据
-           /*  var node = new PrettyJSON.view.Node({
-                el: document.querySelector("#input-info"),
-                data: result
-            }); */
             var template = "<p class='searchp'></p>";
             gaode.citysearchSearchval = result;
             gaode.citysearchSearchtips = result.tips;

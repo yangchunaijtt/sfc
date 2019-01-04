@@ -1,58 +1,4 @@
-   $(function(){
-        createlival();
-        /* 绑定时间函数 */
-        setTimeWheel();
-        /* 这里的问题 */
-        $("#chufadi").bind("focus",function(){
-            inchufadi();
-        })
-        /* 这里的问题 */
-        $("#address").bind("focus",function(){
-            inaddress();
-        })
-        $("#containersearchtime").bind("focus",function(){
-            containersearchtime();
-        })
-        $("#searchsetdate").bind("focus",function(){
-            containersearchtime();
-        })
-
-        $(".dqcsval").text(cityselectval.nowcity);
-        
-        $("#inxcbody").blur(function(){
-            $("#inxcbody").val("");
-        })
-        $("#inxcbody").focus(function(){
-            var lctionhash = window.location.hash;
-            $("#inxcbody").val("");
-            if(lctionhash==="#s"){
-                window.location.hash  = "#sxxwz";
-            }
-            if(lctionhash==="#m"){
-                window.location.hash  = "#mxxwz";
-            }
-      })
-        /* 初始化条件 */
-        $("#chufadi").val("");
-        $("#address").val("");
-
-
-     /*  时间选择页的操作 */  
-      
-    $(".timequx").bind("touch click",function(){
-         timequxfunction();
-     })
-     
-     $(".timeqr").bind("touch click",function(){
-         timeqrfunction();
-     })
-        
-
-
-
-    })
-
-    let searchcityval = {
+   let searchcityval = {
         searchval:"",  /* ？nocity后面的值 */
         selectval:"",  /* 选择的值 */
         dijival:{},  /* 点击事件发生后，所选城市的经纬度参数 */
@@ -231,65 +177,45 @@
      }
 
      /* 始发地 目的地 点击后 赋值并给下一页*/
-         
         $("#searchxincheng .xzli1").bind("touch click",function(){
             var  textval =  $("#searchxincheng .xzli1").text();
             xzlichuli(textval);
-            
         })
         $("#searchxincheng .xzli2").bind("touch click",function(){
             var  textval =  $("#searchxincheng .xzli2").text();
             xzlichuli(textval);
-            
         })
         $("#searchxincheng .xzli3").bind("touch click",function(){
-            
             var  textval =  $("#searchxincheng .xzli3").text();
             xzlichuli(textval);
-            
         })
         $("#searchxincheng .xzli4").bind("touch click",function(){
-          
             var  textval =  $("#searchxincheng .xzli4").text();
             xzlichuli(textval);
-            
         })
         $("#searchxincheng .xzli5").bind("touch click",function(){
-            
             var  textval =  $("#searchxincheng .xzli5").text();
             xzlichuli(textval);
-            
         })
         $("#searchxincheng .xzli6").bind("touch click",function(){
-           
             var  textval =  $("#searchxincheng .xzli6").text();
-            xzlichuli(textval);
-            
+            xzlichuli(textval);  
         })
         $("#searchxincheng .xzli7").bind("touch click",function(){
-            
             var  textval =  $("#searchxincheng .xzli7").text();
             xzlichuli(textval);
-             
         })
         $("#searchxincheng .xzli8").bind("touch click",function(){
-            
             var  textval =  $("#searchxincheng .xzli8").text();
             xzlichuli(textval);
-           
         })
-        $("#searchxincheng .xzli9").bind("touch click",function(){
-            
+        $("#searchxincheng .xzli9").bind("touch click",function(){  
             var  textval =  $("#searchxincheng .xzli9").text();
-            xzlichuli(textval);
-            
+            xzlichuli(textval)    
         })
         $("#searchxincheng .xzli10").bind("touch click",function(){
-            
             var  textval =  $("#searchxincheng .xzli10").text();
-         
             xzlichuli(textval);
-             
         })
         function xzlichuli (textval){
             
@@ -340,13 +266,6 @@
           
           autoComplete.search(searchval, function(status,result) {
             // 搜索成功时，result即是对应的匹配数据
-           /*  var node = new PrettyJSON.view.Node({
-                el: document.querySelector("#input-info"),
-                data: result
-            }); */
-            
-            
-            
             if(window.location.hash =="#sxxwz"){
                 autoInputsunval.cfdresult = result;
               
@@ -614,18 +533,6 @@ $.post(url,param,function(data){
         
     }   
     
-    /* 发送成功回调的处理 */
-    function getAttach(data){
-       
-    }
-
-
-/* 打开详情页函数 */
-    function  openxq(){
-        /* 暂时没发挥作用 */
-    }
-
-
 
 /* 时间页面的组件 */
     /**
@@ -943,13 +850,5 @@ $.post(url,param,function(data){
             })
         }
 
-
-
-    /* 设置页面滑动的效果 */
-        /* 禁用效果 */
-        $(document.body).css({
-            "overflow-x":"hidden",
-            "overflow-y":"hidden"
-          });
-     
+       
     
