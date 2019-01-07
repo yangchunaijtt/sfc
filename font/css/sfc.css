@@ -6,7 +6,6 @@
   /* border-radius: 0px 0px 4px 4px ; */
 }
 .header .hpassenger,
-.hvowner,
 .hrun,
 #ddxq {
   flex: 1;
@@ -15,13 +14,58 @@
   line-height: 60px;
 }
 .header .hpassenger a,
-.header .hvowner a,
 .header .hrun a,
 .header #ddxq .htogglefour {
   display: block;
 }
 .hactive {
   color: #e39f7a;
+}
+/* 筛选 */
+.hpassenger{
+  position: relative;
+}
+#hpassengericon{
+  position: absolute;
+  font-size: 10px;
+  top: 0px;
+  line-height: 60px;
+  color: #adadad;
+}
+.hvowner{
+  position: absolute;
+  
+  top: 60px;
+  left:0px;
+  width: 300%;
+  background: #f2f2f2;
+  border-top: 1px solid #f2f2f2;
+  border-bottom: 1px solid #f2f2f2;
+  font-size: 16px;
+  
+  line-height: 60px;
+}
+.hvowner .hvownerleft{
+  width: 100%;
+  
+  line-height: 40px;
+  
+  background: #fff;
+}
+.hvowner  .hvownerright{
+  display: block;
+  width:100%;
+}
+.hpassenger  .hvowner  .hvownerright .htoggletwo,.hpassenger  .hvowner .hvownerleft  .htoggleone{
+  display: inline-block;
+  width: 64%;
+  text-align: left;
+  text-indent: 20px;
+  background: #fff;
+}
+.hvowner  .hvownerleftone{
+  display: inline-block;
+  width: 33%;
 }
 /* center部分内容 */
 .center {
@@ -34,7 +78,6 @@
   margin: 8px 6px;
   border-radius: 3px;
   background-color: #fff;
-  /* //height:150px; */
 }
 .form-control {
   width: 80%;
@@ -1104,19 +1147,30 @@ input[type=date] {
     
     text-indent: 20px;
   }
-  .runluyouaa{
-    width:100%;
-    border-radius: 6px;
-    background: #fff;
-    margin-top:10px;
-
+  /* 全部行程导航栏设置 */
+  .hrun{
+    position: relative;
   }
-  .runpsgone, .rundvone{
+  .runluyouaa{
+    position: absolute;
+    top: 60px;
+    right: 0px;
+    background: #fff;
+    width: 300%;
+    z-index: 999;
+    border-top: 1px solid #eae9e9;
+    border-bottom: 1px solid #eae9e9;
+  }
+  .hrun .runluyouaa  .runpsgone,.hrun .runluyouaa  .rundvone{
     display: inline-block;
     width: 47%;
-    line-height: 46px;
     text-align: center;
-    font-size: 17px;
+    font-size: 16px;
+    color: #5bc0de;
+  }
+  .hrunoneicon{
+    font-size: 14px;
+    right: 4px;
   }
 /* 加载页面的显示 */
   .jzxsjgaa{
@@ -1157,4 +1211,16 @@ input[type=date] {
   #searchxincheng{
     overflow-y:auto;
   }
-  
+  /* 乘客筛选页面样式 */
+  .runpasgscreen,.runvownerscreen{
+    background: #fff;
+    border-bottom: 1px solid #f2f2f2;
+  }
+  .runpasgscreen span, .runvownerscreen span{
+    display: inline-block;
+    width: 80%;
+    text-indent: 20px;
+    line-height: 50px;
+    color: #0081ff;
+    font-size: 15px;
+  }

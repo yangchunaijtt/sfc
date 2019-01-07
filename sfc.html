@@ -29,16 +29,39 @@
     <div class="header clearfix" style="
     z-index:9999999">
         <div  class="hpassenger">
-            <a href="#passenger" class="hactive htoggleone">乘客</a>
-        </div>
-        <div class="hvowner">
-            <a href="#vowner"   class="htoggletwo">车主</a>
+            <div style="width:100%;" class="hpassengerxsaaa clearfix">
+                    我的行程
+                    <span class="glyphicon glyphicon-chevron-down" id="hpassengericon"></span>
+            </div>
+            <div class="hvowner clearfix" style="display:none;z-index:999">
+                <div class="hvownerleft clearfix">
+                    <div class="hvownerleftone">身份</div>
+                    <a href="#passenger" class="hactive htoggleone">
+                            <span class="glyphicon glyphicon-user" style="color:#23beae;margin-right: 10px;"></span>
+                        乘客
+                    </a>
+                </div>
+                <div class="hvownerright clearfix">
+                    <div style="display: inline-block;width: 33%;"></div>
+                    <a href="#vowner"   class="htoggletwo">
+                        <span class="glyphicon glyphicon-plane" style="color:#ff4a39;margin-right: 10px;"></span>
+                        车主
+                    </a>
+                </div>
+            </div>
         </div>
         <div id="ddxq">
-            <a href="#ddxq" class="htogglefour">支付</a>
+            <a href="#ddxq" class="htogglefour">支付订单</a>
         </div>
         <div  class="hrun">
-            <a href="#run" class="htogglethree">全部行程</a>
+            <a href="#run" class="htogglethree">
+                全部行程
+                <span class="glyphicon glyphicon-triangle-bottom hrunoneicon"></span>
+            </a>
+             <div class="runluyouaa clearfix" style="display: none">
+               <a href="#run?passger" class="runpsgone">全部乘客行程</a> 
+                <a href="#run?diver" class="rundvone">全部车主行程</a>
+            </div>
         </div>
     </div>
     <!-- 显示切换的div -->
@@ -114,16 +137,38 @@
         </div>
         <!-- 全部行程的div -->
         <div class="run clearfix" style="display:none;">
-            <div class="runluyouaa clearfix">
-               <a href="#run?passger" class="runpsgone">全部乘客行程</a> 
-                <a href="#run?diver" class="rundvone">全部车主行程</a>
+            <div class="runscreen clearfix">
+                <div>
+                   <span>筛选</span>
+                </div>
+                <div>
+                    <span>日期范围:</span>
+                    <div>
+                        <span>今天</span>
+                        <span>一周内</span>
+                        <span>一个月之内</span>
+                    </div>
+                </div>
+                <div>
+                    <span>出发城市:</span>
+                </div>
+                <div>
+                    <span>到达城市:</span>
+                    <input type="text">
+                </div>
             </div>
             <!-- 乘客全部行程 -->
             <div class="runpassenger clearfix">
                 <div class="dclxc clearfix">
+                    
                     <div class="top clearfix"> 
                         <span class="glyphicon glyphicon-user top-icon"></span>
                         <span class="deng">全部乘客行程</span>
+                    </div>
+                    <!-- 进入筛选页面 -->
+                    <div class="runpasgscreen">
+                        <span>点击按钮对全部乘客进行筛选:</span>
+                        <a href="#run?passgeran" class="btn btn-primary">筛选</a>
                     </div>
                     <!-- 复用创建部分 -->
                     <div id="runpassengerNode" class="clearfix">
@@ -138,13 +183,19 @@
             </div>
             <!-- <div class="runxian"></div> -->
             <!-- 车主全部行程 -->
-            <div class="runvowner clearfix" style="display:none">         
+            <div class="runvowner clearfix" style="display:none">  
+                         
                     <div class="dclxc clearfix">
                             <div class="top clearfix"> 
                                 <span class="glyphicon glyphicon-plane
                                 top-icon"></span>
                                 <span class="deng">全部车主行程</span>
                             </div>
+                            <!-- 点击按钮进入筛选页面 -->
+                            <div class="runvownerscreen">
+                                <span>点击按钮对全部车主进行筛选:</span>
+                                <a href="#run?diveran" class="btn btn-primary">筛选</a>
+                            </div>  
                             <!-- 复用创建部分 -->
                             <div id="runvownerNode" class="clearfix" >
                              <!-- div填充地方 -->
@@ -240,35 +291,35 @@
                 <div class="quanbu">全部</div>
                 <ul class="ulone clearfix">
                     <li class="ulliwx">
-                       全国
+                       杭州市
                     </li>
                     <li class="ullish">
-                        常州
+                        常州市
                     </li>
                     <li  class="ullisz">
-                        苏州
+                        苏州市
                     </li>
                 </ul>
                 <ul class="ultwo clearfix">
                     <li  class="ullinj">
-                        南京
+                        南京市
                     </li>
                     <li  class="ullint">
-                        上海
+                        上海市
                     </li>
                     <li  class="ulliyz">
-                        无锡
+                        无锡市
                     </li>
                 </ul>
                 <ul class="ulthree clearfix">
                     <li  class="ullitz">
-                       南通
+                       南通市
                     </li>
                     <li  class="ullizjg">
-                        镇江
+                        镇江市
                     </li>
                     <li  class="ullics">
-                        泰州
+                        泰州市
                     </li>
                 </ul>
             </div>
@@ -279,7 +330,7 @@
             <div class="nowcheckcity clearfix">
                 <div class="xcheader clearfix">
                     <span class="xcspanleft">
-                       常州
+                       常州市
                     </span>
                     <span class="glyphicon glyphicon-triangle-bottom scspanright">
                     </span>
@@ -301,37 +352,37 @@
                         <div class="cityxzone">附近城市</div>
                         <ul class="xzulone clearfix">
                             <li class="xzli1">
-                                苏州
+                                苏州市
                             </li>
                             <li  class="xzli2">
-                                无锡
+                                无锡市
                             </li>
                             <li  class="xzli3">
-                                上海
+                                上海市
                             </li>
                             <li  class="xzli4">
-                                南京
+                                南京市
                             </li>
                             <li class="xzli5">
-                                扬州
+                                扬州市
                             </li>
                             <li class="xzli6">
-                                泰州
+                                泰州市
                             </li>
                             <li class="xzli7">
-                                南通
+                                南通市
                             </li>
                             <li class="xzli8">
-                                镇江
+                                镇江市
                             </li>
                         </ul>
                         <div class="cityxztwo">其他城市</div>
                         <ul class="xzultwo clearfix">
                             <li class="xzli9">
-                                杭州
+                                杭州市
                             </li>
                             <li class="xzli10">
-                                北京
+                                北京市
                             </li>
                         </ul>
                     </div>
@@ -433,9 +484,7 @@
             </div>
         </div>
     </div>
-    
     <script src="./font/fontjs/jquery-3.2.1.min.js"></script>
-   
     <!-- bootstrap脚本 -->
     <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!-- 时间选择器前置脚本 -->

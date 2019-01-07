@@ -375,6 +375,7 @@
                 let tipstwo = autoInputsunval.mddresult.tips;  
                 /* 点击时，目的地的数据 */
                 fabuxiaoxi.mmddata =  autoInputsunval.mddresult.tips[i];
+                fabuxiaoxi.mddcity = autoInputsunval.mddresult.tips[0].name;
                 /* 目的地 目的地经纬度 */
                 $("#address").val(tipstwo[i].name);
                 $("#mmdjwd").val(tipstwo[i].location);
@@ -385,6 +386,7 @@
                 let tipsone = autoInputsunval.cfdresult.tips;  
                 /*  #sxxwz 出发地 经纬度信息*/
                 fabuxiaoxi.cfddata  = autoInputsunval.cfdresult.tips[i];
+                fabuxiaoxi.cfdcity = autoInputsunval.cfdresult.tips[0].name;
                 $("#chufadi").val(tipsone[i].name);
                 $(".lnglat").val(tipsone[i].location);
                 locationhash = "#details";

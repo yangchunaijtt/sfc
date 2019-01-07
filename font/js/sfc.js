@@ -4,6 +4,7 @@
             uid:111,         /* 用户id */
             openid:111,
             phone:111,  /* 用户的手机号 */
+            lyxx:"",   /* 存储需要用到路由的值 */
         }
          /* 禁用效果 */
          $(document.body).css({
@@ -19,9 +20,9 @@
         /* 这里容易出问题，最后在改改 */
         $(".vonpondclxc").outerHeight($(document.body).outerHeight()-$(".passenger .select").outerHeight()-$(".header").outerHeight());
         /* 全部行程页 乘客页的高度 */
-        $(".runpassenger").outerHeight($(document.body).outerHeight()-$(".runluyouaa").outerHeight()-$(".header").outerHeight());
+        $(".runpassenger").outerHeight($(document.body).outerHeight()-$(".header").outerHeight());
         /* 全部行程页 车主页的高度 */
-        $(".runvowner").outerHeight($(document.body).outerHeight()-$(".runluyouaa").outerHeight()-$(".header").outerHeight());
+        $(".runvowner").outerHeight($(document.body).outerHeight()-$(".header").outerHeight());
         /* 支付页 */
         $(".paymentzy").outerHeight($(document.body).outerHeight()-$(".header").outerHeight());
     /* 解决一些页面内容太多无法滑动的问题 */
@@ -43,6 +44,31 @@
     
         });
 
+    /* 给导航条绑定切换*/
+    let hpassengerpd = 1;
+   $(".hpassenger").bind("touch click",function(){
+         $(".runluyouaa").hide();
+        hpassengerpd++;
+       if(hpassengerpd%2===0){
+        $("#hpassengericon").attr("class","glyphicon glyphicon-chevron-up");
+        $(".hpassengerxsaaa").css("color","#0094FF");
+       }else {
+        $("#hpassengericon").attr("class","glyphicon glyphicon-chevron-down"); 
+        $(".hpassengerxsaaa").css("color","#555");
+       }
+       $(".hvowner").slideToggle("normal");
+   })
+   /* 给导航条绑定事件 */
+   let hrunxuzval = 1;
+    $(".hrun").bind("touch click",function(){
+        hrunxuzval ++;
+        if(hrunxuzval%2===0){
+            $(".hrunoneicon").attr('class',"glyphicon glyphicon-triangle-bottom hrunoneicon");
+        }else {
+            $(".hrunoneicon").attr('class',"glyphicon glyphicon-triangle-top hrunoneicon");
+        }
+        $(".runluyouaa").slideToggle("normal");
+    })
         
         /* 后台给的先调用下 这段js */
         getOpenid(function(openid){
@@ -89,7 +115,7 @@
             cityselect();
         })
         if(cityselectval.nowcity==""){
-            $(".acityselect").text("常州");
+            $(".acityselect").text("常州市");
         }
         
 
@@ -197,6 +223,9 @@
     let fabuxiaoxi = {
         cfddata:{}, /* 存储出发地数据的地方 */
         mmddata:{}, /* 存储目的地数据的地方 */
+        cfdcity:"", /* 存储出发地的城市 */
+        mddcity:"", /* 存储目的地的城市 */
+        splitmddcity:"",    /* 需要进行切的值 */
     };
 
     /* 点击得到的的数据 */
@@ -383,43 +412,66 @@
         $(".showsjdata").hide();
         $(".paymentzy").hide();
         $(".pdetails").hide();
+        /* 点击了，先隐藏，在进行效果展示 */
     }
     
     // 切换路由的方法
     function hashChange(hashzhi){
         var locationHash = location.hash;
+         // 处理一下参数
+        // #details?a=3
+        var val1 = locationHash.split("?");
+        if(val1[0]=="#passenger" || locationHash =="#passenger" ){
+            $(".runluyouaa").hide();
+            $(".hrunoneicon").attr('class',"glyphicon glyphicon-triangle-bottom hrunoneicon");
+            hashcreate();
+            $(".passenger").show();
+        }
+        
+        /* 不是那个路由的，默认隐藏那个效果 */
+        $("#hpassengericon").attr("class","glyphicon glyphicon-chevron-down"); 
+        $(".hpassengerxsaaa").css("color","#555");
+
+        /* run路由 */
+        if(val1[0]=="#run"){
+
+            hashcreate();
+            $(".run").show();
+            if(val1[1]=="diver"){
+                $(".runpassenger").hide();
+                $(".runscreen").hide();
+                $(".runvowner").show();
+            }else if(val1[1]=="passger"){
+                $(".runvowner").hide();
+                $(".runscreen").hide();
+                $(".runpassenger").show();
+            }else if(val1[1]=="passgeran" || val1[1]=="diveran"){
+                $(".runvowner").hide();
+                $(".runpassenger").hide();
+                $(".runscreen").show();
+                val1[1]==="passgeran"?nowusermsg.lyxx = "passgeran":nowusermsg.lyxx = "diveran";
+                console.log(nowusermsg.lyxx);
+            }
+        }else{
+            /* 不是run则 隐藏导航栏 */
+            $(".runluyouaa").hide();
+            $(".hrunoneicon").attr('class',"glyphicon glyphicon-triangle-bottom hrunoneicon");
+        }
+
         if(hashzhi=="#details?a=p" || hashzhi=="#details?b=v"){
             locationHash="#details";
             window.location.hash= hashzhi;
             $("#address").val("");
         }
         
-        // 处理一下参数
-        // #details?a=3
-        var val1 = locationHash.split("?");
         /* 判断参数 */
         if(val1[0]=="#ownshowdata"){
             openxq();
         }
-        
-        if(val1[0]=="#passenger" || locationHash =="#passenger" ){
-           
-            hashcreate();
-            $(".passenger").show();
-        }else if(val1[0]=="#vowner" ||locationHash=="#vowner"){
+        $(".hvowner").hide();
+         if(val1[0]=="#vowner" ||locationHash=="#vowner"){
             hashcreate();
             $(".vowner").show();
-        }else if(val1[0]=="#run"){
-
-            hashcreate();
-            $(".run").show();
-            if(val1[1]=="diver"){
-                $(".runpassenger").hide();
-                $(".runvowner").show();
-            }else if(val1[1]=="passger"){
-                $(".runpassenger").show();
-                $(".runvowner").hide();
-            }
         }else if(locationHash=="#details"){
             $("#ctxz").css("display","block");
             hashcreate();
@@ -883,33 +935,44 @@
             /* 定位maker实现的代码 */
             $(".searchp0").bind("touch click",function(){  
                 fabuxiaoxi.mmddata = result.tips[0];
-                touchchuli(result.tips[0])     });
+                fabuxiaoxi.mddcity =  $(".acityselect").text();
+                touchchuli(result.tips[0]);
+             });
             $(".searchp1").bind("touch click",function(){ 
                 fabuxiaoxi.mmddata = result.tips[1];
+                fabuxiaoxi.mddcity =  $(".acityselect").text();
                  touchchuli(result.tips[1])      });
             $(".searchp2").bind("touch click",function(){ 
                 fabuxiaoxi.mmddata = result.tips[2];
+                fabuxiaoxi.mddcity =  $(".acityselect").text();
                 touchchuli(result.tips[2])    });
             $(".searchp3").bind("touch click",function(){  
                 fabuxiaoxi.mmddata = result.tips[3];
+                fabuxiaoxi.mddcity =  $(".acityselect").text();
                 touchchuli(result.tips[3])     });
             $(".searchp4").bind("touch click",function(){
                 fabuxiaoxi.mmddata =result.tips[4]; 
+                fabuxiaoxi.mddcity =  $(".acityselect").text();
                  touchchuli(result.tips[4])     });
             $(".searchp5").bind("touch click",function(){ 
                 fabuxiaoxi.mmddata = result.tips[5]; 
+                fabuxiaoxi.mddcity =  $(".acityselect").text();
                 touchchuli(result.tips[5])     });
             $(".searchp6").bind("touch click",function(){ 
                 fabuxiaoxi.mmddata =result.tips[6]; 
+                fabuxiaoxi.mddcity =  $(".acityselect").text();
                 touchchuli(result.tips[6])     });
             $(".searchp7").bind("touch click",function(){ 
                 fabuxiaoxi.mmddata = result.tips[7];
+                fabuxiaoxi.mddcity =  $(".acityselect").text();
                  touchchuli(result.tips[7])     });
             $(".searchp8").bind("touch click",function(){ 
                 fabuxiaoxi.mmddata = result.tips[8];
+                fabuxiaoxi.mddcity =  $(".acityselect").text();
                  touchchuli(result.tips[8])     });
             $(".searchp9").bind("touch click",function(){  
                 fabuxiaoxi.mmddata = result.tips[9];
+                fabuxiaoxi.mddcity =  $(".acityselect").text();
                 touchchuli(result.tips[9])     });
           
           })
@@ -958,6 +1021,7 @@
             
                 /* 定位时绑定到出发地的函数的值上 */
                 fabuxiaoxi.cfddata = result;
+                /* 这里 */
 
             }else{
                 onError(result);
@@ -974,7 +1038,7 @@
         $("#idxinxi").empty();
         $("#idxinxi").append("<P>定位成功</P>");
         /* 先隐藏起来，等后面看需求，解解决出发地的问题 */
-       /*  $("#chufadi").val(data.formattedAddress); */
+        $("#chufadi").val(data.formattedAddress);
     }
     //解析定位错误信息
     function onError(data) {
@@ -1119,9 +1183,8 @@
             
             let lyhash  = window.location.hash;
             var valzhi  = lyhash.split("?");
-             
+             console.log("所有信息",fabuxiaoxi,"出发地信息",cfddata,"目的地信息",cfddata);
             
-
             var   pushType ="";
 
             if(locationqjval.val=="a=p"){   /* b=c是车主 */
