@@ -871,20 +871,45 @@ $.post(url,param,function(data){
                 $(".runscrqdvt").css(valjson);
                 $(".runscrqdvtr").css(valjson);
             }
+            let rscrdvohslet = {
+                one:1,
+                two:1,
+                three:1,
+            }
             $(".runscrqdvo").bind("touch click",function(){
-                runscrqdvohs();  
-                $(".runscrqdvo").css(rsfidvloval);   
-                runscreenv.time = "today";
+                rscrdvohslet.one +=1;
+                if(rscrdvohslet.one%2 === 0){
+                    runscrqdvohs();  
+                    $(".runscrqdvo").css(rsfidvloval);   
+                    runscreenv.time = "today";
+                }else {
+                    $(".runscrqdvo").css(valjson);
+                    runscreenv.time = "";
+                }
             })
             $(".runscrqdvt").bind("touch click",function(){
-                runscrqdvohs();  
-                $(".runscrqdvt").css(rsfidvloval);
-                runscreenv.time = "weekday";
+                rscrdvohslet.two +=1;
+                if(rscrdvohslet.two%2 ===0){
+                    runscrqdvohs();  
+                    $(".runscrqdvt").css(rsfidvloval);
+                    runscreenv.time = "weekday";
+                }else{
+                    $(".runscrqdvt").css(valjson);
+                    runscreenv.time = "";
+                }
+                
             })
             $(".runscrqdvtr").bind("touch click",function(){
-                runscrqdvohs();  
-                $(".runscrqdvtr").css(rsfidvloval);
-                runscreenv.time = "month";
+                rscrdvohslet.three +=1;
+                if(rscrdvohslet.three%2 ===0){
+                    runscrqdvohs();  
+                    $(".runscrqdvtr").css(rsfidvloval);
+                    runscreenv.time = "month";
+                }else {
+                    $(".runscrqdvtr").css(valjson);
+                    runscreenv.time = "";
+                }
+                
             })
         /* 选择出发地 */
             /* 输入 */
@@ -905,30 +930,70 @@ $.post(url,param,function(data){
                     "background":"#23beae",
                     "color":"#fff",
                 };
+                let rsflovlhslet = {
+                    one:1,
+                    two:1,
+                    three:1,
+                    four:1,
+                    five:1,
+                }
                 $(".rsfidvlo").bind('touch click',function(){
-                    runscreenv.cfd = $(".rsfidvlo").text();
-                    rsfidvlovalhs();
-                    $(".rsfidvlo").css(rsfidvloval);
+                    rsflovlhslet.one +=1;
+                    if(rsflovlhslet.one%2===0){
+                        runscreenv.cfd = $(".rsfidvlo").text();
+                        rsfidvlovalhs();
+                        $(".rsfidvlo").css(rsfidvloval);
+                    }else {
+                        runscreenv.cfd="";
+                        $(".rsfidvlo").css(valjson);
+                    }
                 })
                 $(".rsfidvlt").bind('touch click',function(){
-                    runscreenv.cfd = $(".rsfidvlt").text();
-                    rsfidvlovalhs();
-                    $(".rsfidvlt").css(rsdcsdloval);
+                    rsflovlhslet.two +=1;
+                    if(rsflovlhslet.two%2===0){
+                        runscreenv.cfd = $(".rsfidvlt").text();
+                        rsfidvlovalhs();
+                        $(".rsfidvlt").css(rsdcsdloval);
+                    }else {
+                        runscreenv.cfd="";
+                        $(".rsfidvlt").css(valjson);
+                    }
                 })
                 $(".rsfidvltr").bind('touch click',function(){
-                    runscreenv.cfd = $(".rsfidvltr").text();
-                    rsfidvlovalhs();
-                    $(".rsfidvltr").css(rsfidvloval);
+                    rsflovlhslet.three +=1;
+                    if(rsflovlhslet.three%2===0){
+                        runscreenv.cfd = $(".rsfidvltr").text();
+                        rsfidvlovalhs();
+                        $(".rsfidvltr").css(rsfidvloval);
+                    }else {
+                        runscreenv.cfd="";
+                        $(".rsfidvltr").css(valjson);
+                    }
+                    
                 })
                 $(".rsfidvf").bind('touch click',function(){
-                    runscreenv.cfd = $(".rsfidvf").text();
-                    rsfidvlovalhs();
-                    $(".rsfidvf").css(rsfidvloval);
+                    rsflovlhslet.four +=1;
+                    if(rsflovlhslet.four%2===0){
+                        runscreenv.cfd = $(".rsfidvf").text();
+                        rsfidvlovalhs();
+                        $(".rsfidvf").css(rsfidvloval);
+                    }else {
+                        runscreenv.cfd="";
+                        $(".rsfidvf").css(valjson);
+                    }
+                    
                 })
                 $(".rsfidvlfif").bind('touch click',function(){
-                    runscreenv.cfd = $(".rsfidvlfif").text();
-                    rsfidvlovalhs();
-                    $(".rsfidvlfif").css(rsfidvloval);
+                    rsflovlhslet.five +=1;
+                    if(rsflovlhslet.five%2===0){
+                        runscreenv.cfd = $(".rsfidvlfif").text();
+                        rsfidvlovalhs();
+                        $(".rsfidvlfif").css(rsfidvloval);
+                    }else {
+                        runscreenv.cfd="";
+                        $(".rsfidvlfif").css(valjson);   
+                    }
+                    
                 })
         /* 选择目的地 */
             /* 输入框 */
@@ -950,30 +1015,69 @@ $.post(url,param,function(data){
                     "background":"#ff4a39",
                     "color":"#fff",
                 }
+                 let rsdcsdlvllet ={
+                     one:1,
+                     two:1,
+                     three:1,
+                     four:1,
+                     five:1,
+                 }
                 $(".rsdcsdlo").bind("touch click",function(){
-                    runscreenv.mdd = $(".rsdcsdlo").text();
-                    rsdcsdlovalhs();
-                    $(".rsdcsdlo").css(rsdcsdloval);
+                    rsdcsdlvllet.one+=1;
+                    if(rsdcsdlvllet.one%2 ===0){
+                        runscreenv.mdd = $(".rsdcsdlo").text();
+                        rsdcsdlovalhs();
+                        $(".rsdcsdlo").css(rsdcsdloval);
+                    }else {
+                        runscreenv.mdd = "";
+                        $(".rsdcsdlo").css(valjson);
+                    }
                 })
                 $(".rsdcsdlt").bind("touch click",function(){
-                    runscreenv.mdd = $(".rsdcsdlt").text();
-                    rsdcsdlovalhs();
-                    $(".rsdcsdlt").css(rsdcsdloval);
+                    rsdcsdlvllet.two+=1;
+                    if(rsdcsdlvllet.two%2 ===0){
+                        runscreenv.mdd = $(".rsdcsdlt").text();
+                        rsdcsdlovalhs();
+                        $(".rsdcsdlt").css(rsdcsdloval);
+                    }else {
+                        runscreenv.mdd = "";
+                        $(".rsdcsdlt").css(valjson);
+                    }
+                    
                 })
                 $(".rsdcsdltr").bind("touch click",function(){
-                    runscreenv.mdd = $(".rsdcsdltr").text();
-                    rsdcsdlovalhs();
-                    $(".rsdcsdltr").css(rsdcsdloval);
+                    rsdcsdlvllet.three+=1;
+                    if(rsdcsdlvllet.three%2 ===0){
+                        runscreenv.mdd = $(".rsdcsdltr").text();
+                        rsdcsdlovalhs();
+                        $(".rsdcsdltr").css(rsdcsdloval);
+                    }else {
+                        runscreenv.mdd = "";
+                        $(".rsdcsdltr").css(valjson);
+                    }
+                   
                 })
                 $(".rsdcsdlf").bind("touch click",function(){
-                    runscreenv.mdd = $(".rsdcsdlf").text();
-                    rsdcsdlovalhs();
-                    $(".rsdcsdlf").css(rsdcsdloval);
+                    rsdcsdlvllet.four+=1;
+                    if(rsdcsdlvllet.four%2 ===0){
+                        runscreenv.mdd = $(".rsdcsdlf").text();
+                        rsdcsdlovalhs();
+                        $(".rsdcsdlf").css(rsdcsdloval);
+                    }else {
+                        runscreenv.mdd = "";
+                        $(".rsdcsdlf").css(valjson);
+                    }
                 })
                 $(".rsdcsdlfi").bind("touch click",function(){
-                    runscreenv.mdd = $(".rsdcsdlfi").text();
-                    rsdcsdlovalhs();
-                    $(".rsdcsdlfi").css(rsdcsdloval);
+                    rsdcsdlvllet.five+=1;
+                    if(rsdcsdlvllet.five%2 ===0){
+                        runscreenv.mdd = $(".rsdcsdlfi").text();
+                        rsdcsdlovalhs();
+                        $(".rsdcsdlfi").css(rsdcsdloval);
+                    }else {
+                        runscreenv.mdd = "";
+                        $(".rsdcsdlfi").css(valjson);
+                    }
                 })
         /* 点击确定时，取值发送ajax，调用渲染页面函数 */
         $(".runscjwfbsxdd").bind("touch click",function(){
@@ -1062,7 +1166,9 @@ $.post(url,param,function(data){
             $(".runscrqdvt").css(valjson);
             $(".runscrqdvtr").css(valjson);
             $(".rscfcdaipt").val(" ");
+            $(".rscfcdaipt").attr("placeholder","请填写以市为结尾的数据");
             $(".rsdcsoipt").val(" ");
+            $(".rsdcsoipt").attr("placeholder","请填写以市为结尾的数据");
             /* 几个div */
             $(".rsfidvlo").css(valjson);
             $(".rsfidvlt").css(valjson);

@@ -229,6 +229,7 @@
         cfdcity:"", /* 存储出发地的城市 */
         mddcity:"", /* 存储目的地的城市 */
         splitmddcity:"",    /* 需要进行切的值 */
+        dwsj:"",        /* 定位得到的数据 */
     };
 
     /* 点击得到的的数据 */
@@ -927,8 +928,13 @@
           // 实例化Autocomplete
           var searchval = $(".acityselect").text()+keywords;
           if(val!=undefined){
-            searchval = searchcityval.citysfdmmd+keywords;
+            if(searchcityval.citysfdmmd===""){
+                searchval = $(".acityselect").text()+keywords;
+            }else {
+                searchval = searchcityval.citysfdmmd+keywords;
+            }
           }
+            
           var autoComplete = new AMap.Autocomplete(autoOptions);
          
           autoComplete.search(searchval, function(status, result) {
@@ -1028,36 +1034,34 @@
         });
         map.addControl(geolocation);
         geolocation.getCurrentPosition(function(status,result){
-            
-            if(status=='complete'&& result!=null && result!=undefined&&result!=""){
+            if(status=='complete'){
                 onComplete(result)
-            
                 /* 定位时绑定到出发地的函数的值上 */
-                fabuxiaoxi.cfddata = result;
-                /* 这里 */
-
+                /* fabuxiaoxi.cfddata = result; */
             }else{
                 onError(result);
-             
             }
         });
     });
 
 
     function onComplete(data) {
-        console.log(data,"定位成功");
+        /* 解决之道 */
+        /* 把定位得到的数据格式 改成 点击时 数据的格式 */
+
         /* 定位成功后，把成功函数获取到的值给successdata， */
         gaode.successdata = data;
         $("#idxinxi").empty();
         $("#idxinxi").append("<P>定位成功</P>");
         /* 先隐藏起来，等后面看需求，解解决出发地的问题 */
-        $("#chufadi").val(data.formattedAddress);
+        /* $("#chufadi").val(data.formattedAddress);
+        fabuxiaoxi.cfddata = data; */
     }
     //解析定位错误信息
     function onError(data) {
         /* 失败后把失败的值给他 */
         /* data.message:失败原因 */
-        console.log("获取失败");
+        console.log("定位失败");
         gaode.errordata = data ;
     } 
 
@@ -1193,13 +1197,12 @@
             if(!fabuxiaoxi.cfddata.district){
                 fabuxiaoxi.cfddata.district = "";
             }
-            
             let lyhash  = window.location.hash;
             var valzhi  = lyhash.split("?");
              console.log("所有信息",fabuxiaoxi,"出发地信息",cfddata,"目的地信息",cfddata);
             
             var   pushType ="";
-
+            
             if(locationqjval.val=="a=p"){   /* b=c是车主 */
                pushType = "Passenger";  /* 判断是车主 还是乘客发布的 */
             }
@@ -1224,12 +1227,14 @@
                     aLat:mdata.location.lat,  /* 目的地纬度 */
                     departureTime:departureTime,    /* 出发时间问题后解决*/
                     pushType:pushType,        /* 发布类型 */
-                    arCity:cfddata.district,      /* 到达城市 */
-                    dpCity:mdata.district,      /* 出发城市 */
+                    arCity:mdata.district,      /* 到达城市 */
+                    dpCity:cfddata.district,      /* 出发城市 */
                 },
                 success:function(data){
                     $("#containersearchtime").val("");
                     $("#searchsetdate").val("");
+                    /* 初始化定位得到的值 */
+                    fabuxiaoxi.dwsj ={};
                     console.log("获取成功的数据",data);
                 /* 提交的元素 */
                     window.location.hash = "#passenger";
