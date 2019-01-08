@@ -138,23 +138,56 @@
         <!-- 全部行程的div -->
         <div class="run clearfix" style="display:none;">
             <div class="runscreen clearfix">
-                <div>
-                   <span>筛选</span>
+                <div class="runscsxsj clerfix">
+                   <span class="runscsxsjone">筛选(不选显示全部数据)</span>
+                   <a href="#run" class="btn btn-primary">返回</a>
                 </div>
-                <div>
-                    <span>日期范围:</span>
-                    <div>
-                        <span>今天</span>
-                        <span>一周内</span>
-                        <span>一个月之内</span>
+                <div class="runscrqfw clearfix">
+                    <span class="runscrqss">选择数据日期范围:</span>
+                    <div class="runscrqdv clearfix">
+                        <span class="runscrqdvo">今天</span>
+                        <span class="runscrqdvt">一周内</span>
+                        <span class="runscrqdvtr">一个月之内</span>
                     </div>
                 </div>
-                <div>
-                    <span>出发城市:</span>
+                <div class="runsccfcs clearfix">
+                    <span class="runsccfcsone" style="color: #23beae;
+                    font-size: 16px">出发城市(输入框输入/直接点击)</span>
+                    <div class="runsccfcdva clearfix">
+                        <input type="text" class="form-control rscfcdaipt" placeholder="请填写以市为结尾的数据"
+                        style="color:#23beae">
+                        <span class="glyphicon glyphicon-triangle-bottom" style="color:#23beae"></span>
+                        <div class="runsccficondv clearfix">
+                            <ul>
+                                <li class="rsfidvlo">常州市</li>
+                                <li class="rsfidvlt">苏州市</li>
+                                <li class="rsfidvltr">上海市</li>
+                                <li class="rsfidvf">无锡市</li>
+                                <li class="rsfidvlfif">南京市</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <span>到达城市:</span>
-                    <input type="text">
+                <div  class="runscrqdvtddcs clearfix">
+                    <span class="runscrqdvtddcsone" style="font-size:16px;color:#ff4a39">到达城市(输入框输入/直接点击)</span>
+                    <div  class="runsddcsone clearfix">
+                        <input type="text" class="form-control rsdcsoipt" placeholder="请填写以市为结尾的数据"
+                        style="color:#ff4a39">
+                        <span class="glyphicon glyphicon-triangle-bottom" style="color:#ff4a39"></span>
+                        <div class="runsddcsondv clearfix">
+                            <ul>
+                                <li class="rsdcsdlo">常州市</li>
+                                <li class="rsdcsdlt">苏州市</li>
+                                <li class="rsdcsdltr">上海市</li>
+                                <li class="rsdcsdlf">无锡市</li>
+                                <li class="rsdcsdlfi">南京市</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div  class="runscjwfbsx clearfix">
+                    <span class="runscjwfbsxqx">取消</span>
+                    <span class="runscjwfbsxdd">确定</span>
                 </div>
             </div>
             <!-- 乘客全部行程 -->
@@ -184,7 +217,6 @@
             <!-- <div class="runxian"></div> -->
             <!-- 车主全部行程 -->
             <div class="runvowner clearfix" style="display:none">  
-                         
                     <div class="dclxc clearfix">
                             <div class="top clearfix"> 
                                 <span class="glyphicon glyphicon-plane
@@ -220,10 +252,8 @@
                     <input type="text" class="form-control" id="citysearch" placeholder="输入你想查询的地址">
                 </div>
                 <div class="searchvalshow" id="idsearchvalshow">
-                    
                 </div>
                 <div class="xinxi" id="idxinxi">
-
                 </div>
             </div>
             <!-- 地图显示图 -->
@@ -232,7 +262,6 @@
                     点击选择目的地
                 </div>
             </div>
-               
                 <div class="input-card clearfix" >
                     <form action="" id="gaodeform" style="padding-bottom: 11px;">
                         <div class="chufadi clearfix">
@@ -255,7 +284,6 @@
                             float: right;" type="text" id='address' class="form-control" name="Destination"  placeholder="你要去哪儿" /></div>
                             <div>
                                 <div class="ctsearchtime clearfix">
-                                    
                                     <span class="left" style="
                                     line-height: 30px;
                                     text-indent: 5px;" >出发时间:</span>

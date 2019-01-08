@@ -29,7 +29,10 @@
         $(".details").outerHeight($(document.body).outerHeight()-$(".header").outerHeight());
         
         $("#searchxincheng").outerHeight($(document.body).outerHeight()-$(".header").outerHeight());
+        /* 让筛选页也可以滑动 */
+        $(".runscreen").outerHeight($(document.body).outerHeight()-$(".header").outerHeight());
 
+        
         /* 无需id值，直接取全部数据 */
         getqbVowner();
         getqbPassenger();
@@ -434,20 +437,28 @@
 
         /* run路由 */
         if(val1[0]=="#run"){
-
+            /* 路由为 run 时 默认取值 */
+            /* 为run时，请求数据 */
             hashcreate();
             $(".run").show();
+            $(".runvowner").hide();
+            $(".runscreen").hide();
+            $(".runpassenger").show();
             if(val1[1]=="diver"){
                 $(".runpassenger").hide();
                 $(".runscreen").hide();
                 $(".runvowner").show();
+               /*  getqbVowner(); */
             }else if(val1[1]=="passger"){
                 $(".runvowner").hide();
                 $(".runscreen").hide();
                 $(".runpassenger").show();
+                /* getqbPassenger(); */
             }else if(val1[1]=="passgeran" || val1[1]=="diveran"){
+               
                 $(".runvowner").hide();
                 $(".runpassenger").hide();
+                runscjwfbsxddcsh();
                 $(".runscreen").show();
                 val1[1]==="passgeran"?nowusermsg.lyxx = "passgeran":nowusermsg.lyxx = "diveran";
                 console.log(nowusermsg.lyxx);
@@ -626,6 +637,7 @@
             function setqbPassenger(data){
                 let passengerData = data.obj.frOrders;
                 if(data.result>0){ //为0才可以进行操作
+                    $("#runpassengerNode").empty();
                     for(var i = 0 ;i<passengerData.length;i++){
                             /* 全部行程中的数据的操作 */
                         if(passengerData[i].state > -1){
@@ -674,6 +686,7 @@
                 var vownerData = data.obj.frOrders;
                 // 先判断状态码 
                 if(data.result>0){ //为0才可以进行操作
+                    $("#runvownerNode").empty();
                     for(var i = 0 ;i<vownerData.length;i++){
                         if(vownerData[i].state > -1){
                             $("#runvownerNode").append(sfcsj.runvownerDiv);

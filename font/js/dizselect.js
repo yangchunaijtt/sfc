@@ -28,7 +28,6 @@
         $(".nowcity .nowcityval div").text(cityselectval.nowcity);
     }
 
-
     /* 给li绑定事件，
     当点击时，获取值，并上传回去 */
     function createlival(){
@@ -852,5 +851,246 @@ $.post(url,param,function(data){
             })
         }
 
-       
+/* 筛选判断的逻辑 */
+    let runscreenv = {
+        winhash:"",      /* 存储路由信息 */
+        time:"",       /* 发送ajax的time值 */
+        cfd:"",         /* 出发地 */
+        mdd:"",         /* 目的地 */
+    }
+    /*事件处理 */
+        /* 给runscreen添加值 */
+        let valjson = {
+            "background":"#f2f2f2",
+            "color":"#555",
+        };
+        /* 选择时间 */
+            function runscrqdvohs(){
+                
+                $(".runscrqdvo").css(valjson);
+                $(".runscrqdvt").css(valjson);
+                $(".runscrqdvtr").css(valjson);
+            }
+            $(".runscrqdvo").bind("touch click",function(){
+                runscrqdvohs();  
+                $(".runscrqdvo").css(rsfidvloval);   
+                runscreenv.time = "today";
+            })
+            $(".runscrqdvt").bind("touch click",function(){
+                runscrqdvohs();  
+                $(".runscrqdvt").css(rsfidvloval);
+                runscreenv.time = "weekday";
+            })
+            $(".runscrqdvtr").bind("touch click",function(){
+                runscrqdvohs();  
+                $(".runscrqdvtr").css(rsfidvloval);
+                runscreenv.time = "month";
+            })
+        /* 选择出发地 */
+            /* 输入 */
+                $(".rscfcdaipt").bind("blur",function(){
+                    runscreenv.cfd = $(".rscfcdaipt").val();
+                    console.log($(".rscfcdaipt").val(),$(".rscfcdaipt").val());
+                })
+            /* 点击几个城市 */
+                function rsfidvlovalhs(){
+                    /* 几个div */
+                    $(".rsfidvlo").css(valjson);
+                    $(".rsfidvlt").css(valjson);
+                    $(".rsfidvltr").css(valjson);
+                    $(".rsfidvf").css(valjson);
+                    $(".rsfidvlfif").css(valjson); 
+                }
+                let rsfidvloval = {
+                    "background":"#23beae",
+                    "color":"#fff",
+                };
+                $(".rsfidvlo").bind('touch click',function(){
+                    runscreenv.cfd = $(".rsfidvlo").text();
+                    rsfidvlovalhs();
+                    $(".rsfidvlo").css(rsfidvloval);
+                })
+                $(".rsfidvlt").bind('touch click',function(){
+                    runscreenv.cfd = $(".rsfidvlt").text();
+                    rsfidvlovalhs();
+                    $(".rsfidvlt").css(rsdcsdloval);
+                })
+                $(".rsfidvltr").bind('touch click',function(){
+                    runscreenv.cfd = $(".rsfidvltr").text();
+                    rsfidvlovalhs();
+                    $(".rsfidvltr").css(rsfidvloval);
+                })
+                $(".rsfidvf").bind('touch click',function(){
+                    runscreenv.cfd = $(".rsfidvf").text();
+                    rsfidvlovalhs();
+                    $(".rsfidvf").css(rsfidvloval);
+                })
+                $(".rsfidvlfif").bind('touch click',function(){
+                    runscreenv.cfd = $(".rsfidvlfif").text();
+                    rsfidvlovalhs();
+                    $(".rsfidvlfif").css(rsfidvloval);
+                })
+        /* 选择目的地 */
+            /* 输入框 */
+                $(".rsdcsoipt").bind("blur",function(){
+                    runscreenv.mdd = $(".rsdcsoipt").val();
+                    console.log($(".rsdcsoipt").val(),runscreenv.mdd);
+                })
+            /* 下面几个点击 */
+                function rsdcsdlovalhs(){
+                    /* 几个div */
+                    /* 下面几个div */
+                    $(".rsdcsdlo").css(valjson); 
+                    $(".rsdcsdlt").css(valjson); 
+                    $(".rsdcsdltr").css(valjson); 
+                    $(".rsdcsdlf").css(valjson); 
+                    $(".rsdcsdlfi").css(valjson); 
+                }
+                let rsdcsdloval = {
+                    "background":"#ff4a39",
+                    "color":"#fff",
+                }
+                $(".rsdcsdlo").bind("touch click",function(){
+                    runscreenv.mdd = $(".rsdcsdlo").text();
+                    rsdcsdlovalhs();
+                    $(".rsdcsdlo").css(rsdcsdloval);
+                })
+                $(".rsdcsdlt").bind("touch click",function(){
+                    runscreenv.mdd = $(".rsdcsdlt").text();
+                    rsdcsdlovalhs();
+                    $(".rsdcsdlt").css(rsdcsdloval);
+                })
+                $(".rsdcsdltr").bind("touch click",function(){
+                    runscreenv.mdd = $(".rsdcsdltr").text();
+                    rsdcsdlovalhs();
+                    $(".rsdcsdltr").css(rsdcsdloval);
+                })
+                $(".rsdcsdlf").bind("touch click",function(){
+                    runscreenv.mdd = $(".rsdcsdlf").text();
+                    rsdcsdlovalhs();
+                    $(".rsdcsdlf").css(rsdcsdloval);
+                })
+                $(".rsdcsdlfi").bind("touch click",function(){
+                    runscreenv.mdd = $(".rsdcsdlfi").text();
+                    rsdcsdlovalhs();
+                    $(".rsdcsdlfi").css(rsdcsdloval);
+                })
+        /* 点击确定时，取值发送ajax，调用渲染页面函数 */
+        $(".runscjwfbsxdd").bind("touch click",function(){
+            console.log(runscreenv);
+            runscreenv.winhash = window.location.hash;
+            if(runscreenv.time==="" && runscreenv.cfd ==="" && runscreenv.mdd===""){
+                getqbVowner();
+                getqbPassenger();
+                if(runscreenv.winhash==="#run?passgeran"){
+                    window.location.hash = "#run?passger";
+                }else if(runscreenv.winhash==="#run?diveran"){
+                    window.location.hash = "#run?diver";
+                }
+            }else{
+                /* 判断路由 */
+                /* 乘客页 */
+                if(runscreenv.winhash==="#run?passgeran"){
+                    $.ajax({
+                        url: sfcsj.passengerUrl,
+                       type: 'post',
+                       data:{
+                           cur:1,  /* 默认取第一页 */
+                           pushType:"Passenger",   /* 乘客 */
+                           uid:"",  /* id号   默认为空就是取全部的数据*/
+                           dateRange:runscreenv.time,      
+                           arCity:runscreenv.mdd,      /* 到达城市 */
+                           dpCity:runscreenv.cfd,      /* 出发城市 */
+                       },
+                        success: function (data) {
+                            qbxcvalsj.passenger = data;
+                           console.log("筛选乘客的数据",data);
+                           /* setPassenger() 处理 乘客端数据的函数*/
+                           /* 先清空，在添加 */
+                          
+                           /* 成功取到数据后，要清空runscreenv，防止下次再用值不对 */
+                           runscjwfbsxddcsh();
+                           $("#runpassengerNode").empty();
+                           setqbPassenger(data);
+                           window.location.hash = "#run?passger";
+                           
+                       }
+                      });
+                }else if(runscreenv.winhash==="#run?diveran"){
+                    $.ajax({
+                        url: sfcsj.vownerUrl,
+                       type: 'post',
+                       data:{
+                           cur:1,  /* 默认取第一页 */
+                           pushType:"Driver",   /* 乘客 */
+                           uid:"",  /* id号   默认为空就是取全部的数据*/
+                           dateRange:runscreenv.time,      
+                           arCity:runscreenv.mdd,      /* 到达城市 */
+                           dpCity:runscreenv.cfd,      /* 出发城市 */
+                       },
+                        success: function (data) {
+                           qbxcvalsj.vowner = data;
+                           /* 获取成功，但是数据暂时为空 */
+                           console.log("筛选车主的数据",data);
+                           /* setPassenger() 处理 乘客端数据的函数*/
+                           /* 成功取到数据后，要清空runscreenv，防止下次再用值不对 */
+                           runscjwfbsxddcsh();
+                           $("#runvownerNode").empty();
+                           setqbVowneraa(data);
+                           window.location.hash = "#run?diver";
+                       }
+                      });
+                }
+                /* 完成了要把runscreen,使用完要把那个清空 */
+            }
+        })
+        /* 把所有东西初始化 */
+        /* 切换到这两个路由时，就进行初始化  */
+        function runscjwfbsxddcsh(){
+            runscreenv.cfd ="";
+            runscreenv.mdd="";
+            runscreenv.time = "";
+            runscreenv.winhash ="";
+            /* 样式也要初始化 */
+            let valjson = {
+                "background":"#f2f2f2",
+                "color":"#555",
+            };
+            $(".runsccfcdva .runsccficondv ul li").css(valjson);
+            $(".runscrqdvtddcs .runsddcsondv ul li").css(valjson);
+            $(".runscrqdvo").css(valjson);
+            $(".runscrqdvt").css(valjson);
+            $(".runscrqdvtr").css(valjson);
+            $(".rscfcdaipt").val(" ");
+            $(".rsdcsoipt").val(" ");
+            /* 几个div */
+            $(".rsfidvlo").css(valjson);
+            $(".rsfidvlt").css(valjson);
+            $(".rsfidvltr").css(valjson);
+            $(".rsfidvf").css(valjson);
+            $(".rsfidvlfif").css(valjson); 
+            /* 下面几个div */
+            $(".rsdcsdlo").css(valjson); 
+            $(".rsdcsdlt").css(valjson); 
+            $(".rsdcsdltr").css(valjson); 
+            $(".rsdcsdlf").css(valjson); 
+            $(".rsdcsdlfi").css(valjson); 
+        }
+        /* 取消时，直接使用路由 */
+        $(".runscjwfbsxqx").bind("touch click",function(){
+            /* 返回 #run  路由页面  */
+            runscreenv.winhash = window.location.hash;
+            getqbVowner();
+            getqbPassenger();
+            console.log(runscreenv.winhash);
+            if(runscreenv.winhash===""){
+                window.location.hash = "#run";
+            }else if(runscreenv.winhash==="#run?diveran"){
+                window.location.hash = "#run?diver";
+            }else if(runscreenv.winhash==="#run?passgeran"){
+                window.location.hash = "#run?passger";
+            }
+        })
+
+
     

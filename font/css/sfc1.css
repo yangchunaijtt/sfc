@@ -1260,18 +1260,14 @@ body {
   margin-left: 5%;
   border-radius: 4px;
 }
-.run .runscreen .runsccfcs span.runsccfcsone {
+.run .runscreen .runsccfcs span {
   display: block;
   width: 100%;
   line-height: 40px;
   text-indent: 22px;
   border-bottom: 1px solid #f2f2f2;
 }
-.run .runscreen .runsccfcs input,.run .runscreen .runscrqdvtddcs input{
-  padding: 20px;
-  margin: 20px;
-}
-.run .runscreen .runscrqdvtddcs span.runscrqdvtddcsone {
+.run .runscreen .runscrqdvtddcs span {
   display: block;
   width: 100%;
   line-height: 40px;
@@ -1284,12 +1280,11 @@ body {
   padding: 20px 0px;
 }
 .run .runscreen .runscjwfbsx .runscjwfbsxqx {
-  background: red;
-  
-  width: 20%;
+  width: 47%;
   
   display: inline-block;
   
+  line-height: 40px;
   
   float: left;
   
@@ -1297,107 +1292,36 @@ body {
   
   font-size: 16px;
   
-  border-radius: 6px;
+  border-radius: 6px 0px 0px 6px;
+  
+  margin-left: 2%;
   
   border: 1px solid #f2f2f2;
-
-  color: #fff;
-  line-height: 44px;
   
-  background: #5187c5;
+      border-right-color: rgb(242, 242, 242);
+      border-right-style: solid;
+      border-right-width: 1px;
   
-  float: left;
+  border-right: 0px;
   
-  margin-left: 10%;
+  color: #363636;
 }
 .run .runscreen .runscjwfbsx .runscjwfbsxdd {
-  width: 20%;
+  width: 47%;
   
   display: inline-block;
   
-  line-height: 44px;
+  line-height: 40px;
+  
+  float: left;
   
   text-align: center;
   
   font-size: 16px;
   
-  border-radius: 6px;
+  border-radius: 0px 6px 6px 0px;
   
   border: 1px solid #f2f2f2;
   
-  color: #fff;
-  
-  background: #e39f7a;
-  
-  float: right;
-  
-  margin-right: 10%;
+  color: #e39f7a;
 }
-/* 添加快速选择的按钮 */
-.runsccfcdva{
-  position: relative;
-}
-.runsccfcdva .runsccficondv{
-  position: absolute;
-  
-  right: 0px;
-  
-  top: 74px;
-  
-  width: 100%;
-}
-.runsccfcdva .runsccficondv ul li{
-  float: left;
-  
-  width: 15%;
-  
-  margin-right: 3%;
-  
-  background: #23cebc;
-  background: #f2f2f2;
-  
-  text-align: center;
-  
-  line-height: 36px;
-  
-  border-radius: 4px;
-}
-.runsccfcdva .runsccficondv .rsfidvlo{
-  margin-left: 10%;
-}
-/* 出发城市页设置 */
-.runscrqdvtddcs{
-  position: relative;
-}
-.runsddcsondv{
-  position: absolute;
-  right: 10px;
-  width: 100%;
-  top: 74px;
-}
-.runscrqdvtddcs .runsddcsondv ul li {
-  float: left;
-  width: 15%;
-  margin-right: 3%;
-  background: #ff4a39;
-  background: #f2f2f2; 
-  text-align: center;
-  line-height: 36px;
-  border-radius: 4px;
-}
-.runscrqdvtddcs .runsddcsondv  .rsdcsdlo{
-  margin-left: 10%;
-}
-.runscreen{
-  overflow-y: auto;
-}
-.runsccfcs{
-  height:170px;
-}
-.runscrqdvtddcs{
-  height:170px;
-}
-.runsddcsone{
-  position: relative;
-}
-
