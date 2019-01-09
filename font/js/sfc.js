@@ -52,7 +52,9 @@
     /* 给导航条绑定切换*/
     let hpassengerpd = 1;
    $(".hpassenger").bind("touch click",function(){
+
          $(".runluyouaa").hide();
+         
         hpassengerpd++;
        if(hpassengerpd%2===0){
         $("#hpassengericon").attr("class","glyphicon glyphicon-chevron-up");
@@ -377,8 +379,19 @@
         $("#pformcontrolsr").bind("focus",function(){
             locationqjval.val = "a=p";
             hashChange("#details?a=p");
-            
         });
+        /* 两个a标签 */
+        $("#sbutnaone").bind("touch click",function(){
+            locationqjval.val = "a=p";
+            hashChange("#details?a=p");
+        });
+
+        $("#sbuttonatwo").bind("touch click",function(){
+            locationqjval.val = "b=v";
+            hashChange("#details?b=v");
+        })
+        
+
         $("#pformcontrolsc").bind("focus",function(){
             locationqjval.val = "a=p";
             hashChange("#details?a=p");
@@ -448,6 +461,7 @@
             $(".run").show();
             $(".runvowner").hide();
             $(".runscreen").hide();
+            
             $(".runpassenger").show();
             if(val1[1]=="diver"){
                 $(".runpassenger").hide();
@@ -551,6 +565,9 @@
             $(".htoggletwo").addClass("hactive");
         })
         $(".htogglethree").bind(" touch click",function(){
+            /* 把我的行程隐藏 */
+            $(".hvowner").hide();
+
             removeActive();
             $(".htogglethree").addClass("hactive");
         })

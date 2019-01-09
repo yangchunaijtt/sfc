@@ -97,15 +97,6 @@
   line-height: 35px;
   text-indent: 10px;
 }
-.sbutton {
-  margin: 20px 15%;
-  width: 70%;
-  line-height: 23px;
-  font-size: 18px;
-  text-indent: 29%;
-  text-align: -webkit-auto;
-  letter-spacing: 68px;
-}
 /* 常用路线 */
 /* 图标部分 */
 .cylx {
@@ -238,12 +229,12 @@
 .sbutton {
   margin: 10px 15%;
   width: 70%;
-  line-height: 23px;
+  line-height: 26px;
   font-size: 18px;
-  text-indent: 29%;
-  text-align: -webkit-auto;
-  letter-spacing: 68px;
+  text-indent: 6px;
+  letter-spacing: 6px;
   margin-bottom: 19px;
+  text-align: center;
 }
 .runvownerleft {
   width: 80%;
@@ -464,7 +455,7 @@
 select,
 input[type=text],
 input[type=date] {
-  width: 77%;
+  
 }
 /* 地图api页设置 */
 .details .sbutton1 {
@@ -490,6 +481,9 @@ input[type=date] {
 }
 .details #chufadi {
   margin-top: 10px;
+  float: right;
+  margin-right: 10px;
+  background: #fbfbfb;
 }
 .details .city {
   display: inline-block;
@@ -508,19 +502,20 @@ input[type=date] {
   display: inline-block;
   height: 30px;
   margin-top: 13px;
-  width: 50%;
+  width: 60%;
 }
 .details .cityicon {
   position: relative;
   left: 24px;
   font-size: 14px;
-  color: #c5c5c5;
+  color: #636363;
 }
 #citysearch {
   text-indent: 10px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  background: #f2f2f2;
 }
 #ctxz {
   color: #fff;
@@ -541,7 +536,8 @@ input[type=date] {
   background-color: #fff;
   margin-top: 20px;
   border-radius: 4px;
-  margin: 10px 6px;
+  margin: 12px 6px;
+  width: 96%;
 }
 .details .search-bar-inner .searchvalshow {
   position: absolute;
@@ -567,7 +563,6 @@ input[type=date] {
   position: absolute;
   right: 0px;
   width: 20%;
-  height: 40px;
   margin-right: 10px;
   margin-top: 10px;
   color: #fff;
@@ -575,7 +570,7 @@ input[type=date] {
   text-align: center;
 }
 .details .search-bar-inner .xinxi p {
-  line-height: 40px;
+  line-height: 34px;
 }
 /*  页面测试阶段更改 */
 .runpassengerleft {
@@ -1209,7 +1204,7 @@ body {
   margin-top: 10px;
 }
 .run .runscreen .runscsxsj .runscsxsjone {
-  width: 70%;
+  width: 76%;
   display: inline-block;
   text-indent: 30px;
   line-height: 60px;

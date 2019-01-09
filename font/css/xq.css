@@ -13,7 +13,7 @@
   background: #979797;
   color: #fff;
   margin-top: 13px;
-  margin-left: 16px;
+  margin-left: 11%;
   border-radius: 2px;
   line-height: 30px;
   text-align: center;
@@ -109,11 +109,11 @@
   width: 100%;
 }
 .showsjdata .srselect .changzleft {
-  width: 65%;
+  width: 72%;
   display: inline-block;
 }
 .showsjdata .srselect .fanhuisyj {
-  width: 30%;
+  width: 22%;
   display: inline-block;
 }
 .showsjdata .srselect .fanhuisyj .fhusyjd {
@@ -149,18 +149,18 @@
 .clickqxx {
   width: 100%;
   margin:10px 0px;
-  margin-bottom: 20px;
+  padding-bottom: 20px;
 }
 .clickqxx #qxsfcxinxi {
   width: 150px;
-  height: 30px;
-
-  line-height: 30px;
+  height: 36px;
+  line-height: 36px;
   color: #fff;
   background: #31b0d5;
   text-align: center;
   border-radius: 6px;
   margin:0  auto;
+  font-size: 16px;
 }
 .sfval,.qxiaoval{
   width:100%;
