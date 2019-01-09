@@ -13,6 +13,8 @@
           });
      
     $(function(){
+        /* 初始化时设置默认值 */
+        $(".dqcsval").text($(".xcspanleft").text());
 /* 给滑动元素获取高度 */
         /* 乘客页的高度 */
         $(".cylx").outerHeight($(document.body).outerHeight()-$(".passenger .select").outerHeight()-$(".header").outerHeight());
@@ -1099,6 +1101,7 @@
                 if (status === 'complete'&&result.regeocode) {
                     var address = result.regeocode.formattedAddress;
                     document.getElementById('address').value = address;
+                    console.log("点击结果",result);
                 }else{alert(JSON.stringify(result))}
             });
         }
@@ -1111,6 +1114,7 @@
                 $("#idsearchvalshow").empty();
                 $("#idxinxi").append("<P>选择成功</P>");
         })
+
         document.getElementById('lnglat').onkeydown = function(e) {
             if (e.keyCode === 13) {
                 regeoCode();
@@ -1127,13 +1131,11 @@
             if(jbelnglat==false){
                 document.getElementById('lnglat').value = {};
                 regeoCode();
-                
             }
             $("#idxinxi").empty();
             document.getElementById('lnglat').value = jbelnglat;
             regeoCode();
             $("#idxinxi").append("<P>找到地址</P>");
-           
         }
 
         /* 设置中心点函数 */
@@ -1165,9 +1167,6 @@
              
              gaode.formattedAddress = $("#chufadi").val();       
              gaode.Destination = $("#address").val();
-            
-             console.log("发布",fabuxiaoxi);
-
              /* 判断一下目的地是否为空  */
              if($("#chufadi").val() == ""){
                  $("#chufadi").attr("placeholder","请稍做等待！");
@@ -1275,7 +1274,8 @@
                     fabuxiaoxi.mmddata = "";    /* 置空 */
                     console.log("获取成功的数据",data);
                 /* 提交的元素 */
-                    window.location.hash = "#passenger";
+                    /* 数据成功后，在重新请求下页面,刷新数据，把刚刚取到的数据放在页面上给用户观看。*/
+                    window.location.href = "http://qckj.czgdly.com/bus/MobileWeb/WxWeb-kongbatong/sfc.html";   
                 },
                 error:function(data){
                     /* 用完要把用过的值初始化 */

@@ -79,81 +79,60 @@
             $(".ulliwx").addClass("ulliactive");
             cszhi(".ulliwx");
             zhidimaker(".ulliwx");
-            $(".xcspanleft").text($(".acityselect").text());
-            $(".dqcsval").text($(".acityselect").text());
-            
         })
         $(".ullish").bind("touch click",function(){
             removeacive();
             $(".ullish").addClass("ulliactive");
             cszhi(".ullish");
             zhidimaker(".ullish");
-            $(".xcspanleft").text($(".acityselect").text());
-            $(".dqcsval").text($(".acityselect").text());
         })
         $(".ullisz").bind("touch click",function(){
             removeacive();
             $(".ullisz").addClass("ulliactive");
             cszhi(".ullisz");
             zhidimaker(".ullisz");
-            $(".xcspanleft").text($(".acityselect").text());
-            $(".dqcsval").text($(".acityselect").text());
         })
         $(".ullinj").bind("touch click",function(){
             removeacive();
             $(".ullinj").addClass("ulliactive");
             cszhi(".ullinj");
             zhidimaker(".ullinj");
-            $(".xcspanleft").text($(".acityselect").text());
-            $(".dqcsval").text($(".acityselect").text());
         })  
         $(".ullint").bind("touch click",function(){
             removeacive();
             $(".ullint").addClass("ulliactive");
             cszhi(".ullint");
             zhidimaker(".ullinnt");
-            $(".xcspanleft").text($(".acityselect").text());
-            $(".dqcsval").text($(".acityselect").text());
         })
         $(".ulliyz").bind("touch click",function(){
             removeacive();
             $(".ulliyz").addClass("ulliactive");
             cszhi(".ulliyz");
             zhidimaker(".ulliyz");
-            $(".xcspanleft").text($(".acityselect").text());
-            $(".dqcsval").text($(".acityselect").text());
         })
         $(".ullitz").bind("touch click",function(){
             removeacive();
             $(".ullitz").addClass("ulliactive");
             cszhi(".ullitz");
             zhidimaker(".ullitz");
-            $(".xcspanleft").text($(".acityselect").text());
-            $(".dqcsval").text($(".acityselect").text());
         })
         $(".ullizjg").bind("touch click",function(){
             removeacive();
             $(".ullizjg").addClass("ulliactive");
             cszhi(".ullizjg");
             zhidimaker(".ullizjg");
-            $(".xcspanleft").text($(".acityselect").text());
-            $(".dqcsval").text($(".acityselect").text());
         })
         $(".ullics").bind("touch click",function(){
             removeacive();
             $(".ullics").addClass("ulliactive");
             cszhi(".ullics");
             zhidimaker(".ullics");
-            $(".xcspanleft").text($(".acityselect").text());
-            $(".dqcsval").text($(".acityselect").text());
         })
         $(".nowcityval div").bind("touch click",function(){
             removeacive();
             $(".ullics").addClass("ulliactive");
             cszhi(".ullics");
             zhidimaker(".ullics");
-            $(".xcspanleft").text($(".acityselect").text());
-            $(".dqcsval").text($(".acityselect").text());
             
         })
     }
@@ -234,12 +213,10 @@
             
         }
      
-
      /* 点击取消，页面跳为地图页面 */
      $(".xcqx").bind("touch click",function(){
          window.location.hash = "#details";
      })
-
 
      /* 点击搜索功能的函数 */
      let  autoInputsunval = {
@@ -250,7 +227,6 @@
      function autoInputsun(){
 
         var keywords = document.getElementById("inxcbody").value;
-       
         AMap.plugin('AMap.Autocomplete', function(){
                 var autoOptions = {
                     city:"常州"
@@ -326,66 +302,46 @@
      /* 选择城市后返回并把数据填上在表单是上 */
      /* 定位出发地 目的地 */
      /* #mxxwz  #sxxwz */
-     function tjhbindcityxz(){
-        let whash = window.location.hash;
-        if(whash==="#sxxwz"){
-            fabuxiaoxi.cfdcity = $(".xcspanleft").text();
-            console.log(fabuxiaoxi.cfdcity);
-        }else if(whash==="#mxxwz"){
-            fabuxiaoxi.mddcity = $(".xcspanleft").text();
-            console.log(fabuxiaoxi.mddcity);
-        }
-     }
      function tjhbind(){
         $(".tjheader0").bind("touch click",function(){
             xxwzclick(0);
             touchchuli(autoInputsunval.result.tips[0]); 
-            tjhbindcityxz();
         })
         $(".tjheader1").bind("touch click",function(){
             xxwzclick(1);
             touchchuli(autoInputsunval.result.tips[1]); 
-            tjhbindcityxz();
         })
         $(".tjheader2").bind("touch click",function(){
             xxwzclick(2);
-            touchchuli(autoInputsunval.result.tips[2]); 
-            tjhbindcityxz(); 
+            touchchuli(autoInputsunval.result.tips[2]);  
         })
         $(".tjheader3").bind("touch click",function(){
             xxwzclick(3);
-            touchchuli(autoInputsunval.result.tips[3]);
-            tjhbindcityxz();  
+            touchchuli(autoInputsunval.result.tips[3]);  
         })
         $(".tjheader4").bind("touch click",function(){
             xxwzclick(4);
-            touchchuli(autoInputsunval.result.tips[4]);
-            tjhbindcityxz();  
+            touchchuli(autoInputsunval.result.tips[4]);  
         })
         $(".tjheader5").bind("touch click",function(){
             xxwzclick(5);
-            touchchuli(autoInputsunval.result.tips[5]); 
-            tjhbindcityxz(); 
+            touchchuli(autoInputsunval.result.tips[5]);  
         })
         $(".tjheader6").bind("touch click",function(){
             xxwzclick(6);
-            touchchuli(autoInputsunval.result.tips[6]); 
-            tjhbindcityxz(); 
+            touchchuli(autoInputsunval.result.tips[6]);  
         })
         $(".tjheader7").bind("touch click",function(){
             xxwzclick(7);
-            touchchuli(autoInputsunval.result.tips[7]); 
-            tjhbindcityxz(); 
+            touchchuli(autoInputsunval.result.tips[7]);  
         })
         $(".tjheader8").bind("touch click",function(){
             xxwzclick(8);
-            touchchuli(autoInputsunval.result.tips[8]); 
-            tjhbindcityxz(); 
+            touchchuli(autoInputsunval.result.tips[8]);  
         })
         $(".tjheader9").bind("touch click",function(){
             xxwzclick(9);
-            touchchuli(autoInputsunval.result.tips[9]); 
-            tjhbindcityxz(); 
+            touchchuli(autoInputsunval.result.tips[9]);  
         })
      }
         
@@ -399,14 +355,21 @@
             var tips = autoInputsunval.result.tips;  */ 
           
             var locationhash = window.location.hash;
-           
+            /* 给城市赋值 */
+            if(locationhash==="#sxxwz"){
+                fabuxiaoxi.cfdcity = $(".xcspanleft").text();
+                console.log(fabuxiaoxi.cfdcity);
+            }else if(locationhash==="#mxxwz"){
+                fabuxiaoxi.mddcity = $(".xcspanleft").text();
+                console.log(fabuxiaoxi.mddcity);
+            }
+
             /* 出发地  始发地 */
             if(locationhash=="#mxxwz"){
                 let result = autoInputsunval.mddresult;
                 let tipstwo = autoInputsunval.mddresult.tips;  
                 /* 点击时，目的地的数据 */
                 fabuxiaoxi.mmddata =  autoInputsunval.mddresult.tips[i];
-                fabuxiaoxi.mddcity = autoInputsunval.mddresult.tips[0].name;
                 /* 目的地 目的地经纬度 */
                 $("#address").val(tipstwo[i].name);
                 $("#mmdjwd").val(tipstwo[i].location);
@@ -417,7 +380,6 @@
                 let tipsone = autoInputsunval.cfdresult.tips;  
                 /*  #sxxwz 出发地 经纬度信息*/
                 fabuxiaoxi.cfddata  = autoInputsunval.cfdresult.tips[i];
-                fabuxiaoxi.cfdcity = autoInputsunval.cfdresult.tips[0].name;
                 $("#chufadi").val(tipsone[i].name);
                 $(".lnglat").val(tipsone[i].location);
                 locationhash = "#details";     
@@ -659,6 +621,9 @@ $.post(url,param,function(data){
             function timequxfunction(){
                 $("#dt-a-0").data("val"," ");
                 $("#dt-c-1").data("val"," ");
+                /* 点击取消把地图页的两个时间值改为空 */
+                $("#containersearchtime").val("");
+                $("#searchsetdate").val("");
                 window.location.hash = "#details";
             }
         /* 点击确认时的操作 */
@@ -676,7 +641,6 @@ $.post(url,param,function(data){
                     alert("期望到达时间不能小于出发时间!");
                 }
             }
-    
     
 /*  实现页面滑动到底部加载*/
 
@@ -706,8 +670,6 @@ $.post(url,param,function(data){
         $passenger.on( 'load.infiniteScroll', function( event, response ) {
             var data = response;
             /* 获取成功后，要把页面加1，方便用户在滑动，在触发获取函数*/
-            
-            console.log("乘客页滑动效果",passengerNodeval.page,passengerNodeval.loadcount,data);
             passengerNodeval.page++;
             /* 开始处理结果 */
              /* 赋值最大页数 */
@@ -744,9 +706,6 @@ $.post(url,param,function(data){
         $vownper.on( 'load.infiniteScroll', function( event, response ) {
             var data = response;
             /* 获取成功后，要把页面加1，方便用户在滑动，在触发获取函数*/
-                                            /* 10     2 */
-            console.log("车主页滑动效果",vownperNodeval.page,vownperNodeval.loadcount,data);
-            
             /* 开始处理结果 */
              /* 赋值最大页数 */
             vownperNodeval.loadcount = data.page;
@@ -783,9 +742,6 @@ $.post(url,param,function(data){
         $runpassengerval.on( 'load.infiniteScroll', function( event, response ) {
             var data = response;
             /* 获取成功后，要把页面加1，方便用户在滑动，在触发获取函数*/
-                                            /* 10     2 */
-            console.log("全部乘客页滑动效果",runpassengerval.page,runpassengerval.loadcount,data);
-            
             /* 开始处理结果 */
              /* 赋值最大页数 */
             runpassengerval.loadcount = data.page;
@@ -823,9 +779,6 @@ $.post(url,param,function(data){
         $runpassengerval.on( 'load.infiniteScroll', function( event, response ) {
             var data = response;
             /* 获取成功后，要把页面加1，方便用户在滑动，在触发获取函数*/
-                                            /* 10     2 */
-            console.log("全部车主页滑动效果",runvownerval.page,runvownerval.loadcount,data);
-            
             /* 开始处理结果 */
              /* 赋值最大页数 */
             runvownerval.loadcount = data.page;
@@ -863,9 +816,7 @@ $.post(url,param,function(data){
             $runpassengerval.on( 'load.infiniteScroll', function( event, response ) {
                 var data = response;
                 /* 获取成功后，要把页面加1，方便用户在滑动，在触发获取函数*/
-                                                /* 10     2 */
-                console.log("支付页滑动效果",paymentzyval.page,paymentzyval.loadcount,data);
-                
+                                                /* 10     2 */        
                 /* 开始处理结果 */
                 /* 赋值最大页数 */
                 paymentzyval.loadcount = data.page;

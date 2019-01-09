@@ -8,10 +8,7 @@ $(function(){
    $(".mddsdmdiv").bind("touch click",function(){
        cfdsdmdivcl("mdd");
    })
-   /* 绑取消订单的事件 */
-   $("#qxsfcxinxi").bind("touch click",function(){
-        qxsfcxinxi();
-   })
+   
    /* 获取路由的值 */
    hqselectval();
    
@@ -31,7 +28,7 @@ $(function(){
         取消结果:
         </span>
         <span class="qxiaovaldv">
-            大佬~取消要慎重、！、
+            可以取消
         </span>
     `;
     let clickqxx = `
@@ -76,9 +73,16 @@ $(function(){
             success:function(data){
                 console.log("获取成功的数据",data);
                 rendering(data);
+                /* 绑取消订单的事件 */
+                $("#qxsfcxinxi").bind("touch click",function(){
+                    qxsfcxinxi();
+                })
             },
             error:function(data){
                 console.log("失败的原因",data);
+                $("#qxsfcxinxi").bind("touch click",function(){
+                    qxsfcxinxi();
+                })
             }
         })
     }   
@@ -94,6 +98,10 @@ $(function(){
                 $(".cftimesdmd").text(sj.departureTime);
             /* 期望时间 */
                 $(".cfdsdmd").text(sj.arrivalTime);
+            /* 出发城市 */
+                $(".cfcitydv").text(sj.dpCity);
+            /* 目的城市 */
+                $(".mdcitydv").text(sj.arCity);
             /* 身份 */
                 if(sj.pushType==="Passenger"){
                     $(".sfvaldiv").text("乘客");

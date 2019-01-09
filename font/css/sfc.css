@@ -905,8 +905,7 @@ input[type=date] {
   color: #fc9153;
 }
 .searchtime .timebody {
-  width: 100%;
-  margin-top: 20px;
+  margin: 11px 6px;
 }
 .searchtime .timebody input {
   text-align: center;
@@ -1079,7 +1078,6 @@ input[type=date] {
 }
 /* 时间选择css样式 */
 .timebody {
-  width: 100%;
   background: #fff;
   margin-bottom: 10px;
   border-radius: 5px;
@@ -1228,6 +1226,8 @@ body {
   line-height: 40px;
   text-indent: 22px;
   border-bottom: 1px solid #f2f2f2;
+  color: #23beae;
+  font-size: 16px;
 }
 .run .runscreen .runscrqfw .runscrqdv {
   margin-bottom: 20px;
