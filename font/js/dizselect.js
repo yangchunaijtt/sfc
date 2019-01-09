@@ -223,7 +223,7 @@
             searchcityval.citysfdmmd =  textval ;
             $(".dqcsval").text(textval);
             cityselectval.nowcity = textval;
-            $(".acityselect").text(textval);
+         
             $("#inxcbody").val(textval);
             autoInputsun();
             if(locationhash=="#s"){
@@ -308,52 +308,84 @@
 
 
      /* 点击返回选择城市页 */
+        /* 需要多几步判断 */
         $(".xcheader").bind("touch click ",function(){
-            window.location.hash = "#s";
+            let whash = window.location.hash;
+            if(whash==="#s"){
+                window.location.hash = "#s";
+            }else if(whash==="#m"){
+                window.location.hash = "#m";
+            }else if(whash==="#sxxwz"){
+                window.location.hash = "#s";
+            }else if(whash==="#mxxwz"){
+                window.location.hash = "#m";
+            }
         })
 
     
      /* 选择城市后返回并把数据填上在表单是上 */
+     /* 定位出发地 目的地 */
+     /* #mxxwz  #sxxwz */
+     function tjhbindcityxz(){
+        let whash = window.location.hash;
+        if(whash==="#sxxwz"){
+            fabuxiaoxi.cfdcity = $(".xcspanleft").text();
+            console.log(fabuxiaoxi.cfdcity);
+        }else if(whash==="#mxxwz"){
+            fabuxiaoxi.mddcity = $(".xcspanleft").text();
+            console.log(fabuxiaoxi.mddcity);
+        }
+     }
      function tjhbind(){
         $(".tjheader0").bind("touch click",function(){
             xxwzclick(0);
             touchchuli(autoInputsunval.result.tips[0]); 
+            tjhbindcityxz();
         })
         $(".tjheader1").bind("touch click",function(){
             xxwzclick(1);
             touchchuli(autoInputsunval.result.tips[1]); 
+            tjhbindcityxz();
         })
         $(".tjheader2").bind("touch click",function(){
             xxwzclick(2);
-            touchchuli(autoInputsunval.result.tips[2]);  
+            touchchuli(autoInputsunval.result.tips[2]); 
+            tjhbindcityxz(); 
         })
         $(".tjheader3").bind("touch click",function(){
             xxwzclick(3);
-            touchchuli(autoInputsunval.result.tips[3]); 
+            touchchuli(autoInputsunval.result.tips[3]);
+            tjhbindcityxz();  
         })
         $(".tjheader4").bind("touch click",function(){
             xxwzclick(4);
-            touchchuli(autoInputsunval.result.tips[4]); 
+            touchchuli(autoInputsunval.result.tips[4]);
+            tjhbindcityxz();  
         })
         $(".tjheader5").bind("touch click",function(){
             xxwzclick(5);
             touchchuli(autoInputsunval.result.tips[5]); 
+            tjhbindcityxz(); 
         })
         $(".tjheader6").bind("touch click",function(){
             xxwzclick(6);
             touchchuli(autoInputsunval.result.tips[6]); 
+            tjhbindcityxz(); 
         })
         $(".tjheader7").bind("touch click",function(){
             xxwzclick(7);
             touchchuli(autoInputsunval.result.tips[7]); 
+            tjhbindcityxz(); 
         })
         $(".tjheader8").bind("touch click",function(){
             xxwzclick(8);
             touchchuli(autoInputsunval.result.tips[8]); 
+            tjhbindcityxz(); 
         })
         $(".tjheader9").bind("touch click",function(){
             xxwzclick(9);
             touchchuli(autoInputsunval.result.tips[9]); 
+            tjhbindcityxz(); 
         })
      }
         
@@ -388,8 +420,7 @@
                 fabuxiaoxi.cfdcity = autoInputsunval.cfdresult.tips[0].name;
                 $("#chufadi").val(tipsone[i].name);
                 $(".lnglat").val(tipsone[i].location);
-                locationhash = "#details";
-                
+                locationhash = "#details";     
             }
              
             window.location.hash = "#details";
