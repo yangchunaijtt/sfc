@@ -33,18 +33,14 @@
                     我的行程
                     <span class="glyphicon glyphicon-chevron-down" id="hpassengericon"></span>
             </div>
-            <div class="hvowner clearfix" style="display:none;z-index:999">
+            <div class="hvowner clearfix" style="display:none;z-index:999;height:61px;">
                 <div class="hvownerleft clearfix">
-                    <div class="hvownerleftone">身份</div>
-                    <a href="#passenger" class="hactive htoggleone">
-                            <span class="glyphicon glyphicon-user" style="color:#23beae;margin-right: 10px;"></span>
-                        乘客
+                    <a class="hvownerleftone"  href="#passenger" style="display: inline-block">
+                        <span class="glyphicon glyphicon-user" style="color:#23beae ;margin-right: 17px;"></span>
+                        乘客 
                     </a>
-                </div>
-                <div class="hvownerright clearfix">
-                    <div style="display: inline-block;width: 33%;"></div>
-                    <a href="#vowner"   class="htoggletwo">
-                        <span class="glyphicon glyphicon-plane" style="color:#ff4a39;margin-right: 10px;"></span>
+                    <a href="#vowner" class="hactive htoggleone" style="display: inline-block">
+                        <span class="glyphicon glyphicon-plane " style="color:#ff4a39;margin-right: 17px;"></span>
                         车主
                     </a>
                 </div>
@@ -74,13 +70,13 @@
                     <div class="snav">开启路程</div>
                     <div class="departure clearfix">
                         <span class="sfc-icon">始发地:</span>
-                        <input  type="text" class="form-control"  id="pformcontrolsr"  name="departure"  placeholder="你从哪里来"/>
+                        <input  type="text" class="form-control"  id="pformcontrolsr"  name="departure"  placeholder="你从哪里来" style="width: 78%; background: #f2f2f2;"/>
                     </div>
                     <div class="destination">
                         <span class="sfc-brand">
                            目的地:
                         </span>
-                        <input  type="text"  class="form-control" name="destination" id="pformcontrolsc" placeholder="你要去哪儿"/>
+                        <input  type="text"  class="form-control" name="destination" id="pformcontrolsc" style="width: 78%; background: #f2f2f2;" placeholder="你要去哪儿"/>
                     </div>
                        <a href="javascript:;"  class="sbutton  btn btn-info" id="sbutnaone">发布行程</a>
                 </form>
@@ -89,7 +85,7 @@
             <div class="cylx clearfix">
                 <div class="chd">
                     <sapn class="glyphicon glyphicon-map-marker cylx-icon"></sapn>
-                    <span class="circle">常用路线</span>
+                    <span class="circle">已发布行程</span>
                 </div>
                 <div id="passengerNode"  class="clearfix">
                     <!-- 乘客div内容嵌套区 -->
@@ -109,13 +105,13 @@
                     <div class="snav">开启路程</div>
                     <div class="departure clearfix">
                         <span class="sfc-icon">始发地:</span>
-                        <input  type="text" class="form-control"  id="vformcontrolsr" name="departure"  placeholder="你从哪里来"/>
+                        <input  type="text" class="form-control"  style="width: 78%; background: #f2f2f2;" id="vformcontrolsr" name="departure"  placeholder="你从哪里来"/>
                     </div>
                     <div class="destination">
                         <span class="sfc-brand">
                             目的地:
                         </span>
-                        <input  type="text"  class="form-control" name="destination"  id="vformcontrolsc" placeholder="你要去哪儿"/>
+                        <input  type="text"  class="form-control" name="destination" style="width: 78%; background: #f2f2f2;"  id="vformcontrolsc" placeholder="你要去哪儿"/>
                     </div>
                         <a href="javascript:;" class="sbutton  btn btn-info" id="sbuttonatwo">发布行程</a>
                 </form>
@@ -123,7 +119,7 @@
             <div class="vonpondclxc clearfix">
                 <div class="top clearfix"> 
                     <span class="glyphicon glyphicon-volume-up top-icon"></span>
-                    <span class="deng">待处理行程</span>
+                    <span class="deng">已发布行程</span>
                 </div>
                 <div id="vownperNode"  class="clearfix">
                     <!-- 复用添加地方 -->
@@ -197,11 +193,10 @@
                     <div class="top clearfix"> 
                         <span class="glyphicon glyphicon-user top-icon"></span>
                         <span class="deng">全部乘客行程</span>
-                    </div>
-                    <!-- 进入筛选页面 -->
-                    <div class="runpasgscreen">
-                        <span>点击按钮对全部乘客进行筛选:</span>
-                        <a href="#run?passgeran" class="btn btn-primary">筛选</a>
+                        <!-- 进入筛选页面 -->
+                        <div class=" runpasgscreen clearfix">
+                            <a href="#run?passgeran"   class="btn btn-primary ">筛选</a>
+                        </div>
                     </div>
                     <!-- 复用创建部分 -->
                     <div id="runpassengerNode" class="clearfix">
@@ -222,12 +217,11 @@
                                 <span class="glyphicon glyphicon-plane
                                 top-icon"></span>
                                 <span class="deng">全部车主行程</span>
+                                <!-- 点击按钮进入筛选页面 -->
+                                <div class="runvownerscreen">
+                                    <a href="#run?diveran"  class="btn btn-primary ">筛选</a>
+                                </div>
                             </div>
-                            <!-- 点击按钮进入筛选页面 -->
-                            <div class="runvownerscreen">
-                                <span>点击按钮对全部车主进行筛选:</span>
-                                <a href="#run?diveran" class="btn btn-primary">筛选</a>
-                            </div>  
                             <!-- 复用创建部分 -->
                             <div id="runvownerNode" class="clearfix" >
                              <!-- div填充地方 -->
@@ -282,21 +276,21 @@
                                text-indent: 5px;">目的地:</span>      
                             <input style="float: right;
                             margin-right: 10px;
-                            background: #fbfbfb;text-indent: 6px;" type="text" id='address' class="form-control" name="Destination"  placeholder="你要去哪儿" /></div>
+                            background: #f2f2f2;text-indent: 6px;" type="text" id='address' class="form-control" name="Destination"  placeholder="你要去哪儿" /></div>
                             <div>
                                 <div class="ctsearchtime clearfix">
                                     <span class="left" style="text-indent: 6px;" >出发时间:</span>
                                     <input type="text" style="
                                     float: right;float: right;
                                     margin-right: 10px;
-                                    background: #fbfbfb;" placeholder="选择出发时间" class="form-control" id="containersearchtime">
+                                    background: #f2f2f2;" placeholder="选择出发时间" class="form-control" id="containersearchtime">
                             </div>
                                 <div class="ctsearchtime clearfix">
                                         <span class="left" style="text-indent: 6px;" >期望时间:</span>
                                         <input type="text" style="
                                         float: right;float: right;
                                         margin-right: 10px;
-                                        background: #fbfbfb;" placeholder="选择期望到达时间" class="form-control" id="searchsetdate">
+                                        background: #f2f2f2;" placeholder="选择期望到达时间" class="form-control" id="searchsetdate">
                                 </div>
                             <div class="qwsjselectime clearfix">
                                 
@@ -494,22 +488,9 @@
                     <span class="pdetailspan">支付情况:</span>
                     <div class="pdetaildiv" id="pdzfqk"></div>
                </div>
-               <div class="pdetailsdad pdetailsfif clearfix">
-                    <span class="pdetailspan">订单退款:</span>
-                    <div class="pdetaildiv" id="pdddtk"></div>
+               <div>
+                   <button>查看支付订单</button>
                </div>
-               <div class="pdetailsdad pdetails6 clearfix">
-                    <span class="pdetailspan">退款单号:</span>
-                    <div class="pdetaildiv" id="pdtkdh"></div>
-                </div>
-               <div class="pdetailsdad pdetails7 clearfix">
-                    <span class="pdetailspan">退款价格:</span>
-                    <div class="pdetaildiv" id="pdtkjg"></div>
-                </div>
-                <div class="pdetailsdad pdetails8 clearfix">
-                    <span class="pdetailspan">退款日期:</span>
-                    <div class="pdetaildiv" id="pdttime"></div>
-                </div>
             </div>
         </div>
     </div>

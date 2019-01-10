@@ -27,7 +27,7 @@ a{color:#5E5E5E;}
 	height: 0;
 	display: block;
 }
-a:focus, a:hover{
+a:focus{
     color:#e39f7a;
 }
 .jz{text-align: center;}

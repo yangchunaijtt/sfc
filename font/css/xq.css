@@ -7,8 +7,8 @@
   background: #fff;
   border-radius: 4px;
 }
-.showsjdata .srselect .changz {
-  width: 60px;
+.showsjdata .srselect .changz,.fanhuisyj a {
+  width: 63px;
   height: 30px;
   background: #979797;
   color: #fff;
@@ -29,6 +29,8 @@
 }
 .showsjdata .showmoredata .cfdsdm {
   width: 100%;
+  border-bottom: 1px solid #f2f2f2;
+  border-top: 1px solid #f2f2f2;
 }
 .showsjdata .showmoredata .cfdsdm .cfdsdmspan {
   width: 25%;
@@ -36,16 +38,22 @@
   text-indent: 10px;
   height: 40px;
   line-height: 40px;
+  float:left;
 }
 .showsjdata .showmoredata .cfdsdm .cfdsdmdiv {
-  width: 72%;
+  width: 48%;
   display: inline-block;
   text-indent: 10px;
   height: 40px;
   line-height: 40px;
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+  float:left;
 }
 .showsjdata .showmoredata .mddsdm {
   width: 100%;
+  border-bottom: 1px solid #f2f2f2;
 }
 .showsjdata .showmoredata .mddsdm .mdddsdmspan {
   width: 25%;
@@ -53,13 +61,18 @@
   height: 40px;
   line-height: 40px;
   text-indent: 10px;
+  float: left;
 }
 .showsjdata .showmoredata .mddsdm .mddsdmdiv {
-  width: 72%;
+  width: 48%;
   display: inline-block;
   text-indent: 10px;
   height: 40px;
   line-height: 40px;
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+  float: left;
 }
 .showsjdata .showmoredata .cftimesdm {
   width: 100%;
@@ -70,6 +83,7 @@
   text-indent: 10px;
   height: 40px;
   line-height: 40px;
+  float: left;
 }
 .showsjdata .showmoredata .cftimesdm .cftimesdmd {
   width: 72%;
@@ -77,6 +91,7 @@
   text-indent: 10px;
   height: 40px;
   line-height: 40px;
+  float: left;
 }
 .showsjdata .showmoredata .ddcfdsdm {
   width: 100%;
@@ -87,6 +102,7 @@
   height: 40px;
   line-height: 40px;
   text-indent: 10px;
+  float: left;
 }
 .showsjdata .showmoredata .ddcfdsdm .cfdsdmd {
   width: 72%;
@@ -94,6 +110,7 @@
   text-indent: 10px;
   height: 40px;
   line-height: 40px;
+  float: left;
 }
 /* 颜色切换s */
 /* 成功的背景颜色 */
@@ -119,10 +136,10 @@
 .showsjdata .srselect .fanhuisyj .fhusyjd {
   display: inline-block;
   width: 58px;
-  height: 28px;
+  height: 30px;
   margin: 0 auto;
   margin-top: 0px;
-  line-height: 28px;
+  line-height: 30px;
   margin-top: 18px;
   border-radius: 3px;
   background: #5cb85c;
@@ -138,6 +155,7 @@
   text-indent: 10px;
   height: 40px;
   line-height: 40px;
+  float: left;
 }
 .sdstatus .sdstatusd {
   width: 72%;
@@ -145,6 +163,7 @@
   text-indent: 10px;
   height: 40px;
   line-height: 40px;
+  float: left;
 }
 .clickqxx {
   width: 100%;
@@ -162,24 +181,6 @@
   margin:0  auto;
   font-size: 16px;
 }
-.sfval,.qxiaoval{
-  width:100%;
-}
-  .sfvalspan,.qxiaovalspan{
-    width: 25%;
-    display: inline-block;
-    text-indent: 10px;
-    height: 40px;
-    line-height: 40px;
-    vertical-align: top;
-  }
-  .sfvaldiv,.qxiaovaldv{
-    width: 72%;
-    display: inline-block;
-    text-indent: 10px;
-    height: 40px;
-    line-height: 40px;
-  }
   .cfcity, .mdcity{
     width: 100%;
     line-height: 40px;
@@ -189,9 +190,67 @@
     width: 25%;
     display: inline-block;
     text-indent: 10px;
+    float: left;
   }
   .cfcity  .cfcitydv, .mdcity .mdcitydv{
     width: 72%;
     display: inline-block;
     text-indent: 10px;
+    float: left;
   }
+  .sfval{
+    width: 100%;
+    line-height: 40px;
+    height: 40px;
+  }
+  .sfval  .sfvalspan{
+    width: 25%;
+    display: inline-block;
+    text-indent: 10px;
+    float: left;
+  }
+  .sfval .sfvaldiv{
+    width: 72%;
+    display: inline-block;
+    text-indent: 10px;
+    float: left;
+    }
+    /* 按钮的处理 */
+  .cfdsdmdivbt,.mddsdmdivbt{
+    display: inline-block;
+    width: 22%;
+    float: right;
+    margin-right: 10px;
+    margin-top: 3px;
+  }
+  /* 按钮提示 css样式 */
+.mydiv {
+  background-color: #fff;
+  border: 1px solid #DCDCDC;
+  text-align: center;
+  line-height: 40px;
+  font-size: 16px;
+  font-weight: bold;
+  z-index: 99;
+  width: 70%;
+  min-height: 120px;
+  left: 15%;
+  top: 40%;
+  margin-top: 0px;
+  position: fixed!important;
+  position: absolute;
+  border-radius: 7px;
+  padding: 10px;
+}
+.bg {
+  background-color: #C0C0C0;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  filter: alpha(opacity=50);
+  opacity: 0.5;
+  z-index: 1;
+  position: fixed!important;
+  position: absolute;
+}

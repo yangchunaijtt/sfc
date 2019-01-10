@@ -30,25 +30,29 @@
 
     /* 给li绑定事件，
     当点击时，获取值，并上传回去 */
-    function createlival(){
-        function removeacive(){
-            $(".ulliwx").removeClass("ulliactive");
-            $(".ullish").removeClass("ulliactive");
-            $(".ullisz").removeClass("ulliactive");
-            $(".ullinj").removeClass("ulliactive");
-            $(".ulliyz").removeClass("ulliactive");
-            $(".ullitz").removeClass("ulliactive");
-            $(".ullizjg").removeClass("ulliactive");
-            $(".ullint").removeClass("ulliactive");
-            $(".ullics").removeClass("ulliactive");
-        }
-        function cszhi(val){
-            var lival = $(val).text();
-            cityselectval.nowcity = lival;
-            $(".nowcity .nowcityval div").text(lival);
+    function removeacive(){
+        $(".ulliwx").removeClass("ulliactive");
+        $(".ullish").removeClass("ulliactive");
+        $(".ullisz").removeClass("ulliactive");
+        $(".ullinj").removeClass("ulliactive");
+        $(".ulliyz").removeClass("ulliactive");
+        $(".ullitz").removeClass("ulliactive");
+        $(".ullizjg").removeClass("ulliactive");
+        $(".ullint").removeClass("ulliactive");
+        $(".ullics").removeClass("ulliactive");
+    };
+
+    function cszhi(val){
+        var lival = $(val).text();
+        cityselectval.nowcity = lival;
+        $(".nowcity .nowcityval div").text(lival);
+        
+        $(".acityselect").text($(val).text());
+        if(val !==".ullish"){
             window.location.hash= "#details";
-            $(".acityselect").text(cityselectval.nowcity);
         }
+    };
+    function createlival(){
         /* 点击之后在指定地方花maker */
         function zhidimaker(val){
             var lival = $(val).text();
@@ -74,70 +78,46 @@
               })
         }
 
+        /* 处理城市选择页点击 */
         $(".ulliwx").bind("touch click",function(){
-            removeacive();
-            $(".ulliwx").addClass("ulliactive");
-            cszhi(".ulliwx");
-            zhidimaker(".ulliwx");
+            ullicstyicz(".ulliwx");
         })
         $(".ullish").bind("touch click",function(){
-            removeacive();
-            $(".ullish").addClass("ulliactive");
-            cszhi(".ullish");
-            zhidimaker(".ullish");
+            ullicstyicz(".ullish");
+            window.location.hash= "#details";
         })
         $(".ullisz").bind("touch click",function(){
-            removeacive();
-            $(".ullisz").addClass("ulliactive");
-            cszhi(".ullisz");
-            zhidimaker(".ullisz");
+            ullicstyicz(".ullisz");
         })
         $(".ullinj").bind("touch click",function(){
-            removeacive();
-            $(".ullinj").addClass("ulliactive");
-            cszhi(".ullinj");
-            zhidimaker(".ullinj");
+            ullicstyicz(".ullinj");
         })  
         $(".ullint").bind("touch click",function(){
-            removeacive();
-            $(".ullint").addClass("ulliactive");
-            cszhi(".ullint");
-            zhidimaker(".ullinnt");
+            ullicstyicz(".ullint");
         })
         $(".ulliyz").bind("touch click",function(){
-            removeacive();
-            $(".ulliyz").addClass("ulliactive");
-            cszhi(".ulliyz");
-            zhidimaker(".ulliyz");
+            ullicstyicz(".ulliyz");
         })
         $(".ullitz").bind("touch click",function(){
-            removeacive();
-            $(".ullitz").addClass("ulliactive");
-            cszhi(".ullitz");
-            zhidimaker(".ullitz");
+            ullicstyicz(".ullitz");
         })
         $(".ullizjg").bind("touch click",function(){
-            removeacive();
-            $(".ullizjg").addClass("ulliactive");
-            cszhi(".ullizjg");
-            zhidimaker(".ullizjg");
+            ullicstyicz(".ullizjg");
         })
         $(".ullics").bind("touch click",function(){
-            removeacive();
-            $(".ullics").addClass("ulliactive");
-            cszhi(".ullics");
-            zhidimaker(".ullics");
+            ullicstyicz(".ullics");
         })
-        $(".nowcityval div").bind("touch click",function(){
+        function ullicstyicz(val){
             removeacive();
-            $(".ullics").addClass("ulliactive");
-            cszhi(".ullics");
-            zhidimaker(".ullics");
-            
+            $(val).addClass("ulliactive");
+            cszhi(val);
+            zhidimaker(val);
+        }
+        /* 点自己的操作 */
+        $(".nowcityval div").bind("touch click",function(){
+            window.location.hash= "#details";
         })
     }
-
-
 
     /* 进入input时chufadi  出发地时 进入可以自动选择的页面 */
     function inchufadi(){

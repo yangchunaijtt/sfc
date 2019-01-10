@@ -1,6 +1,6 @@
-$(function(){
-    
 
+$(function(){
+    showLodding("请稍等，加载中...");
     /* 点击时  地图上添加一个maker点 并且聚焦 */
    $(".cfdsdmdiv").bind("touch click",function(){
        cfdsdmdivcl("cfd");
@@ -8,32 +8,26 @@ $(function(){
    $(".mddsdmdiv").bind("touch click",function(){
        cfdsdmdivcl("mdd");
    })
-   
+   $(".cfdsdmdivbt").bind("touch click",function(){
+    cfdsdmdivcl("cfd");
+    })  
+    $(".mddsdmdivbt").bind("touch click",function(){
+        cfdsdmdivcl("mdd");
+    })
    /* 获取路由的值 */
    hqselectval();
    
    /* 初始化 */
    /* 初始化的数据 */
-   $(".qxiaoval").append(qxiaoval);
    $(".clickqxx").append(clickqxx);
-
    if(nowusermsg.valone == "sf=run"){
-        $(".qxiaoval").empty();
         $(".clickqxx").empty();
    }
 })
 /* 数据 */
-    let qxiaoval = `
-        <span class="qxiaovalspan">
-        取消结果:
-        </span>
-        <span class="qxiaovaldv">
-            可以取消
-        </span>
-    `;
     let clickqxx = `
     <div id="qxsfcxinxi">
-    取消订单
+    取消发布
     </div>`;
 
 /* 页面初始化的数据 */
@@ -77,12 +71,18 @@ $(function(){
                 $("#qxsfcxinxi").bind("touch click",function(){
                     qxsfcxinxi();
                 })
+                /* 加载成功，取消提示按钮 */
+                clearDialog();
             },
             error:function(data){
                 console.log("失败的原因",data);
                 $("#qxsfcxinxi").bind("touch click",function(){
                     qxsfcxinxi();
                 })
+                /* 加载失败，取消提示按钮 */
+                clearDialog();
+                /* 弹出提示信息 */
+                showMessage1btn("网络故障,刷新在试","",0);
             }
         })
     }   
@@ -91,33 +91,32 @@ $(function(){
         var sj = data.obj;
         if(data.result>0){
             /* 出发地 */
-                $(".cfdsdmdiv").text(sj.departure);
+                $(".cfdsdmdiv").text(sj.departure.trim());
             /* 目的地 */
-                $(".mddsdmdiv").text(sj.arrival);
+                $(".mddsdmdiv").text(sj.arrival.trim());
             /*出发时间  */
                 $(".cftimesdmd").text(sj.departureTime);
             /* 期望时间 */
                 $(".cfdsdmd").text(sj.arrivalTime);
             /* 出发城市 */
-                $(".cfcitydv").text(sj.dpCity);
+                $(".cfcitydv").text(sj.dpCity.trim());
             /* 目的城市 */
-                $(".mdcitydv").text(sj.arCity);
-            /* 身份 */
-                if(sj.pushType==="Passenger"){
-                    $(".sfvaldiv").text("乘客");
-                }else{
-                    $(".sfvaldiv").text("车主");
-                }
+                $(".mdcitydv").text(sj.arCity.trim());
+            /* 提示的城市名 */
+                $(".changz").text(sj.dpCity.trim());
+            /* 手机号*/
+                $(".sfvaldiv").text(sj.userInfo.mobile.trim());
             /* 订单结果 */
-            nowusermsg.state = sj.state ;
+            nowusermsg.state = sj.state;
             if(nowusermsg.state == 0){
                 $(".sdstatusd").text("发布成功");
             }else if(nowusermsg.state == -1){
                 $(".sdstatusd").text("失效了");
+                 $(".clickqxx").empty();
             }else if(nowusermsg.state == 1){
                 $(".sdstatusd").text("订单行程已完成");
             }else{
-                $(".sdstatusd").text("未知的状态");
+                $(".sdstatusd").text("发生错误！");
             }
         }
     }
@@ -136,24 +135,23 @@ $(function(){
                 success:function(data){
                     console.log("获取成功的数据",data);
                     if(data.result===-1){
-                        $(".qxiaovaldv").text("操作失败,请重新刷新");
+                        /* 操作失败,请重新刷新 */
+                        showMessage1btn("操作失败,请重新刷新","",0)
                     }else if(data.result===1){
-                        $(".qxiaovaldv").text("操作成功,请点返回");
+                        showMessage1btn("操作成功","",0)
                     }
-                   
                 },
                 error:function(data){
-                    $(".qxiaovaldv").text("网络原因，刷新在试");
+                    showMessage1btn("网络原因,刷新在试","",0);
                 }
             })
         }else if(nowusermsg.state===-1){
-            $(".qxiaovaldv").text("种种原因,暂时不能取消");
+            showMessage1btn("暂时不能取消","",0);
         }else if(nowusermsg.state===1){
-            $(".qxiaovaldv").text("订单已完成");
+            showMessage1btn("订单已完成","",0);
         }else {
-            $(".qxiaovaldv").text("网络原因，刷新在试");
+            showMessage1btn("网络原因，刷新在试","",0);
         }
-        
     }
 
 /* 地图的初始化 */
@@ -185,7 +183,6 @@ function cfdsdmdivcl(val){
 function autocfdiv(result){
   var sj = result;
   var dw = sj.tips[0].location;
-  console.log(dw);
    if(sj.info=="OK"){
        maponbh(dw);
        setdtCeneter([dw.R,dw.P]);
@@ -193,7 +190,6 @@ function autocfdiv(result){
 }
 /* 根据地址 数据 Location的json地址坐标的 */
 function autocfdsdmdiv(val){
-   console.log(val);
    AMap.plugin('AMap.Autocomplete', function(){
            var autoOptions = {
                city:"常州"
@@ -203,11 +199,6 @@ function autocfdsdmdiv(val){
      
      autoComplete.search(val, function(status,result) {
        // 搜索成功时，result即是对应的匹配数据
-      /*  var node = new PrettyJSON.view.Node({
-           el: document.querySelector("#input-info"),
-           data: result
-       }); */
-       /* console.log(searchval,status,result); */
        /* 存储数据 */
        paymentvalsj.resultdata = result;
        autocfdiv(result);
@@ -241,7 +232,6 @@ function autocfdsdmdiv(val){
     function setdtCeneter(qjposition){
         //var position = new AMap.LngLat(116, 39);  // 标准写法
         // 简写
-        /*  console.log(qjposition); */
             var position = [qjposition.R, qjposition.P]; 
             map.setCenter(position); 
         // 获取地图中心点
