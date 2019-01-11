@@ -18,19 +18,15 @@
 .header #ddxq .htogglefour {
   display: block;
 }
-.hactive {
-  color: #e39f7a;
-}
 /* 筛选 */
 .hpassenger {
   position: relative;
 }
 #hpassengericon {
   position: absolute;
-  font-size: 10px;
+  font-size: 14px;
   top: 0px;
   line-height: 60px;
-  color: #adadad;
 }
 .hvowner {
   position: absolute;
@@ -118,6 +114,7 @@
   font-size: 18px;
   color: #e39f7a;
   display: inline-block;
+  margin-left: 10px;
 }
 .cylx .chd .circle {
   display: inline-block;
@@ -261,8 +258,8 @@
   border-bottom: 1px solid #f0f0f0;
 }
 .vowner .vonpondclxc .top .top-icon {
-  text-indent: 12px;
-  font-size: 18px;
+  margin-left: 10px;
+  font-size: 24px;
   color: #f0935a;
   line-height: 34px;
 }
@@ -349,6 +346,7 @@
   line-height: 50px;
 }
 .run .dclxc .top .top-icon {
+  margin-left: 10px;
   text-indent: 12px;
   font-size: 18px;
   color: #f0935a;
@@ -1444,3 +1442,12 @@ body {
   position: fixed!important;
   position: absolute;
 }
+
+/* 支付按钮的样式 */
+  .lookpaydan{
+    margin: 0 auto;
+    display: block;
+    margin-top: 10px;
+  }
+
+  

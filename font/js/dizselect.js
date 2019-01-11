@@ -385,14 +385,16 @@
 
     function paymentbutton(FROID,qmguid){
         /*首先取消所有 */
-        
+
+        /* id一样 */
+        console.log("支付功能",nowusermsg.uid,FROID,qmguid);
         /* qmguid： 数据的发布者的id号  */
         /* 如果uid一直 ，则不需要付钱，点击时直接看  */
-        if(qmguid == nowusermsg.uid){
-          
+        if(parseInt(qmguid) == parseInt(nowusermsg.uid) ){
+            console.log("一样")
             /* 支付成功  可以观看用户的信息 */
             /* 如果一样，直接用本地的id就好 */
-            let jwxxone = "#ownshowdata?id="+FROID+"&uid="+nowusermsg.uid+"&sf=run";
+            let jwxxone = "#ownshowdata?id="+FROID+"&uid="+qmguid+"&sf=run";
             
             let wlgrefone = "http://qckj.czgdly.com/bus/MobileWeb/WxWeb-kongbatong/font/html/xq.html"+jwxxone;
           
@@ -401,10 +403,10 @@
             /* 现在判断解决， */
             return false;
             /* 判断if else  */
-        }
-
-                
-        paymentbttsj.title = nowusermsg.uid+"的订单";
+        }else{
+            console.log("不一样");
+                /* id不一样 */
+        paymentbttsj.title = "发布订单";
         paymentbttsj.FROID = FROID; 
      
          var bSign = "";
@@ -424,13 +426,13 @@
         paymentbttsj.billno = paymentbttsj.billno + generateTimeReqestNumber() + rand;
         
 
-// 参数
-var param = {"title" : paymentbttsj.title,"amount" : paymentbttsj.amount,"outtradeno" : paymentbttsj.billno};
+    // 参数
+    var param = {"title" : paymentbttsj.title,"amount" : paymentbttsj.amount,"outtradeno" : paymentbttsj.billno};
 
-// 地址
-/* POST http://qckj.czgdly.com/bus/
-common/getBSign-kongbatong.asp 404 (Not Found)*/
-var url = "../common/getBSign-kongbatong.asp";
+    // 地址
+    /* POST http://qckj.czgdly.com/bus/
+    common/getBSign-kongbatong.asp 404 (Not Found)*/
+    var url = "../common/getBSign-kongbatong.asp";
 
 /* sfcsj.passenger 存储着用户的信息 */
         /* openid 需要传入的数据的定义*/
@@ -441,13 +443,13 @@ var url = "../common/getBSign-kongbatong.asp";
             FROID:paymentbttsj.FROID,
         };
        
-$.post(url,param,function(data){
-    if (!((typeof (data) == 'object') && data.constructor == Object)) {
-        data = eval("(" + data + ")");
-    }
+    $.post(url,param,function(data){
+        if (!((typeof (data) == 'object') && data.constructor == Object)) {
+            data = eval("(" + data + ")");
+        }
 
-    if(data.BSign) {
-        bSign = data.BSign;
+        if(data.BSign) {
+            bSign = data.BSign;
 
         BC.err = function(data) {
             //注册错误信息接受
@@ -475,10 +477,10 @@ $.post(url,param,function(data){
                     case "get_brand_wcpay_request:ok":
                         showMessage1btn("支付成功！如需退单，请提前发班时间24小时退定！","Back()",1);
                         /* 支付成功  可以观看用户的信息 */
-                        let jwxx = "#ownshowdata?id="+paymentbttsj.FROID+"&uid="+nowusermsg.uid;
-                        
+                        let jwxx = "#ownshowdata?id="+paymentbttsj.FROID+"&uid="+qmguid+"&sf=run";
+                        /* 传入id号 和 uid */
+                        /* 应该是发布数据的那个人的 */
                         let wlgref = "http://qckj.czgdly.com/bus/MobileWeb/WxWeb-kongbatong/font/html/xq.html"+jwxx;
-                      
                         window.location.href = wlgref ;
                         break;
                     case "get_brand_wcpay_request:fail":
@@ -505,8 +507,8 @@ $.post(url,param,function(data){
                 clearDialog();
             },"json")
         
+        }
     }   
-    
 
 /* 时间页面的组件 */
     /**
@@ -783,7 +785,6 @@ $.post(url,param,function(data){
                     /* 数据量很小情况下  报错了 */
                     if(  paymentzyval.page <= paymentzyval.loadcount){
                         /* 获取全部时间的行程，失效页没有关系 */
-                    
                         return "http://qckj.czgdly.com/bus/MobileWeb/madeFROViewPayments/queryPageMadeFROVPayments.asp?cur="+paymentzyval.page+"&uid="+useruid+"&dateRange=";
                     }
                 },

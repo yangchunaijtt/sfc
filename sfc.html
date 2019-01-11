@@ -9,14 +9,14 @@
     <!-- 时间选择器样式表 -->
     <link href="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
 
-    <!--  自己定义的css文件 -->
-    <link rel="stylesheet" href="./font/css/react.css">
-    <link rel="stylesheet" href="./font/css/sfc.css"> 
     <!-- 图片 -->
-    <link rel="shortcut icon" href="./font/img/sfc.jpg">   
+    <link rel="shortcut icon" href="./font/font/sfc.jpg">   
     <!-- 时间css的引入 -->
     <link rel="stylesheet" href="css/mobiscroll.custom-2.16.1.min.css">
     <link rel="stylesheet" href="css/mobiscroll.android-ics-2.5.2.css">
+    <!--  自己定义的css文件 -->
+    <link rel="stylesheet" href="./font/css/react.css">
+    <link rel="stylesheet" href="./font/css/sfc.css"> 
     <title>顺风车</title>
     <style>
         .amap-touch-toolbar .amap-zoomcontrol {
@@ -31,7 +31,7 @@
         <div  class="hpassenger">
             <div style="width:100%;" class="hpassengerxsaaa clearfix">
                     我的行程
-                    <span class="glyphicon glyphicon-chevron-down" id="hpassengericon"></span>
+                    <span class="glyphicon glyphicon-triangle-bottom" id="hpassengericon"></span>
             </div>
             <div class="hvowner clearfix" style="display:none;z-index:999;height:61px;">
                 <div class="hvownerleft clearfix">
@@ -40,7 +40,7 @@
                         乘客 
                     </a>
                     <a href="#vowner" class="hactive htoggleone" style="display: inline-block">
-                        <span class="glyphicon glyphicon-plane " style="color:#ff4a39;margin-right: 17px;"></span>
+                        <span class="iconfont icon-qiche" style="color:#ff4a39;margin-right: 13px;"></span>
                         车主
                     </a>
                 </div>
@@ -50,10 +50,10 @@
             <a href="#ddxq" class="htogglefour">支付订单</a>
         </div>
         <div  class="hrun">
-            <a href="#run" class="htogglethree">
+            <div class="htogglethree">
                 全部行程
                 <span class="glyphicon glyphicon-triangle-bottom hrunoneicon"></span>
-            </a>
+            </div>
              <div class="runluyouaa clearfix" style="display: none">
                <a href="#run?passger" class="runpsgone">全部乘客行程</a> 
                 <a href="#run?diver" class="rundvone">全部车主行程</a>
@@ -118,7 +118,7 @@
             </div>
             <div class="vonpondclxc clearfix">
                 <div class="top clearfix"> 
-                    <span class="glyphicon glyphicon-volume-up top-icon"></span>
+                    <span class="iconfont icon-xingcheng top-icon"></span>
                     <span class="deng">已发布行程</span>
                 </div>
                 <div id="vownperNode"  class="clearfix">
@@ -214,7 +214,7 @@
             <div class="runvowner clearfix" style="display:none">  
                     <div class="dclxc clearfix">
                             <div class="top clearfix"> 
-                                <span class="glyphicon glyphicon-plane
+                                <span class="iconfont icon-qiche
                                 top-icon"></span>
                                 <span class="deng">全部车主行程</span>
                                 <!-- 点击按钮进入筛选页面 -->
@@ -279,14 +279,14 @@
                             background: #f2f2f2;text-indent: 6px;" type="text" id='address' class="form-control" name="Destination"  placeholder="你要去哪儿" /></div>
                             <div>
                                 <div class="ctsearchtime clearfix">
-                                    <span class="left" style="text-indent: 6px;" >出发时间:</span>
+                                    <span class="left" style="text-indent: 6px;line-height:30px;" >出发时间:</span>
                                     <input type="text" style="
                                     float: right;float: right;
                                     margin-right: 10px;
                                     background: #f2f2f2;" placeholder="选择出发时间" class="form-control" id="containersearchtime">
                             </div>
                                 <div class="ctsearchtime clearfix">
-                                        <span class="left" style="text-indent: 6px;" >期望时间:</span>
+                                        <span class="left" style="text-indent: 6px;line-height:30px;" >期望时间:</span>
                                         <input type="text" style="
                                         float: right;float: right;
                                         margin-right: 10px;
@@ -448,7 +448,7 @@
         <div class="paymentzy clearfix" style="display: none">
             <!-- 上不头部 -->
             <div class="phdicon clearfix">
-                <span class="ptbicon  glyphicon glyphicon-comment"></span>
+                <span class="ptbicon  iconfont icon-zhifu1"></span>
                 <div class="mypay">
                     我的支付
                 </div>
@@ -488,8 +488,8 @@
                     <span class="pdetailspan">支付情况:</span>
                     <div class="pdetaildiv" id="pdzfqk"></div>
                </div>
-               <div>
-                   <button>查看支付订单</button>
+               <div class="pdetailsdad  pdetlsdadlook clearfix">
+                   <!-- 添加填充button的地方 -->
                </div>
             </div>
         </div>

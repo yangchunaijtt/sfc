@@ -47,11 +47,6 @@
             /* http://qckj.czgdly.com/bus/MobileWeb/WxWeb-kongbatong/Register_content.html
                 记录在本地
             */
-        function register(val){
-            var nowhref = window.location.href;
-            localCache("page",nowhref);     /* 存储在本地的地址 */
-            window.location.href = "Register_content.html";		/* 发送给他的地址 */	
-        }  
 
         /* 初始化时设置默认值 */
         $(".dqcsval").text($(".xcspanleft").text());
@@ -94,14 +89,11 @@
    $(".hpassenger").bind("touch click",function(){
 
          $(".runluyouaa").hide();
-         
         hpassengerpd++;
        if(hpassengerpd%2===0){
-        $("#hpassengericon").attr("class","glyphicon glyphicon-chevron-up");
-        $(".hpassengerxsaaa").css("color","#0094FF");
+        $("#hpassengericon").attr("class","glyphicon glyphicon-triangle-top");
        }else {
-        $("#hpassengericon").attr("class","glyphicon glyphicon-chevron-down"); 
-        $(".hpassengerxsaaa").css("color","#555");
+        $("#hpassengericon").attr("class","glyphicon glyphicon-triangle-bottom"); 
        }
        $(".hvowner").slideToggle("normal");
    })
@@ -110,9 +102,9 @@
     $(".hrun").bind("touch click",function(){
         hrunxuzval ++;
         if(hrunxuzval%2===0){
-            $(".hrunoneicon").attr('class',"glyphicon glyphicon-triangle-bottom hrunoneicon");
-        }else {
             $(".hrunoneicon").attr('class',"glyphicon glyphicon-triangle-top hrunoneicon");
+        }else {
+            $(".hrunoneicon").attr('class',"glyphicon glyphicon-triangle-bottom hrunoneicon");
         }
         $(".runluyouaa").slideToggle("normal");
     })
@@ -208,8 +200,37 @@
         $(".ullish").addClass("ulliactive");
         cszhi(".ullish");
 
+        $(".hpassenger").css("color","#e39f7a");
+    /* 页面点击路由颜色设置 */
+        $(".hpassenger").bind("touch click",function(){
+            hashlycolorsz();
+            $(".hpassenger").css("color","#e39f7a");
+        })
+        $("#ddxq").bind("touch click",function(){
+            hashlycolorsz();
+            $("#ddxq").css("color","#e39f7a");
+            $("#ddxq a").css("color","#e39f7a");
+        })
+        $(".hrun").bind("touch click",function(){
+            hashlycolorsz();
+            $(".hrun").css("color","#e39f7a");
+        })
+
     })
 
+    function register(val){
+        var nowhref = window.location.href;
+        localCache("page",nowhref);     /* 存储在本地的地址 */
+        window.location.href = "Register_content.html";		/* 发送给他的地址 */	
+    }  
+
+    function hashlycolorsz(){
+        /* #e39f7a */
+        $(".hpassenger").css("color","#555");
+        $("#ddxq").css("color","#555");
+        $(".hrun").css("color","#555");
+        $("#ddxq a").css("color","#555");
+    }
     /* 选择城市的初始化函数 */
     let cityselectval = {
         nowcity:"",  
@@ -261,7 +282,7 @@
         
         passengerDiv:`
             <div class="cylx-cy clearfix" id="passengerDiv">
-                <a href="#showdata" id="aPassengerDiv" target="_blank" class="clearfix">
+                <a href="#showdata" id="aPassengerDiv"  target="_parent" class="clearfix">
                 <div class="cylx-cyheader">
                 <span class="bt">常用</span>
                 <div class="time">
@@ -283,7 +304,7 @@
         `,
         // 车主数据的 div 
         vownerDiv:`
-        <a href="#showdata" id="avownerDiv"  target="_blank"  class="clearfix">
+        <a href="#showdata" id="avownerDiv"   target="_parent"  class="clearfix">
             <div class="circle clearfix" id="vownerDiv">
                 <div class="left vownerleft clearfix">
                     <div class="time">
@@ -312,7 +333,7 @@
         // 全部行程中乘客 
         runpassengerDiv:`
         <div class="circle clearfix" id="runpassengerDiv">
-        <a href="#showdata" id="arunpassengerDiv" class="arunpassengerDivclass clearfix">
+        <a href="javascript:;" id="arunpassengerDiv"  target="_parent" class="arunpassengerDivclass clearfix">
             <div class="left runpassengerleft  clearfix">
                 <div class="time">
                     <span class="data" id="rpsgdata"></span>
@@ -337,7 +358,7 @@
         runvownerDiv:`
         <div class="circle clearfix" id="runvownerDiv">
         
-        <a href="#ownshowdata" id="arunvownerDiv"  target="_blank"  class="arunvownerDivclass clearfix">
+        <a href="#ownshowdata" id="arunvownerDiv"   target="_parent"  class="arunvownerDivclass clearfix">
             <div class="left runvownerleft  clearfix" >
                 <div class="time">
                     <span class="data" id="rvdata">14号</span>
@@ -443,7 +464,6 @@
         $(".pdetails").hide();
         /* 点击了，先隐藏，在进行效果展示 */
     }
-    
     // 切换路由的方法
     function hashChange(hashzhi){
         var locationHash = location.hash;
@@ -466,8 +486,7 @@
             }
             
             /* 不是那个路由的，默认隐藏那个效果 */
-            $("#hpassengericon").attr("class","glyphicon glyphicon-chevron-down"); 
-            $(".hpassengerxsaaa").css("color","#555");
+            $("#hpassengericon").attr("class","glyphicon glyphicon-triangle-bottom"); 
     
             /* run路由 */
             if(val1[0]=="#run"|| locationHash=="#run"){
@@ -578,9 +597,7 @@
         $(".htogglethree").bind(" touch click",function(){
             /* 把我的行程隐藏 */
             $(".hvowner").hide();
-
             removeActive();
-            $(".htogglethree").addClass("hactive");
         })
         function removeActive(){
             $(".htoggleone").removeClass("hactive");
@@ -680,9 +697,6 @@
                             $("#runpassengerNode").append(sfcsj.runpassengerDiv);
 
                             /* 全部行程中的uid应该不是本地的uid，而是ajax时的uid */
-
-                            var runaPassengerDivsj = "#showdata?"+"id="+passengerData[i].id+"&uid="+nowusermsg.uid;
-                            $("#arunpassengerDiv").attr("href",runaPassengerDivsj);
                             var runidaPassengerDiv = "arunpassengerDiv"+i;
                             
                             $("#arunpassengerDiv").attr("id",runidaPassengerDiv);
@@ -1091,7 +1105,6 @@
          fabuxiaoxi.dwsj = data; 
          /* 定义成功后，切换路由到首页 */
         /*  window.location.hash = "#passenger"; */
-        showMessage1btn("定位成功！","",0)
          console.log("定位得到的数据",fabuxiaoxi.dwsj);
         
     }
@@ -1261,21 +1274,7 @@
                 departure = fabuxiaoxi.dwsj.formattedAddress;
             }
 
-            var tmps = {
-                uid	:nowusermsg.uid,        /* 用户id  */
-                departure:departure,   /* 出发地 */
-                dLng :dLng ,    /* 出发地经度 */
-                dLat: dLat,   /* 出发地纬度 */
-                arrival:mdata.name,     /* 目的地 */
-                arrivalTime:arrivalTime,      /* 到达时间问题 */
-                aLng:mdata.location.lng,    /* 目的地经度 */
-                aLat:mdata.location.lat,  /* 目的地纬度 */
-                departureTime:departureTime,    /* 出发时间问题后解决*/
-                pushType:pushType,        /* 发布类型 */
-                arCity:fabuxiaoxi.mddcity.trim(),      /* 到达城市 */
-                dpCity:fabuxiaoxi.cfdcity.trim(),      /* 出发城市 */
-            };
-            alert(JSON.stringify(tmps));
+            
             $.ajax({
                 type:"post",
                 url:"http://qckj.czgdly.com/bus/MobileWeb/madeFreeRideOrders/saveMadeFROrders.asp",
@@ -1304,9 +1303,11 @@
                     fabuxiaoxi.cfddata = "";    /* 置空 */
                     fabuxiaoxi.mmddata = "";    /* 置空 */
                     console.log("获取成功的数据",data);
+                    showMessage1btn("发布成功!","",0);
                 /* 提交的元素 */
                     /* 数据成功后，在重新请求下页面,刷新数据，把刚刚取到的数据放在页面上给用户观看。*/
                     window.location.href = "http://qckj.czgdly.com/bus/MobileWeb/WxWeb-kongbatong/sfc.html";   
+                   
                 },
                 error:function(data){
                     /* 用完要把用过的值初始化 */
@@ -1316,7 +1317,7 @@
                     fabuxiaoxi.cfddata = "";    /* 置空 */
                     fabuxiaoxi.mmddata = "";    /* 置空 */
                     console.log("失败的原因",data);
-                    alert("发布失败,请刷新重选");
+                    showMessage1btn("发布失败,请刷新重试!","",0)
                 }
             })
         },
@@ -1327,8 +1328,9 @@
     /* 存储获取到的支付页的信息，供支付详情页掉欧阳 */
     let paymentpageval = {
         result:{},  /* 数据 */
+        chisu:0,    /* 计算用户支付了几次 */
     }
-   
+    /* paymentpage(nowusermsg.uid,paymentbttsj.FROID,qmguid,); */
     function paymentpage(uid){
         console.log("用户的uid",uid);
         /* uid         用户id
@@ -1346,12 +1348,12 @@
                 paymentpageval.result = data ;
                if(data.result>0){
                     for(var jj = 0 ;jj<data.obj.froViewPayments.length;jj++){
+                        paymentpageval.chisu++;
                         $(".phdiconfyq").append(sfcsj.paymentpage);
                     /* 处理支付页面的数据 */
                         paymentpcl(jj,data);
                     }
                }
-                 
             },
             error:function(data){
                 console.log("支付表失败的原因",data);
@@ -1364,7 +1366,7 @@
         var sj = data.obj.froViewPayments[i];
         /* 处理点击支付的数据 */
             /* 传递参数 */
-            var pmaqkpayment  = "#payment?id="+sj.id;
+            var pmaqkpayment  = "#payment?id="+sj.id+"&froid="+sj.froid+"&puid="+sj.puid;
             $("#pmaqkpayment").attr("href",pmaqkpayment);
             var pmaqkpaymentid = "#pmaqkpayment"+i;
             $("#pmaqkpayment").attr("id",pmaqkpaymentid);
@@ -1391,21 +1393,25 @@
             $("#pmpayssuc").attr("id",pmpayssuc);
     }   
 
-
 /* 点击路由时 读取信息 */
     /* "#payment?id=1 */
     function passengercli(){
         var winhash = window.location.hash;
        
         var sjone = winhash.split("?");
-        var sjid = sjone[1].split("="); /* id  1 */
-        var sjval = sjid[1];    /* 1,2,3 */
-        if(sjid===""){
+        var sjid = sjone[1].split("&"); /* id  1 */
+        var sjval = sjid[0].split("=");
+        
+
+        var sjvalzhi= sjval[1];            /* 1,2,3 */
+        console.log(sjid,sjval,sjvalzhi);
+        console.log(paymentpageval.result,paymentpageval.result.obj.froViewPayments);
+        if(sjvalzhi===""){
             return false;
         }else {
+            /* 循环发送得到的数据，比较下，id相同，则把数据添加进去。 */
             for(var a  = 0; a < paymentpageval.result.obj.froViewPayments.length;a++){
-                if(sjval == paymentpageval.result.obj.froViewPayments[a].id ){
-                   
+                if(sjvalzhi== paymentpageval.result.obj.froViewPayments[a].id ){
                     passengerclival(paymentpageval.result.obj.froViewPayments[a]);
                 }
             }
@@ -1413,6 +1419,8 @@
     }
     /* 具体填充的函数 */
         function passengerclival(val){
+            console.log("val的值",val);
+            $(".pdetlsdadlook").empty();
             /* 付款号： */
                 $("#pdfkh").text(val.vpNo);
             /* 支付价格 */
@@ -1433,4 +1441,20 @@
                 $("#pdzflx").text(val.payType);
             /* 支付日期 */
                 $("#pdzfrq").text(val.payDate);
+            /* 填充 */
+                if(val.payState === 1){
+                    $(".pdetlsdadlook").append(`<div class="clearfix" style="height: 56px;"><button class="lookpaydan btn btn-success">查看行程页面</button>
+                    <div class="lookpaydxx" style="display:none;">
+                    </div></div>`);
+                    /* 点击查看页面功能
+                        支付成功时,我只需要支付时的id和发布者的uid就行
+                    */
+                    $(".lookpaydan").bind("touch click",function(){
+                        let jwxx = "#ownshowdata?id="+val.froid+"&uid="+val.puid+"&sf=run";
+                        let wlgref = "http://qckj.czgdly.com/bus/MobileWeb/WxWeb-kongbatong/font/html/xq.html"+jwxx;
+                        window.location.href = wlgref ;
+                    })
+                }else {
+                    $(".pdetlsdadlook").empty();
+                }
         }

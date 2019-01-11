@@ -12,12 +12,21 @@
   height: 30px;
   background: #979797;
   color: #fff;
+  border-radius: 4px;
   margin-top: 13px;
-  margin-left: 11%;
-  border-radius: 2px;
-  line-height: 30px;
   text-align: center;
+  line-height: 30px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
+/* 样式设置 */
+  .showsjdata  .srselect  .fanhuisyj  .fhusyjd{
+    background: #5cb85c;
+  }
+  .changz{
+    margin-left: 11%;
+  }
 .showsjdata #sdcontainer {
   width: 100%;
   height: 350px;
@@ -135,16 +144,6 @@
 }
 .showsjdata .srselect .fanhuisyj .fhusyjd {
   display: inline-block;
-  width: 58px;
-  height: 30px;
-  margin: 0 auto;
-  margin-top: 0px;
-  line-height: 30px;
-  margin-top: 18px;
-  border-radius: 3px;
-  background: #5cb85c;
-  text-align: center;
-  color: #fff;
 }
 .sdstatus {
   width: 100%;

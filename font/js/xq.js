@@ -173,10 +173,8 @@ function cfdsdmdivcl(val){
    /* 出发地要 找地址 */
    if(val=="cfd"){
        autocfdsdmdiv($(".cfdsdmdiv").text());
-       autocfdiv();
    }else if(val=="mdd"){
        autocfdsdmdiv($(".mddsdmdiv").text());
-       autocfdiv();
    }
 }
 /* 复用的处理函数 */
