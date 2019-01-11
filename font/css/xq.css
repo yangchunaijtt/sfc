@@ -45,16 +45,16 @@
   width: 25%;
   display: inline-block;
   text-indent: 10px;
-  height: 40px;
-  line-height: 40px;
+  height: 50px;
+  line-height: 50px;
   float:left;
 }
 .showsjdata .showmoredata .cfdsdm .cfdsdmdiv {
   width: 48%;
   display: inline-block;
   text-indent: 10px;
-  height: 40px;
-  line-height: 40px;
+  height: 50px;
+  line-height: 50px;
   overflow: hidden;
   text-overflow:ellipsis;
   white-space: nowrap;
@@ -67,8 +67,8 @@
 .showsjdata .showmoredata .mddsdm .mdddsdmspan {
   width: 25%;
   display: inline-block;
-  height: 40px;
-  line-height: 40px;
+  height: 50px;
+  line-height: 50px;
   text-indent: 10px;
   float: left;
 }
@@ -76,8 +76,8 @@
   width: 48%;
   display: inline-block;
   text-indent: 10px;
-  height: 40px;
-  line-height: 40px;
+  height: 50px;
+  line-height: 50px;
   overflow: hidden;
   text-overflow:ellipsis;
   white-space: nowrap;
@@ -219,8 +219,8 @@
     display: inline-block;
     width: 22%;
     float: right;
-    margin-right: 10px;
-    margin-top: 3px;
+    margin-right: 14px;
+    margin-top: 8px;
   }
   /* 按钮提示 css样式 */
 .mydiv {

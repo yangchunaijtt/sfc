@@ -620,7 +620,7 @@
                     $("#dt-c-1").data("val"," ");
                     window.location.hash = "#details";
                 }else {
-                    alert("期望到达时间不能小于出发时间!");
+                    showMessage1btn("期望时间不能小于出发时间!","",0);
                 }
             }
     
