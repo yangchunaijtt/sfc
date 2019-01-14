@@ -79,6 +79,7 @@
         }
 
         /* 处理城市选择页点击 */
+            /* 处理城市选择页点击 */
         $(".ulliwx").bind("touch click",function(){
             ullicstyicz(".ulliwx");
         })
@@ -135,46 +136,6 @@
      }
 
      /* 始发地 目的地 点击后 赋值并给下一页*/
-        $("#searchxincheng .xzli1").bind("touch click",function(){
-            var  textval =  $("#searchxincheng .xzli1").text();
-            xzlichuli(textval);
-        })
-        $("#searchxincheng .xzli2").bind("touch click",function(){
-            var  textval =  $("#searchxincheng .xzli2").text();
-            xzlichuli(textval);
-        })
-        $("#searchxincheng .xzli3").bind("touch click",function(){
-            var  textval =  $("#searchxincheng .xzli3").text();
-            xzlichuli(textval);
-        })
-        $("#searchxincheng .xzli4").bind("touch click",function(){
-            var  textval =  $("#searchxincheng .xzli4").text();
-            xzlichuli(textval);
-        })
-        $("#searchxincheng .xzli5").bind("touch click",function(){
-            var  textval =  $("#searchxincheng .xzli5").text();
-            xzlichuli(textval);
-        })
-        $("#searchxincheng .xzli6").bind("touch click",function(){
-            var  textval =  $("#searchxincheng .xzli6").text();
-            xzlichuli(textval);  
-        })
-        $("#searchxincheng .xzli7").bind("touch click",function(){
-            var  textval =  $("#searchxincheng .xzli7").text();
-            xzlichuli(textval);
-        })
-        $("#searchxincheng .xzli8").bind("touch click",function(){
-            var  textval =  $("#searchxincheng .xzli8").text();
-            xzlichuli(textval);
-        })
-        $("#searchxincheng .xzli9").bind("touch click",function(){  
-            var  textval =  $("#searchxincheng .xzli9").text();
-            xzlichuli(textval)    
-        })
-        $("#searchxincheng .xzli10").bind("touch click",function(){
-            var  textval =  $("#searchxincheng .xzli10").text();
-            xzlichuli(textval);
-        })
         function xzlichuli (textval){
             
             var locationhash = window.location.hash;
@@ -193,10 +154,7 @@
             
         }
      
-     /* 点击取消，页面跳为地图页面 */
-     $(".xcqx").bind("touch click",function(){
-         window.location.hash = "#details";
-     })
+     
 
      /* 点击搜索功能的函数 */
      let  autoInputsunval = {
@@ -337,11 +295,14 @@
             var locationhash = window.location.hash;
             /* 给城市赋值 */
             if(locationhash==="#sxxwz"){
+                /* 把那个清空 */
+                fabuxiaoxi.dwsj ="";
                 fabuxiaoxi.cfdcity = $(".xcspanleft").text();
                 console.log(fabuxiaoxi.cfdcity);
             }else if(locationhash==="#mxxwz"){
                 fabuxiaoxi.mddcity = $(".xcspanleft").text();
                 console.log(fabuxiaoxi.mddcity);
+
             }
 
             /* 出发地  始发地 */
@@ -356,6 +317,7 @@
                
             }
             if(locationhash=="#sxxwz"){
+                fabuxiaoxi.dwsj ="";
                 let result = autoInputsunval.cfdresult;
                 let tipsone = autoInputsunval.cfdresult.tips;  
                 /*  #sxxwz 出发地 经纬度信息*/
@@ -960,10 +922,6 @@
                 })
         /* 选择目的地 */
             /* 输入框 */
-                $(".rsdcsoipt").bind("blur",function(){
-                    runscreenv.mdd = $(".rsdcsoipt").val();
-                    console.log($(".rsdcsoipt").val(),runscreenv.mdd);
-                })
             /* 下面几个点击 */
                 function rsdcsdlovalhs(){
                     /* 几个div */
@@ -974,74 +932,15 @@
                     $(".rsdcsdlf").css(valjson); 
                     $(".rsdcsdlfi").css(valjson); 
                 }
-                let rsdcsdloval = {
-                    "background":"#ff4a39",
-                    "color":"#fff",
-                }
-                 let rsdcsdlvllet ={
-                     one:1,
-                     two:1,
-                     three:1,
-                     four:1,
-                     five:1,
-                 }
-                $(".rsdcsdlo").bind("touch click",function(){
-                    rsdcsdlvllet.one+=1;
-                    if(rsdcsdlvllet.one%2 ===0){
-                        runscreenv.mdd = $(".rsdcsdlo").text();
-                        rsdcsdlovalhs();
-                        $(".rsdcsdlo").css(rsdcsdloval);
-                    }else {
-                        runscreenv.mdd = "";
-                        $(".rsdcsdlo").css(valjson);
-                    }
-                })
-                $(".rsdcsdlt").bind("touch click",function(){
-                    rsdcsdlvllet.two+=1;
-                    if(rsdcsdlvllet.two%2 ===0){
-                        runscreenv.mdd = $(".rsdcsdlt").text();
-                        rsdcsdlovalhs();
-                        $(".rsdcsdlt").css(rsdcsdloval);
-                    }else {
-                        runscreenv.mdd = "";
-                        $(".rsdcsdlt").css(valjson);
-                    }
-                    
-                })
-                $(".rsdcsdltr").bind("touch click",function(){
-                    rsdcsdlvllet.three+=1;
-                    if(rsdcsdlvllet.three%2 ===0){
-                        runscreenv.mdd = $(".rsdcsdltr").text();
-                        rsdcsdlovalhs();
-                        $(".rsdcsdltr").css(rsdcsdloval);
-                    }else {
-                        runscreenv.mdd = "";
-                        $(".rsdcsdltr").css(valjson);
-                    }
-                   
-                })
-                $(".rsdcsdlf").bind("touch click",function(){
-                    rsdcsdlvllet.four+=1;
-                    if(rsdcsdlvllet.four%2 ===0){
-                        runscreenv.mdd = $(".rsdcsdlf").text();
-                        rsdcsdlovalhs();
-                        $(".rsdcsdlf").css(rsdcsdloval);
-                    }else {
-                        runscreenv.mdd = "";
-                        $(".rsdcsdlf").css(valjson);
-                    }
-                })
-                $(".rsdcsdlfi").bind("touch click",function(){
-                    rsdcsdlvllet.five+=1;
-                    if(rsdcsdlvllet.five%2 ===0){
-                        runscreenv.mdd = $(".rsdcsdlfi").text();
-                        rsdcsdlovalhs();
-                        $(".rsdcsdlfi").css(rsdcsdloval);
-                    }else {
-                        runscreenv.mdd = "";
-                        $(".rsdcsdlfi").css(valjson);
-                    }
-                })
+                
+        function rscsxsjofhu(){
+            winhash = window.location.hash;
+            if(winhash==="#run?passgeran"){
+                window.location.hash = "#run?passger";
+            }else if(winhash==="#run?diveran"){
+                window.location.hash = "#run?diver";
+            }
+        }
         /* 点击确定时，取值发送ajax，调用渲染页面函数 */
         $(".runscjwfbsxdd").bind("touch click",function(){
             console.log(runscreenv);
@@ -1065,9 +964,9 @@
                            cur:1,  /* 默认取第一页 */
                            pushType:"Passenger",   /* 乘客 */
                            uid:"",  /* id号   默认为空就是取全部的数据*/
-                           dateRange:runscreenv.time,      
-                           arCity:runscreenv.mdd,      /* 到达城市 */
-                           dpCity:runscreenv.cfd,      /* 出发城市 */
+                           dateRange:runscreenv.time.trim(),      
+                           arCity:runscreenv.mdd.trim(),      /* 到达城市 */
+                           dpCity:runscreenv.cfd.trim(),      /* 出发城市 */
                        },
                         success: function (data) {
                             qbxcvalsj.passenger = data;
@@ -1091,9 +990,9 @@
                            cur:1,  /* 默认取第一页 */
                            pushType:"Driver",   /* 乘客 */
                            uid:"",  /* id号   默认为空就是取全部的数据*/
-                           dateRange:runscreenv.time,      
-                           arCity:runscreenv.mdd,      /* 到达城市 */
-                           dpCity:runscreenv.cfd,      /* 出发城市 */
+                           dateRange:runscreenv.time.trim(),      
+                           arCity:runscreenv.mdd.trim(),      /* 到达城市 */
+                           dpCity:runscreenv.cfd.trim(),      /* 出发城市 */
                        },
                         success: function (data) {
                            qbxcvalsj.vowner = data;

@@ -109,7 +109,11 @@
         $(".runluyouaa").slideToggle("normal");
     })
         
-        
+    
+    /* 给返回添加返回事件 */
+    $(".rscsxsjofhu").bind("touch click",function(){
+        rscsxsjofhu();
+    })
 
         
         /* 点击id可以选择城市 */
@@ -179,10 +183,12 @@
                 window.location.hash  = "#mxxwz";
             }
         })
-            /* 初始化条件 */
+        
+        /* 初始化条件 */
             $("#chufadi").val("");
             $("#address").val("");
-
+            $("#containersearchtime").val("");
+            $("#searchsetdate").val("");
 
         /*  时间选择页的操作 */  
         
@@ -216,7 +222,153 @@
             $(".hrun").css("color","#e39f7a");
         })
 
+/* 绑定事件都放在这里面 */
+        
+/* 始发地 目的地 点击后 赋值并给下一页*/
+        $("#searchxincheng .xzli1").bind("touch click",function(){
+            var  textval =  $("#searchxincheng .xzli1").text();
+            xzlichuli(textval);
+        })
+        $("#searchxincheng .xzli2").bind("touch click",function(){
+            var  textval =  $("#searchxincheng .xzli2").text();
+            xzlichuli(textval);
+        })
+        $("#searchxincheng .xzli3").bind("touch click",function(){
+            var  textval =  $("#searchxincheng .xzli3").text();
+            xzlichuli(textval);
+        })
+        $("#searchxincheng .xzli4").bind("touch click",function(){
+            var  textval =  $("#searchxincheng .xzli4").text();
+            xzlichuli(textval);
+        })
+        $("#searchxincheng .xzli5").bind("touch click",function(){
+            var  textval =  $("#searchxincheng .xzli5").text();
+            xzlichuli(textval);
+        })
+        $("#searchxincheng .xzli6").bind("touch click",function(){
+            var  textval =  $("#searchxincheng .xzli6").text();
+            xzlichuli(textval);  
+        })
+        $("#searchxincheng .xzli7").bind("touch click",function(){
+            var  textval =  $("#searchxincheng .xzli7").text();
+            xzlichuli(textval);
+        })
+        $("#searchxincheng .xzli8").bind("touch click",function(){
+            var  textval =  $("#searchxincheng .xzli8").text();
+            xzlichuli(textval);
+        })
+        $("#searchxincheng .xzli9").bind("touch click",function(){  
+            var  textval =  $("#searchxincheng .xzli9").text();
+            xzlichuli(textval)    
+        })
+        $("#searchxincheng .xzli10").bind("touch click",function(){
+            var  textval =  $("#searchxincheng .xzli10").text();
+            xzlichuli(textval);
+        })
+    /* 点击取消，页面跳为地图页面 */
+        $(".xcqx").bind("touch click",function(){
+            window.location.hash = "#details";
+        })
+    /* 选择目的地 */
+            /* 输入框 */
+            $(".rsdcsoipt").bind("blur",function(){
+                runscreenv.mdd = $(".rsdcsoipt").val();
+                console.log($(".rsdcsoipt").val(),runscreenv.mdd);
+            })
+            let rsdcsdloval = {
+                "background":"#ff4a39",
+                "color":"#fff",
+            }
+             let rsdcsdlvllet ={
+                 one:1,
+                 two:1,
+                 three:1,
+                 four:1,
+                 five:1,
+             }
+            $(".rsdcsdlo").bind("touch click",function(){
+                rsdcsdlvllet.one+=1;
+                if(rsdcsdlvllet.one%2 ===0){
+                    runscreenv.mdd = $(".rsdcsdlo").text();
+                    rsdcsdlovalhs();
+                    $(".rsdcsdlo").css(rsdcsdloval);
+                }else {
+                    runscreenv.mdd = "";
+                    $(".rsdcsdlo").css(valjson);
+                }
+            })
+            $(".rsdcsdlt").bind("touch click",function(){
+                rsdcsdlvllet.two+=1;
+                if(rsdcsdlvllet.two%2 ===0){
+                    runscreenv.mdd = $(".rsdcsdlt").text();
+                    rsdcsdlovalhs();
+                    $(".rsdcsdlt").css(rsdcsdloval);
+                }else {
+                    runscreenv.mdd = "";
+                    $(".rsdcsdlt").css(valjson);
+                }
+                
+            })
+            $(".rsdcsdltr").bind("touch click",function(){
+                rsdcsdlvllet.three+=1;
+                if(rsdcsdlvllet.three%2 ===0){
+                    runscreenv.mdd = $(".rsdcsdltr").text();
+                    rsdcsdlovalhs();
+                    $(".rsdcsdltr").css(rsdcsdloval);
+                }else {
+                    runscreenv.mdd = "";
+                    $(".rsdcsdltr").css(valjson);
+                }
+               
+            })
+            $(".rsdcsdlf").bind("touch click",function(){
+                rsdcsdlvllet.four+=1;
+                if(rsdcsdlvllet.four%2 ===0){
+                    runscreenv.mdd = $(".rsdcsdlf").text();
+                    rsdcsdlovalhs();
+                    $(".rsdcsdlf").css(rsdcsdloval);
+                }else {
+                    runscreenv.mdd = "";
+                    $(".rsdcsdlf").css(valjson);
+                }
+            })
+            $(".rsdcsdlfi").bind("touch click",function(){
+                rsdcsdlvllet.five+=1;
+                if(rsdcsdlvllet.five%2 ===0){
+                    runscreenv.mdd = $(".rsdcsdlfi").text();
+                    rsdcsdlovalhs();
+                    $(".rsdcsdlfi").css(rsdcsdloval);
+                }else {
+                    runscreenv.mdd = "";
+                    $(".rsdcsdlfi").css(valjson);
+                }
+            })
     })
+
+/* 所有资源加载成功在执行地图定位 */
+    window.onload = function(){
+        /*  定位功能  */
+        AMap.plugin('AMap.Geolocation', function() {
+            var geolocation = new AMap.Geolocation({
+                enableHighAccuracy: true,//是否使用高精度定位，默认:true
+                timeout: 10000,          //超过10秒后停止定位，默认：5s
+                buttonPosition:'RB',    //定位按钮的停靠位置
+                buttonOffset: new AMap.Pixel(10, 20),//定位按钮与设置的停靠位置的偏移量，默认：Pixel(10, 20)
+                zoomToAccuracy: true,   //定位成功后是否自动调整地图视野到定位点
+            });
+            map.addControl(geolocation);
+            geolocation.getCurrentPosition(function(status,result){
+                if(status=='complete'){
+                    onComplete(result)
+                    /* 定位时绑定到出发地的函数的值上 */
+                    /* fabuxiaoxi.cfddata = result; */
+                }else{
+                    onError(result);
+                }
+            });
+        });
+
+    }
 
     function register(val){
         var nowhref = window.location.href;
@@ -476,7 +628,6 @@
             $("#address").val("");
             console.log("这里的问题?")
         }else {
-            console.log(hashzhi);
             $("#idsearchvalshow").empty();
             if(val1[0]=="#passenger" || locationHash =="#passenger" ){
                 $(".runluyouaa").hide();
@@ -1070,27 +1221,8 @@
      }
 
      
-    //定位功能 
-    AMap.plugin('AMap.Geolocation', function() {
-        var geolocation = new AMap.Geolocation({
-            enableHighAccuracy: true,//是否使用高精度定位，默认:true
-            timeout: 10000,          //超过10秒后停止定位，默认：5s
-            buttonPosition:'RB',    //定位按钮的停靠位置
-            buttonOffset: new AMap.Pixel(10, 20),//定位按钮与设置的停靠位置的偏移量，默认：Pixel(10, 20)
-            zoomToAccuracy: true,   //定位成功后是否自动调整地图视野到定位点
-        });
-        map.addControl(geolocation);
-        geolocation.getCurrentPosition(function(status,result){
-            if(status=='complete'){
-                onComplete(result)
-                /* 定位时绑定到出发地的函数的值上 */
-                /* fabuxiaoxi.cfddata = result; */
-            }else{
-                onError(result);
-            }
-        });
-    });
 
+/*  定位功能函数 */
 
     function onComplete(data) {
         /* 解决之道 */
@@ -1267,23 +1399,44 @@
             }
             
             if(fabuxiaoxi.dwsj!==""){
-                console.log("信息类型",fabuxiaoxi.dwsj);
                 dLng = fabuxiaoxi.dwsj.position.lng;
                 dLat = fabuxiaoxi.dwsj.position.lat;
                 fabuxiaoxi.cfdcity = fabuxiaoxi.dwsj.addressComponent.city;
                 departure = fabuxiaoxi.dwsj.formattedAddress;
             }
-
+            console.log("发布提示",fabuxiaoxi);
+            let successdattsxx = "";
+            if(nowusermsg.uid === undefined  ){
+                successdattsxx = "读取账号出错,请重新登录!";
+            }else if(departure === undefined || dLat === undefined || fabuxiaoxi.cfdcity.trim() === undefined
+            || dLng === undefined ){
+                if(dLat === undefined || dLng === undefined ){
+                    successdattsxx = "始发地不能选市,请选择具体地名!";
+                }else{
+                    successdattsxx = "始发地出错,请重新选择!";
+                }
+            }else if(arrivalTime === undefined || departureTime === undefined ){
+                successdattsxx = "选择时间出错,请重新选择!";
+            }else if(mdata.name === undefined || mdata.location.lng === undefined || 
+                mdata.location.lat=== undefined  || fabuxiaoxi.mddcity.trim() === undefined){
+                    if(mdata.location.lng === undefined || mdata.location.lat=== undefined ){
+                        successdattsxx = "目的地不能选市,请选择具体地名!";
+                    }else{
+                        successdattsxx = "目的地出错,请重新选择!";
+                    }
+            }else if(pushType === undefined){
+                successdattsxx = "身份出错,请重新点击!";
+            }
             
             $.ajax({
                 type:"post",
                 url:"http://qckj.czgdly.com/bus/MobileWeb/madeFreeRideOrders/saveMadeFROrders.asp",
                 data:{
                     uid	:nowusermsg.uid,        /* 用户id  */
-                    departure:departure,   /* 出发地 */
+                    departure:departure.trim(),   /* 出发地 */
                     dLng :dLng ,    /* 出发地经度 */
                     dLat: dLat,   /* 出发地纬度 */
-                    arrival:mdata.name,     /* 目的地 */
+                    arrival:mdata.name.trim(),     /* 目的地 */
                     arrivalTime:arrivalTime,      /* 到达时间问题 */
                     aLng:mdata.location.lng,    /* 目的地经度 */
                     aLat:mdata.location.lat,  /* 目的地纬度 */
@@ -1293,21 +1446,26 @@
                     dpCity:fabuxiaoxi.cfdcity.trim(),      /* 出发城市 */
                 },
                 success:function(data){
-                    $("#containersearchtime").val("");
-                    $("#searchsetdate").val("");
-
-                    /* 用完要把用过的值初始化 */
-                    fabuxiaoxi.dwsj = "";   /* 定位的初始化 */
-                    fabuxiaoxi.cfdcity =""; /* 城市至为空 */
-                    fabuxiaoxi.mddcity = "";    /* 置空 */
-                    fabuxiaoxi.cfddata = "";    /* 置空 */
-                    fabuxiaoxi.mmddata = "";    /* 置空 */
-                    console.log("获取成功的数据",data);
-                    showMessage1btn("发布成功!","",0);
-                /* 提交的元素 */
-                    /* 数据成功后，在重新请求下页面,刷新数据，把刚刚取到的数据放在页面上给用户观看。*/
-                    window.location.href = "http://qckj.czgdly.com/bus/MobileWeb/WxWeb-kongbatong/sfc.html";   
                    
+                    if(data.result ===  -1 ){
+                        showMessage1btn(successdattsxx,"",0);
+                        return false;
+                    }else {
+                        $("#containersearchtime").val("");
+                        $("#searchsetdate").val("");
+    
+                        /* 用完要把用过的值初始化 */
+                        fabuxiaoxi.dwsj = "";   /* 定位的初始化 */
+                        fabuxiaoxi.cfdcity =""; /* 城市至为空 */
+                        fabuxiaoxi.mddcity = "";    /* 置空 */
+                        fabuxiaoxi.cfddata = "";    /* 置空 */
+                        fabuxiaoxi.mmddata = "";    /* 置空 */
+                        console.log("获取成功的数据",data);
+                        showMessage1btn("发布成功!","",0);
+                    /* 提交的元素 */
+                        /* 数据成功后，在重新请求下页面,刷新数据，把刚刚取到的数据放在页面上给用户观看。*/
+                        window.location.href = "http://qckj.czgdly.com/bus/MobileWeb/WxWeb-kongbatong/sfc.html";   
+                    }
                 },
                 error:function(data){
                     /* 用完要把用过的值初始化 */

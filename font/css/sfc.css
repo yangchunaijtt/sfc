@@ -16,6 +16,8 @@
 .header .hpassenger a,
 .header .hrun a,
 .header #ddxq .htogglefour {
+
+
   display: block;
 }
 /* 筛选 */
@@ -252,20 +254,18 @@
   margin: 6px 6px;
 }
 .vowner .vonpondclxc .top {
-  margin-top: 10px;
-  height: 34px;
-  background: #FFF;
-  border-bottom: 1px solid #f0f0f0;
+  margin: 10px 6px;
+  vertical-align: top;
 }
 .vowner .vonpondclxc .top .top-icon {
   margin-left: 10px;
-  font-size: 24px;
+  font-size: 27px;
   color: #f0935a;
-  line-height: 34px;
+  line-height: 22px;
 }
 .vowner .vonpondclxc .top .deng {
   margin-left: 12px;
-  line-height: 34px;
+  line-height: 25px;
 }
 .vowner .vonpondclxc .circle {
   background: #fff;

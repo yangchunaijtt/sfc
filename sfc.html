@@ -17,7 +17,9 @@
     <!--  自己定义的css文件 -->
     <link rel="stylesheet" href="./font/css/react.css">
     <link rel="stylesheet" href="./font/css/sfc.css"> 
-    <title>顺风车</title>
+    <title>
+        顺风车
+    </title>
     <style>
         .amap-touch-toolbar .amap-zoomcontrol {
             bottom: -39px;
@@ -55,8 +57,12 @@
                 <span class="glyphicon glyphicon-triangle-bottom hrunoneicon"></span>
             </div>
              <div class="runluyouaa clearfix" style="display: none">
-               <a href="#run?passger" class="runpsgone">全部乘客行程</a> 
-                <a href="#run?diver" class="rundvone">全部车主行程</a>
+               <a href="#run?passger" class="runpsgone">
+                   全部乘客行程
+                </a> 
+                <a href="#run?diver" class="rundvone">
+                    全部车主行程
+                </a>
             </div>
         </div>
     </div>
@@ -67,9 +73,13 @@
             <!-- 表单 -->
             <div class="select">
                 <form action="">
-                    <div class="snav">开启路程</div>
+                    <div class="snav">
+                        开启路程
+                    </div>
                     <div class="departure clearfix">
-                        <span class="sfc-icon">始发地:</span>
+                        <span class="sfc-icon">
+                            始发地:
+                        </span>
                         <input  type="text" class="form-control"  id="pformcontrolsr"  name="departure"  placeholder="你从哪里来" style="width: 78%; background: #f2f2f2;"/>
                     </div>
                     <div class="destination">
@@ -78,14 +88,18 @@
                         </span>
                         <input  type="text"  class="form-control" name="destination" id="pformcontrolsc" style="width: 78%; background: #f2f2f2;" placeholder="你要去哪儿"/>
                     </div>
-                       <a href="javascript:;"  class="sbutton  btn btn-info" id="sbutnaone">发布行程</a>
+                       <a href="javascript:;"  class="sbutton  btn btn-info" id="sbutnaone">
+                           发布行程
+                        </a>
                 </form>
             </div>
             <!-- 常用路线 -->
             <div class="cylx clearfix">
                 <div class="chd">
                     <sapn class="glyphicon glyphicon-map-marker cylx-icon"></sapn>
-                    <span class="circle">已发布行程</span>
+                    <span class="circle">
+                        已发布行程
+                    </span>
                 </div>
                 <div id="passengerNode"  class="clearfix">
                     <!-- 乘客div内容嵌套区 -->
@@ -102,9 +116,13 @@
             <!-- 表单 -->
             <div class="select clearfix">
                 <form action="">
-                    <div class="snav">开启路程</div>
+                    <div class="snav">
+                        开启路程
+                    </div>
                     <div class="departure clearfix">
-                        <span class="sfc-icon">始发地:</span>
+                        <span class="sfc-icon">
+                            始发地:
+                        </span>
                         <input  type="text" class="form-control"  style="width: 78%; background: #f2f2f2;" id="vformcontrolsr" name="departure"  placeholder="你从哪里来"/>
                     </div>
                     <div class="destination">
@@ -119,7 +137,9 @@
             <div class="vonpondclxc clearfix">
                 <div class="top clearfix"> 
                     <span class="iconfont icon-xingcheng top-icon"></span>
-                    <span class="deng">已发布行程</span>
+                    <span class="deng">
+                        已发布行程
+                    </span>
                 </div>
                 <div id="vownperNode"  class="clearfix">
                     <!-- 复用添加地方 -->
@@ -135,55 +155,95 @@
         <div class="run clearfix" style="display:none;">
             <div class="runscreen clearfix">
                 <div class="runscsxsj clerfix">
-                   <span class="runscsxsjone">筛选(不选显示全部数据)</span>
-                   <a href="#run" class="btn btn-primary">返回</a>
+                   <span class="runscsxsjone">
+                       筛选(不选显示全部数据)
+                    </span>
+                   <div  class="btn btn-primary rscsxsjofhu">
+                       返回
+                    </div>
                 </div>
                 <div class="runscrqfw clearfix">
-                    <span class="runscrqss">选择数据日期范围</span>
+                    <span class="runscrqss">
+                        选择数据日期范围
+                    </span>
                     <div class="runscrqdv clearfix">
-                        <span class="runscrqdvo">今天</span>
-                        <span class="runscrqdvt">一周内</span>
-                        <span class="runscrqdvtr">一个月之内</span>
+                        <span class="runscrqdvo">
+                            今天
+                        </span>
+                        <span class="runscrqdvt">
+                            一周内
+                        </span>
+                        <span class="runscrqdvtr">
+                            一个月之内
+                        </span>
                     </div>
                 </div>
                 <div class="runsccfcs clearfix">
                     <span class="runsccfcsone" style="color: #23beae;
-                    font-size: 16px">出发城市(输入框输入/直接点击)</span>
+                    font-size: 16px">
+                        出发城市(输入框输入/直接点击)
+                    </span>
                     <div class="runsccfcdva clearfix">
                         <input type="text" class="form-control rscfcdaipt" placeholder="请填写以市为结尾的数据"
                         style="color:#23beae;background: #f2f2f2;">
                         <span class="glyphicon glyphicon-triangle-bottom" style="color:#23beae"></span>
                         <div class="runsccficondv clearfix">
                             <ul>
-                                <li class="rsfidvlo">常州市</li>
-                                <li class="rsfidvlt">苏州市</li>
-                                <li class="rsfidvltr">上海市</li>
-                                <li class="rsfidvf">无锡市</li>
-                                <li class="rsfidvlfif">南京市</li>
+                                <li class="rsfidvlo">
+                                    常州市
+                                </li>
+                                <li class="rsfidvlt">
+                                    苏州市
+                                </li>
+                                <li class="rsfidvltr">
+                                    上海市
+                                </li>
+                                <li class="rsfidvf">
+                                    无锡市
+                                </li>
+                                <li class="rsfidvlfif">
+                                    南京市
+                                </li>
                             </ul>
                         </div>
                     </div>
                 </div>
                 <div  class="runscrqdvtddcs clearfix">
-                    <span class="runscrqdvtddcsone" style="font-size:16px;color:#ff4a39">到达城市(输入框输入/直接点击)</span>
+                    <span class="runscrqdvtddcsone" style="font-size:16px;color:#ff4a39">
+                        到达城市(输入框输入/直接点击)
+                    </span>
                     <div  class="runsddcsone clearfix">
                         <input type="text" class="form-control rsdcsoipt" placeholder="请填写以市为结尾的数据"
                         style="color:#ff4a39;background: #f2f2f2;">
                         <span class="glyphicon glyphicon-triangle-bottom" style="color:#ff4a39"></span>
                         <div class="runsddcsondv clearfix">
                             <ul>
-                                <li class="rsdcsdlo">常州市</li>
-                                <li class="rsdcsdlt">苏州市</li>
-                                <li class="rsdcsdltr">上海市</li>
-                                <li class="rsdcsdlf">无锡市</li>
-                                <li class="rsdcsdlfi">南京市</li>
+                                <li class="rsdcsdlo">
+                                    常州市
+                                </li>
+                                <li class="rsdcsdlt">
+                                    苏州市
+                                </li>
+                                <li class="rsdcsdltr">
+                                    上海市
+                                </li>
+                                <li class="rsdcsdlf">
+                                    无锡市
+                                </li>
+                                <li class="rsdcsdlfi">
+                                    南京市
+                                </li>
                             </ul>
                         </div>
                     </div>
                 </div>
                 <div  class="runscjwfbsx clearfix">
-                    <span class="runscjwfbsxqx">取消</span>
-                    <span class="runscjwfbsxdd">确定</span>
+                    <span class="runscjwfbsxqx">
+                        取消
+                    </span>
+                    <span class="runscjwfbsxdd">
+                        确定
+                    </span>
                 </div>
             </div>
             <!-- 乘客全部行程 -->
@@ -192,10 +252,14 @@
                     
                     <div class="top clearfix"> 
                         <span class="glyphicon glyphicon-user top-icon"></span>
-                        <span class="deng">全部乘客行程</span>
+                        <span class="deng">
+                            全部乘客行程
+                        </span>
                         <!-- 进入筛选页面 -->
                         <div class=" runpasgscreen clearfix">
-                            <a href="#run?passgeran"   class="btn btn-primary ">筛选</a>
+                            <a href="#run?passgeran"   class="btn btn-primary ">
+                                筛选
+                            </a>
                         </div>
                     </div>
                     <!-- 复用创建部分 -->
@@ -216,10 +280,14 @@
                             <div class="top clearfix"> 
                                 <span class="iconfont icon-qiche
                                 top-icon"></span>
-                                <span class="deng">全部车主行程</span>
+                                <span class="deng">
+                                    全部车主行程
+                                </span>
                                 <!-- 点击按钮进入筛选页面 -->
                                 <div class="runvownerscreen">
-                                    <a href="#run?diveran"  class="btn btn-primary ">筛选</a>
+                                    <a href="#run?diveran"  class="btn btn-primary ">
+                                        筛选
+                                    </a>
                                 </div>
                             </div>
                             <!-- 复用创建部分 -->
@@ -261,7 +329,9 @@
                         <div class="chufadi clearfix">
                             <span class="left" style="
                             line-height: 30px;
-                            text-indent: 5px; margin-top: 10px;text-indent: 6px;">始发地:</span>
+                            text-indent: 5px; margin-top: 10px;text-indent: 6px;">
+                                始发地:
+                            </span>
                             <input type="text" class="form-control" 
                             style="
                             float: right;"  id="chufadi" name="departure" placeholder="你从哪里来"/>
@@ -273,7 +343,9 @@
                             <div class="clearfix">
                                <span class="left" style="
                                line-height: 30px;
-                               text-indent: 5px;">目的地:</span>      
+                               text-indent: 5px;">
+                                    目的地:
+                                </span>      
                             <input style="float: right;
                             margin-right: 10px;
                             background: #f2f2f2;text-indent: 6px;" type="text" id='address' class="form-control" name="Destination"  placeholder="你要去哪儿" /></div>

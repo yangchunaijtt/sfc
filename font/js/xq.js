@@ -1,4 +1,3 @@
-
 $(function(){
     showLodding("请稍等，加载中...");
     /* 点击时  地图上添加一个maker点 并且聚焦 */
@@ -155,54 +154,54 @@ $(function(){
     }
 
 /* 地图的初始化 */
-var map = new AMap.Map('sdcontainer', {
-    resizeEnable: true,
-    zoom:10,//级别
-    center: [119.9,31.7],//中心点坐标
-});
+    var map = new AMap.Map('sdcontainer', {
+        resizeEnable: true,
+        zoom:10,//级别
+        center: [119.9,31.7],//中心点坐标
+    });
 
 
-let paymentvalsj = {
-  resultdata:{}
-}    
+    let paymentvalsj = {
+    resultdata:{}
+    }    
 
 
 /* 点击时，判断地址，并在地图撒花姑娘 */ 
 /* 始发地点击找地址 */
-function cfdsdmdivcl(val){
-   /* 出发地要 找地址 */
-   if(val=="cfd"){
-       autocfdsdmdiv($(".cfdsdmdiv").text());
-   }else if(val=="mdd"){
-       autocfdsdmdiv($(".mddsdmdiv").text());
-   }
-}
+    function cfdsdmdivcl(val){
+    /* 出发地要 找地址 */
+    if(val=="cfd"){
+        autocfdsdmdiv($(".cfdsdmdiv").text());
+    }else if(val=="mdd"){
+        autocfdsdmdiv($(".mddsdmdiv").text());
+    }
+    }
 /* 复用的处理函数 */
-function autocfdiv(result){
-  var sj = result;
-  var dw = sj.tips[0].location;
-   if(sj.info=="OK"){
-       maponbh(dw);
-       setdtCeneter([dw.R,dw.P]);
-   }
-}
+    function autocfdiv(result){
+    var sj = result;
+    var dw = sj.tips[0].location;
+    if(sj.info=="OK"){
+        maponbh(dw);
+        setdtCeneter([dw.R,dw.P]);
+    }
+    }
 /* 根据地址 数据 Location的json地址坐标的 */
-function autocfdsdmdiv(val){
-   AMap.plugin('AMap.Autocomplete', function(){
-           var autoOptions = {
-               city:"常州"
-           }
-     // 实例化Autocomplete
-     var autoComplete = new AMap.Autocomplete(autoOptions);
-     
-     autoComplete.search(val, function(status,result) {
-       // 搜索成功时，result即是对应的匹配数据
-       /* 存储数据 */
-       paymentvalsj.resultdata = result;
-       autocfdiv(result);
-     })
-   })
-}
+    function autocfdsdmdiv(val){
+    AMap.plugin('AMap.Autocomplete', function(){
+            var autoOptions = {
+                city:"常州"
+            }
+        // 实例化Autocomplete
+        var autoComplete = new AMap.Autocomplete(autoOptions);
+        
+        autoComplete.search(val, function(status,result) {
+        // 搜索成功时，result即是对应的匹配数据
+        /* 存储数据 */
+        paymentvalsj.resultdata = result;
+        autocfdiv(result);
+        })
+    })
+    }
 
 
 /* 别的页面写来的函数 */
