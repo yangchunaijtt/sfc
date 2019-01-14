@@ -80,13 +80,13 @@
                         <span class="sfc-icon">
                             始发地:
                         </span>
-                        <input  type="text" class="form-control"  id="pformcontrolsr"  name="departure"  placeholder="你从哪里来" style="width: 78%; background: #f2f2f2;"/>
+                        <input  type="text" class="form-control"  id="pformcontrolsr"  name="departure"  placeholder="你从哪里来" style="width: 78%; background: #f2f2f2;" readonly/>
                     </div>
                     <div class="destination">
                         <span class="sfc-brand">
                            目的地:
                         </span>
-                        <input  type="text"  class="form-control" name="destination" id="pformcontrolsc" style="width: 78%; background: #f2f2f2;" placeholder="你要去哪儿"/>
+                        <input  type="text"  class="form-control" name="destination" id="pformcontrolsc" style="width: 78%; background: #f2f2f2;" placeholder="你要去哪儿" readonly/>
                     </div>
                        <a href="javascript:;"  class="sbutton  btn btn-info" id="sbutnaone">
                            发布行程
@@ -123,13 +123,13 @@
                         <span class="sfc-icon">
                             始发地:
                         </span>
-                        <input  type="text" class="form-control"  style="width: 78%; background: #f2f2f2;" id="vformcontrolsr" name="departure"  placeholder="你从哪里来"/>
+                        <input  type="text" class="form-control"  style="width: 78%; background: #f2f2f2;" id="vformcontrolsr" name="departure"  placeholder="你从哪里来" readonly/>
                     </div>
                     <div class="destination">
                         <span class="sfc-brand">
                             目的地:
                         </span>
-                        <input  type="text"  class="form-control" name="destination" style="width: 78%; background: #f2f2f2;"  id="vformcontrolsc" placeholder="你要去哪儿"/>
+                        <input  type="text"  class="form-control" name="destination" style="width: 78%; background: #f2f2f2;"  id="vformcontrolsc" placeholder="你要去哪儿" readonly/>
                     </div>
                         <a href="javascript:;" class="sbutton  btn btn-info" id="sbuttonatwo">发布行程</a>
                 </form>
@@ -334,7 +334,7 @@
                             </span>
                             <input type="text" class="form-control" 
                             style="
-                            float: right;"  id="chufadi" name="departure" placeholder="你从哪里来"/>
+                            float: right;"  id="chufadi" name="departure" placeholder="你从哪里来" readonly/>
                         </div>
                         <!-- 发送始发地经纬度的input  name="chufadijwd" -->
                         <input id='lnglat' type="text" style="display:none" name="chufadijwd">
@@ -348,21 +348,21 @@
                                 </span>      
                             <input style="float: right;
                             margin-right: 10px;
-                            background: #f2f2f2;text-indent: 6px;" type="text" id='address' class="form-control" name="Destination"  placeholder="你要去哪儿" /></div>
+                            background: #f2f2f2;text-indent: 6px;" type="text" id='address' class="form-control" name="Destination"  placeholder="你要去哪儿" readonly /></div>
                             <div>
                                 <div class="ctsearchtime clearfix">
                                     <span class="left" style="text-indent: 6px;line-height:30px;" >出发时间:</span>
                                     <input type="text" style="
                                     float: right;float: right;
                                     margin-right: 10px;
-                                    background: #f2f2f2;" placeholder="选择出发时间" class="form-control" id="containersearchtime">
+                                    background: #f2f2f2;" placeholder="选择出发时间" class="form-control" id="containersearchtime" readonly>
                             </div>
                                 <div class="ctsearchtime clearfix">
                                         <span class="left" style="text-indent: 6px;line-height:30px;" >期望时间:</span>
                                         <input type="text" style="
                                         float: right;float: right;
                                         margin-right: 10px;
-                                        background: #f2f2f2;" placeholder="选择期望到达时间" class="form-control" id="searchsetdate">
+                                        background: #f2f2f2;" placeholder="选择期望到达时间" class="form-control" id="searchsetdate" readonly/>
                                 </div>
                             <div class="qwsjselectime clearfix">
                                 
@@ -566,7 +566,7 @@
             </div>
         </div>
     </div>
-    <script src="./font/fontjs/jquery-3.2.1.min.js"></script>
+    <script src="./js/jquery.min.js"></script>
     <!-- bootstrap脚本 -->
     <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!-- 时间选择器前置脚本 -->
@@ -595,5 +595,4 @@
     <script src="./font/js/sfc.js"></script>
     <script src="./font/js/dizselect.js"></script>
 </body>
-    
 </html>

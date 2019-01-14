@@ -24,17 +24,14 @@ $(function(){
    }
 })
 /* 数据 */
-    let clickqxx = `
-    <div id="qxsfcxinxi">
-    取消发布
-    </div>`;
+    var clickqxx = "<div id='qxsfcxinxi'>取消发布</div>";
 
 /* 页面初始化的数据 */
-    let nowusermsg = {
+    var nowusermsg = {
         valone:'',
         uid:111,
         id:111,
-        state:111,
+        state:111
     }
 /* 获取向数据库获取值的定义id 和 uid */
     function hqselectval(){
@@ -161,10 +158,9 @@ $(function(){
     });
 
 
-    let paymentvalsj = {
+    var paymentvalsj = {
     resultdata:{}
     }    
-
 
 /* 点击时，判断地址，并在地图撒花姑娘 */ 
 /* 始发地点击找地址 */
@@ -203,38 +199,28 @@ $(function(){
     })
     }
 
-
 /* 别的页面写来的函数 */
-    /*   maponbh(dw);
-       setdtCeneter([dw.R,dw.P]);
-        */
     /* 查询点击时标点 */
     function maponbh(jbelnglat){
-        
         setdtCeneter(jbelnglat)
-
         if(jbelnglat==false){
             document.getElementById('lnglat').value = {};
             regeoCode();
-            
         }
         $("#idxinxi").empty();
         document.getElementById('lnglat').value = jbelnglat;
         regeoCode();
         $("#idxinxi").append("<P>找到地址</P>");
-       
     }
     /* 设置中心点函数 */
         /* 设置地图中心点 */
     function setdtCeneter(qjposition){
-        //var position = new AMap.LngLat(116, 39);  // 标准写法
-        // 简写
             var position = [qjposition.R, qjposition.P]; 
             map.setCenter(position); 
         // 获取地图中心点
         var currentCenter = map.getCenter(); 
     }
-    let geocoder,marker;
+    var geocoder,marker;
     function regeoCode() {
         if(!geocoder){
             geocoder = new AMap.Geocoder({
@@ -256,8 +242,6 @@ $(function(){
         
         geocoder.getAddress(lnglat, function(status, result) {
             if (status === 'complete'&&result.regeocode) {
-                
-             
             }else{alert(JSON.stringify(result))}
         });
     }
@@ -269,5 +253,3 @@ $(function(){
         }
         return true;
     }; 
-
-    /* 需求页获取详细信息 */

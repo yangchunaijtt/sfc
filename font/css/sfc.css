@@ -460,7 +460,7 @@
 /* 高德地图API  */
 #container {
   width: 100%;
-  height: 350px;
+  height: 280px;
 }
 /* 样式替代 */
 select,
@@ -1114,7 +1114,7 @@ body {
 .runvownerscreen {
   width: 15%;
   display: inline-block;
-  margin-right: 15px;
+  margin-right: 19px;
   float: right;
 }
 .runpasgscreen span,

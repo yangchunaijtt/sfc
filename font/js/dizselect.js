@@ -1,35 +1,20 @@
-   let searchcityval = {
-        searchval:"",  /* ？nocity后面的值 */
-        selectval:"",  /* 选择的值 */
-        dijival:{},  /* 点击事件发生后，所选城市的经纬度参数 */
-        citysfdmmd:"",  /* 在始发地目的地页 进行搜索的后面判断的值 */
-        /* 进入搜索时，autoInputsun函数的模板 */
-        autoInputsuntmp:`
-            <div class="tjheader clearfix" id="tjheaderid">
-                <div class="icon">
-                    <span class="glyphicon glyphicon-send iconone"></span>
-                </div>
-                <div class="show-weizhi clearfix">
-                    <p class="dizi">
-                        副食品大楼(县直街)
-                    </p>
-                    <p class="jtdz">
-                        江苏省常州市钟楼区荷花池街道延陵西路157号
-                    </p>
-                </div>
-            </div>
-        `,           
+var searchcityval = {
+        searchval:"",  // ？nocity后面的值 
+        selectval:"",  // 选择的值 
+        dijival:{},  // 点击事件发生后，所选城市的经纬度参数 
+        citysfdmmd:"",  // 在始发地目的地页 进行搜索的后面判断的值 
+        // 进入搜索时，autoInputsun函数的模板 
+        autoInputsuntmp:"<div class='tjheader clearfix' id='tjheaderid'><div class='icon'><span class='glyphicon glyphicon-send iconone'></span></div><div class='show-weizhi clearfix'><p class='dizi'>副食品大楼(县直街)</p><p class='jtdz'>江苏省常州市钟楼区荷花池街道延陵西路157号</p></div></div>"          
     }
     
-    /* 给当前城市赋值的 */
+    // 给当前城市赋值的 
     function searchcity() {
         searchcityval.searchval =   window.location.search ;
         
         $(".nowcity .nowcityval div").text(cityselectval.nowcity);
     }
 
-    /* 给li绑定事件，
-    当点击时，获取值，并上传回去 */
+    // 给li绑定事件
     function removeacive(){
         $(".ulliwx").removeClass("ulliactive");
         $(".ullish").removeClass("ulliactive");
@@ -53,7 +38,7 @@
         }
     };
     function createlival(){
-        /* 点击之后在指定地方花maker */
+        // 点击之后在指定地方花maker 
         function zhidimaker(val){
             var lival = $(val).text();
            
@@ -67,9 +52,9 @@
                   if (status === 'complete' && result.info === 'OK') {
                     // result中对应详细地理坐标信息
                     
-                    /* 获取到了指定的指标值 */
+                    // 获取到了指定的指标值 
                     searchcityval.dijival = result.geocodes[0].location;
-                    /* 在获取到的地方花个maker */
+                    // 在获取到的地方花个maker 
                     maponbh(searchcityval.dijival);
                     setdtCeneter([searchcityval.dijival.R,searchcityval.dijival.P]);
 
@@ -78,8 +63,8 @@
               })
         }
 
-        /* 处理城市选择页点击 */
-            /* 处理城市选择页点击 */
+        // 处理城市选择页点击 
+            // 处理城市选择页点击 
         $(".ulliwx").bind("touch click",function(){
             ullicstyicz(".ulliwx");
         })
@@ -114,28 +99,28 @@
             cszhi(val);
             zhidimaker(val);
         }
-        /* 点自己的操作 */
+        // 点自己的操作 
         $(".nowcityval div").bind("touch click",function(){
             window.location.hash= "#details";
         })
     }
 
-    /* 进入input时chufadi  出发地时 进入可以自动选择的页面 */
+    // 进入input时chufadi  出发地时 进入可以自动选择的页面 
     function inchufadi(){
         window.location.hash = "#s";
     }
-     /* 进入input时address  目的地时 进入可以自动选择的页面 */
+     // 进入input时address  目的地时 进入可以自动选择的页面 
      function inaddress(){
         window.location.hash = "#m";
      }
 
-    /* time处理地方 */
-     /* 选择出发时间 */
+    // time处理地方 
+     // 选择出发时间 
      function containersearchtime(){
         window.location.hash = "#time";
      }
 
-     /* 始发地 目的地 点击后 赋值并给下一页*/
+     // 始发地 目的地 点击后 赋值并给下一页
         function xzlichuli (textval){
             
             var locationhash = window.location.hash;
@@ -144,7 +129,7 @@
             $(".dqcsval").text(textval);
             cityselectval.nowcity = textval;
          
-            $("#inxcbody").val(textval);
+            $("#inxcbody").val(textval.trim());
             autoInputsun();
             if(locationhash=="#s"){
                 window.location.hash = "#sxxwz";
@@ -154,11 +139,9 @@
             
         }
      
-     
-
-     /* 点击搜索功能的函数 */
-     let  autoInputsunval = {
-         result:{},   /*  autoInputsun的返回值result返回给需要的数据 */
+     // 点击搜索功能的函数 
+     var  autoInputsunval = {
+         result:{},   //  autoInputsun的返回值result返回给需要的数据 
          cfdresult:{},
          mddresult:{},
      }
@@ -181,12 +164,14 @@
             // 搜索成功时，result即是对应的匹配数据
             if(window.location.hash =="#sxxwz"){
                 autoInputsunval.cfdresult = result;
+                autoInputsunval.result = result;
+                
               
             }
             if(window.location.hash =="#mxxwz"){
                 
                 autoInputsunval.mddresult = result;
-                
+                autoInputsunval.result = result;
             }
             $(".searchweizhi").empty();
             for(var j = 0; j<result.tips.length;j++){
@@ -198,7 +183,7 @@
      }
 
      function autosunnode(i,result){
-         /* 名字操作上去 */
+         // 名字操作上去 
         $(".searchweizhi").append(searchcityval.autoInputsuntmp);
         var tjheader = "tjheader"+i;
         $(".tjheader").attr("class",tjheader);
@@ -207,24 +192,24 @@
         $(dizi).text(result.tips[i].name);
         var jtdzval =result.tips[i].district+result.tips[i].address;
         $(jtdz).text(jtdzval);
-        /* DOM创建出来再绑定事件 */
+        // DOM创建出来再绑定事件 
         tjhbind();
        
      }
-      /* 城市地点选择页初始化详细信息 */
+      // 城市地点选择页初始化详细信息 
      
 
-     /* 点击搜索功能的实现 */
+     // 点击搜索功能的实现 
      document.getElementById("inxcbody").oninput = autoInputsun;
      document.getElementById("inxcbody").onchange = autoInputsun;
      document.getElementById("inxcbody").propertychange = autoInputsun;
      
 
 
-     /* 点击返回选择城市页 */
-        /* 需要多几步判断 */
+     // 点击返回选择城市页 
+        // 需要多几步判断 
         $(".xcheader").bind("touch click ",function(){
-            let whash = window.location.hash;
+            var  whash = window.location.hash;
             if(whash==="#s"){
                 window.location.hash = "#s";
             }else if(whash==="#m"){
@@ -237,9 +222,9 @@
         })
 
     
-     /* 选择城市后返回并把数据填上在表单是上 */
-     /* 定位出发地 目的地 */
-     /* #mxxwz  #sxxwz */
+     // 选择城市后返回并把数据填上在表单是上 
+     // 定位出发地 目的地 
+     // #mxxwz  #sxxwz 
      function tjhbind(){
         $(".tjheader0").bind("touch click",function(){
             xxwzclick(0);
@@ -283,44 +268,38 @@
         })
      }
         
-        /* 点击时，要判断他是始发地  还是目的地 */
-        /* 
-            数据格式：{}
-        */
+        // 点击时，要判断他是始发地  还是目的地 
         function xxwzclick(i){
            
-            /* var result = autoInputsunval.result;
-            var tips = autoInputsunval.result.tips;  */ 
           
             var locationhash = window.location.hash;
-            /* 给城市赋值 */
+            // 给城市赋值 
             if(locationhash==="#sxxwz"){
-                /* 把那个清空 */
+                // 把那个清空 
                 fabuxiaoxi.dwsj ="";
                 fabuxiaoxi.cfdcity = $(".xcspanleft").text();
-                console.log(fabuxiaoxi.cfdcity);
+               
             }else if(locationhash==="#mxxwz"){
                 fabuxiaoxi.mddcity = $(".xcspanleft").text();
-                console.log(fabuxiaoxi.mddcity);
 
             }
 
-            /* 出发地  始发地 */
+            // 出发地  始发地 
             if(locationhash=="#mxxwz"){
-                let result = autoInputsunval.mddresult;
-                let tipstwo = autoInputsunval.mddresult.tips;  
-                /* 点击时，目的地的数据 */
+                var result = autoInputsunval.mddresult;
+                var tipstwo = autoInputsunval.mddresult.tips;  
+                // 点击时，目的地的数据 
                 fabuxiaoxi.mmddata =  autoInputsunval.mddresult.tips[i];
-                /* 目的地 目的地经纬度 */
+                // 目的地 目的地经纬度 
                 $("#address").val(tipstwo[i].name);
                 $("#mmdjwd").val(tipstwo[i].location);
                
             }
             if(locationhash=="#sxxwz"){
                 fabuxiaoxi.dwsj ="";
-                let result = autoInputsunval.cfdresult;
-                let tipsone = autoInputsunval.cfdresult.tips;  
-                /*  #sxxwz 出发地 经纬度信息*/
+                var result = autoInputsunval.cfdresult;
+                var tipsone = autoInputsunval.cfdresult.tips;  
+                //  #sxxwz 出发地 经纬度信息
                 fabuxiaoxi.cfddata  = autoInputsunval.cfdresult.tips[i];
                 $("#chufadi").val(tipsone[i].name);
                 $(".lnglat").val(tipsone[i].location);
@@ -330,44 +309,41 @@
             window.location.hash = "#details";
         }
 
-/* 支付功能的实现 */
+// 支付功能的实现 
         
 
-     /* 支付button的实现 */
-     /* 以后多个就这样实现 */
-     let paymentbttsj  = {
+     // 支付button的实现 
+     // 以后多个就这样实现 
+     var paymentbttsj  = {
          title:"",
          amount:100,
-         billno: "FRO",   /* 生成订单号 */
-         instant_channel:"wx", /* 订单支付形式 */
-         openid:{},  /* openid的存储 */
-         usource:"Wx_Kbt",   /* 用户的来源 */
-         FROID:111,     /* 发布单号，取当前信息的id值 */
+         billno: "FRO",   // 生成订单号 
+         instant_channel:"wx", // 订单支付形式 
+         openid:{},  // openid的存储 
+         usource:"Wx_Kbt",   // 用户的来源 
+         FROID:111     // 发布单号，取当前信息的id值 
      }
 
     function paymentbutton(FROID,qmguid){
-        /*首先取消所有 */
+        //首先取消所有 
 
-        /* id一样 */
-        console.log("支付功能",nowusermsg.uid,FROID,qmguid);
-        /* qmguid： 数据的发布者的id号  */
-        /* 如果uid一直 ，则不需要付钱，点击时直接看  */
+      
+        // qmguid： 数据的发布者的id号  
+        // 如果uid一直 ，则不需要付钱，点击时直接看  
         if(parseInt(qmguid) == parseInt(nowusermsg.uid) ){
-            console.log("一样")
-            /* 支付成功  可以观看用户的信息 */
-            /* 如果一样，直接用本地的id就好 */
-            let jwxxone = "#ownshowdata?id="+FROID+"&uid="+qmguid+"&sf=run";
+            // 支付成功  可以观看用户的信息 
+            // 如果一样，直接用本地的id就好 
+            var jwxxone = "#ownshowdata?id="+FROID+"&uid="+qmguid+"&sf=run";
             
-            let wlgrefone = "http://qckj.czgdly.com/bus/MobileWeb/WxWeb-kongbatong/font/html/xq.html"+jwxxone;
+            var wlgrefone = "http://qckj.czgdly.com/bus/MobileWeb/WxWeb-kongbatong/font/html/xq.html"+jwxxone;
           
             window.location.href = wlgrefone ;
             
-            /* 现在判断解决， */
+            // 现在判断解决， 
             return false;
-            /* 判断if else  */
+            // 判断if else  
         }else{
-            console.log("不一样");
-                /* id不一样 */
+                // id不一样 
         paymentbttsj.title = "发布订单";
         paymentbttsj.FROID = FROID; 
      
@@ -377,7 +353,7 @@
             var r = Math.floor(Math.random() * 10);
             rand += r;
         }
-        /* 生成时间戳 "yyyyMMddhhmmss" 格式*/
+        // 生成时间戳 "yyyyMMddhhmmss" 格式
         function pad2(n) { return n < 10 ? '0' + n : n };
         function generateTimeReqestNumber() {
             var date = new Date();
@@ -392,12 +368,10 @@
     var param = {"title" : paymentbttsj.title,"amount" : paymentbttsj.amount,"outtradeno" : paymentbttsj.billno};
 
     // 地址
-    /* POST http://qckj.czgdly.com/bus/
-    common/getBSign-kongbatong.asp 404 (Not Found)*/
     var url = "../common/getBSign-kongbatong.asp";
 
-/* sfcsj.passenger 存储着用户的信息 */
-        /* openid 需要传入的数据的定义*/
+// sfcsj.passenger 存储着用户的信息 
+        // openid 需要传入的数据的定义
         paymentbttsj.openid = {
             uid:nowusermsg.uid,
             phone:nowusermsg.phone,
@@ -421,7 +395,7 @@
         BC.click({
             //"return_url" : "http://qckj.czgdly.com/bus/MobileWeb/WxWeb/myTickets_content.html",
             "instant_channel" : paymentbttsj.instant_channel,
-            "debug" : true,
+            "debug" : false,
             "need_ali_guide" : true,
             "use_app" : true,
             "title" : paymentbttsj.title, //商品名
@@ -429,7 +403,7 @@
             "out_trade_no" : paymentbttsj.billno, //自定义订单号
             "sign" : bSign, //商品信息hash值，含义和生成方式见下文
             "openid" : nowusermsg.openid,
-            "optional" : paymentbttsj.openid, //可选，自定义webhook的optional回调参数
+            "optional" : paymentbttsj.openid //可选，自定义webhook的optional回调参数
         },
         {
             wxJsapiFinish : function(res) {
@@ -438,11 +412,11 @@
                 switch(res.err_msg){
                     case "get_brand_wcpay_request:ok":
                         showMessage1btn("支付成功！如需退单，请提前发班时间24小时退定！","Back()",1);
-                        /* 支付成功  可以观看用户的信息 */
-                        let jwxx = "#ownshowdata?id="+paymentbttsj.FROID+"&uid="+qmguid+"&sf=run";
-                        /* 传入id号 和 uid */
-                        /* 应该是发布数据的那个人的 */
-                        let wlgref = "http://qckj.czgdly.com/bus/MobileWeb/WxWeb-kongbatong/font/html/xq.html"+jwxx;
+                        // 支付成功  可以观看用户的信息 
+                        var jwxx = "#ownshowdata?id="+paymentbttsj.FROID+"&uid="+qmguid+"&sf=run";
+                        // 传入id号 和 uid 
+                        // 应该是发布数据的那个人的 
+                        var wlgref = "http://qckj.czgdly.com/bus/MobileWeb/WxWeb-kongbatong/font/html/xq.html"+jwxx;
                         window.location.href = wlgref ;
                         break;
                     case "get_brand_wcpay_request:fail":
@@ -454,9 +428,6 @@
                     }
                 }
                 });
-                /**
-                * click调用错误返回：默认行为
-                */
                 BC.err = function(err) {
                     
                     //err 为object, 例 ｛”ERROR“ : "xxxx"｝;
@@ -472,11 +443,8 @@
         }
     }   
 
-/* 时间页面的组件 */
-    /**
-     * 用户点击选择时间时，跳到时间选择页面，
-     */
-    /* 时间选择所需要的数据 */
+// 时间页面的组件 
+    // 时间选择所需要的数据 
     function setTimeWheel(){            
         var dd = new Date();
         var currYear = dd.getFullYear();  
@@ -551,26 +519,26 @@
         $("#dt-a-0").mobiscroll().datetime(optSDateTime_0);  
         $("#dt-c-1").mobiscroll().datetime(optSDateTime_0); 
     }
-    /* 存储值的地方 */
-    let changePriceByUCarval = {
-        cfsj:"",    /* 存储出发时间的值 */
-        qwsj:"",    /* 存储期望到达的时间 */
+    // 存储值的地方 
+    var changePriceByUCarval = {
+        cfsj:"",    // 存储出发时间的值 
+        qwsj:""   // 存储期望到达的时间 
     }
-    /* 值变化取值 */
+    // 值变化取值 
         function changePriceByUCar(){
           
         }
-    /* 时间取值函数 */
-        /* 取消方法 */
+    // 时间取值函数 
+        // 取消方法 
             function timequxfunction(){
                 $("#dt-a-0").data("val"," ");
                 $("#dt-c-1").data("val"," ");
-                /* 点击取消把地图页的两个时间值改为空 */
+                // 点击取消把地图页的两个时间值改为空 
                 $("#containersearchtime").val("");
                 $("#searchsetdate").val("");
                 window.location.hash = "#details";
             }
-        /* 点击确认时的操作 */
+        // 点击确认时的操作 
             function timeqrfunction(){
                 var cfsj =  $("#dt-a-0").attr("data-val");
                 var mdsj =  $("#dt-c-1").attr("data-val");
@@ -586,20 +554,20 @@
                 }
             }
     
-/*  实现页面滑动到底部加载*/
+//  实现页面滑动到底部加载
 
-    /* 滑动需要的全局函数 */
-    /* 乘客passengerNode的滑动效果 */
-    let passengerNodeval = {
-        page:2,    /* 当前页，用于向页面发送请求的页码参数 第一次发送的为2 */
-        loadcount:3,   /* 页面展示的为第几页的数据 */
+    // 滑动需要的全局函数 
+    // 乘客passengerNode的滑动效果 
+    var passengerNodeval = {
+        page:2,    // 当前页，用于向页面发送请求的页码参数 第一次发送的为2 
+        loadcount:3  // 页面展示的为第几页的数据 
     }
     function hdpassengerNode(){
         var useruid =  nowusermsg.uid;
         var $passenger = $('#passengerNode').infiniteScroll({     //#content是包含所有图或块的容器
             path: function(){
-                /* 如果用户滑动时，当前页面展示的数据页码小于等于后台的数据页码 */
-                /* 这里判断有问题 */
+                // 如果用户滑动时，当前页面展示的数据页码小于等于后台的数据页码 
+                // 这里判断有问题 
                 if(  passengerNodeval.page <= passengerNodeval.loadcount){
                     return "http://qckj.czgdly.com/bus/MobileWeb/madeFreeRideOrders/queryPageMadeFROrders_get.asp?cur="+passengerNodeval.page+"&pushType=Passenger"+"&uid="+useruid+"&dateRange="+"&dpCity="+"&arCity=";
                 }
@@ -609,34 +577,34 @@
             elementScroll:".cylx",
             status:".page-load-status",
             responseType:"json",
-            debug:true,
+            debug:true
         });
         $passenger.on( 'load.infiniteScroll', function( event, response ) {
             var data = response;
-            /* 获取成功后，要把页面加1，方便用户在滑动，在触发获取函数*/
+            // 获取成功后，要把页面加1，方便用户在滑动，在触发获取函数
             passengerNodeval.page++;
-            /* 开始处理结果 */
-             /* 赋值最大页数 */
+            // 开始处理结果 
+             // 赋值最大页数 
             passengerNodeval.loadcount = data.page;
            
-                 /* 调用处理乘客页的函数 */
+                 // 调用处理乘客页的函数 
                 setPassenger(data);   
         })
     }
 
-     /* 车主页vownperNode的滑动效果 */
-     let vownperNodeval = {
-        page:2,    /* 当前页，用于向页面发送请求的页码参数 第一次发送的为2 */
-        loadcount:3,   /* 页面展示的为第几页的数据 */
+     // 车主页vownperNode的滑动效果 
+     var vownperNodeval = {
+        page:2,    // 当前页，用于向页面发送请求的页码参数 第一次发送的为2 
+        loadcount:3   // 页面展示的为第几页的数据 
     }
     function hdvownperNode(){
         var useruid =  nowusermsg.uid;
         var $vownper = $('#vownperNode').infiniteScroll({     //#content是包含所有图或块的容器
             path: function(){
-                /* 如果用户滑动时，当前页面展示的数据页码小于等于后台的数据页码 */
-                /* 数据量很小情况下  报错了 */
+                // 如果用户滑动时，当前页面展示的数据页码小于等于后台的数据页码 
+                // 数据量很小情况下  报错了 
                 if(  vownperNodeval.page <= vownperNodeval.loadcount){
-                    /* 获取全部时间的行程，失效页没有关系 */
+                    // 获取全部时间的行程，失效页没有关系 
                     return "http://qckj.czgdly.com/bus/MobileWeb/madeFreeRideOrders/queryPageMadeFROrders_get.asp?cur="+vownperNodeval.page+"&pushType=Driver"+"&uid="+useruid+"&dateRange="+"&dpCity="+"&arCity=";
                 }
             },
@@ -645,34 +613,34 @@
             scrollThreshold:50,
             status:".vowpage-load-status",
             responseType:"json",
-            debug:true,
+            debug:true
         });
         $vownper.on( 'load.infiniteScroll', function( event, response ) {
             var data = response;
-            /* 获取成功后，要把页面加1，方便用户在滑动，在触发获取函数*/
-            /* 开始处理结果 */
-             /* 赋值最大页数 */
+            // 获取成功后，要把页面加1，方便用户在滑动，在触发获取函数
+            // 开始处理结果 
+             // 赋值最大页数 
             vownperNodeval.loadcount = data.page;
             vownperNodeval.page = vownperNodeval.page+1;
-                 /* 调用处理车主页的函数 */
+                 // 调用处理车主页的函数 
                  setVowner(data);
         })
     }
 
-/* 全部行程中 乘客页滑动效果 */
-     /* 全部行程中 乘客页滑动效果runpassengerNode的滑动效果 */
-     let runpassengerval = {
-        page:2,    /* 当前页，用于向页面发送请求的页码参数 第一次发送的为2 */
-        loadcount:3,   /* 页面展示的为第几页的数据 */
+// 全部行程中 乘客页滑动效果 
+     // 全部行程中 乘客页滑动效果runpassengerNode的滑动效果 
+     var runpassengerval = {
+        page:2,    // 当前页，用于向页面发送请求的页码参数 第一次发送的为2 
+        loadcount:3   // 页面展示的为第几页的数据 
     }
     function hdrunpassenger(){
         var useruid =  nowusermsg.uid;
         var $runpassengerval = $('#runpassengerNode').infiniteScroll({     //#content是包含所有图或块的容器
             path: function(){
-                /* 如果用户滑动时，当前页面展示的数据页码小于等于后台的数据页码 */
-                /* 数据量很小情况下  报错了 */
+                // 如果用户滑动时，当前页面展示的数据页码小于等于后台的数据页码 
+                // 数据量很小情况下  报错了 
                 if(  runpassengerval.page <= runpassengerval.loadcount){
-                    /* 获取全部时间的行程，失效页没有关系 */
+                    // 获取全部时间的行程，失效页没有关系 
                     return "http://qckj.czgdly.com/bus/MobileWeb/madeFreeRideOrders/queryPageMadeFROrders_get.asp?cur="+runpassengerval.page+"&pushType=Passenger"+"&uid="+"&dateRange="+"&dpCity=''"+"&arCity=";
                 }
             },
@@ -681,34 +649,34 @@
             scrollThreshold:50,
             status:".runpaspage-load-status",
             responseType:"json",
-            debug:true,
+            debug:true
         });
         $runpassengerval.on( 'load.infiniteScroll', function( event, response ) {
             var data = response;
-            /* 获取成功后，要把页面加1，方便用户在滑动，在触发获取函数*/
-            /* 开始处理结果 */
-             /* 赋值最大页数 */
+            // 获取成功后，要把页面加1，方便用户在滑动，在触发获取函数
+            // 开始处理结果 
+             // 赋值最大页数 
             runpassengerval.loadcount = data.page;
             runpassengerval.page = vownperNodeval.page+1;
-                 /* 调用处理车主页的函数 */
+                 // 调用处理车主页的函数 
                  setqbPassenger(data);
         })
     }
-/* 全部行程中 车主的滑动效果 */
-     /* 滑动需要的全局函数 */
-    /* 全部行程中 乘客页滑动效果runvowner的滑动效果 */
-    let runvownerval = {
-        page:2,    /* 当前页，用于向页面发送请求的页码参数 第一次发送的为2 */
-        loadcount:3,   /* 页面展示的为第几页的数据 */
+// 全部行程中 车主的滑动效果 
+     // 滑动需要的全局函数 
+    // 全部行程中 乘客页滑动效果runvowner的滑动效果 
+    var runvownerval = {
+        page:2,    // 当前页，用于向页面发送请求的页码参数 第一次发送的为2 
+        loadcount:3  // 页面展示的为第几页的数据 
     }
     function hdrunvowner(){
         var useruid =  nowusermsg.uid;
         var $runpassengerval = $('#runvownerNode').infiniteScroll({     //#content是包含所有图或块的容器
             path: function(){
-                /* 如果用户滑动时，当前页面展示的数据页码小于等于后台的数据页码 */
-                /* 数据量很小情况下  报错了 */
+                // 如果用户滑动时，当前页面展示的数据页码小于等于后台的数据页码 
+                // 数据量很小情况下  报错了 
                 if(  runvownerval.page <= runvownerval.loadcount){
-                    /* 获取全部时间的行程，失效页没有关系 */
+                    // 获取全部时间的行程，失效页没有关系 
                 
                     return "http://qckj.czgdly.com/bus/MobileWeb/madeFreeRideOrders/queryPageMadeFROrders_get.asp?cur="+runvownerval.page+"&pushType=Driver"+"&uid="+"&dateRange="+"&dpCity="+"&arCity=";
                 }
@@ -718,35 +686,35 @@
             scrollThreshold:50,
             status:".runvownerNode-load-status",
             responseType:"json",
-            debug:true,
+            debug:true
         });
         $runpassengerval.on( 'load.infiniteScroll', function( event, response ) {
             var data = response;
-            /* 获取成功后，要把页面加1，方便用户在滑动，在触发获取函数*/
-            /* 开始处理结果 */
-             /* 赋值最大页数 */
+            // 获取成功后，要把页面加1，方便用户在滑动，在触发获取函数
+            // 开始处理结果 
+             // 赋值最大页数 
             runvownerval.loadcount = data.page;
             runvownerval.page = runvownerval.page+1;
-                 /* 调用处理全部车主页的函数 */
+                 // 调用处理全部车主页的函数 
                  setqbVowneraa(data);
         })
     }
 
 
 
-/* 支付页 滑动获取数据效果 */
-        let paymentzyval = {
-            page:2,    /* 当前页，用于向页面发送请求的页码参数 第一次发送的为2 */
-            loadcount:3,   /* 页面展示的为第几页的数据 */
+// 支付页 滑动获取数据效果 
+    var paymentzyval = {
+            page:2,    // 当前页，用于向页面发送请求的页码参数 第一次发送的为2 
+            loadcount:3   // 页面展示的为第几页的数据 
         }
         function hdpaymentzy(){
             var useruid =  nowusermsg.uid;
             var $runpassengerval = $('.phdiconfyq').infiniteScroll({     //#content是包含所有图或块的容器
                 path: function(){
-                    /* 如果用户滑动时，当前页面展示的数据页码小于等于后台的数据页码 */
-                    /* 数据量很小情况下  报错了 */
+                    // 如果用户滑动时，当前页面展示的数据页码小于等于后台的数据页码 
+                    // 数据量很小情况下  报错了 
                     if(  paymentzyval.page <= paymentzyval.loadcount){
-                        /* 获取全部时间的行程，失效页没有关系 */
+                        // 获取全部时间的行程，失效页没有关系 
                         return "http://qckj.czgdly.com/bus/MobileWeb/madeFROViewPayments/queryPageMadeFROVPayments.asp?cur="+paymentzyval.page+"&uid="+useruid+"&dateRange=";
                     }
                 },
@@ -754,52 +722,51 @@
                 elementScroll:".paymentzy",
                 scrollThreshold:50,
                 responseType:"json",
-                debug:true,
+                debug:true
             });
             $runpassengerval.on( 'load.infiniteScroll', function( event, response ) {
                 var data = response;
-                /* 获取成功后，要把页面加1，方便用户在滑动，在触发获取函数*/
-                                                /* 10     2 */        
-                /* 开始处理结果 */
-                /* 赋值最大页数 */
+                // 获取成功后，要把页面加1，方便用户在滑动，在触发获取函数
+                                                // 10     2         
+                // 开始处理结果 
+                // 赋值最大页数 
                 paymentzyval.loadcount = data.page;
                 paymentzyval.page = paymentzyval.page+1;
-                    /* 调用处理全部车主页的函数 */
+                    // 调用处理全部车主页的函数 
                     paymentpageval.result = data ;
                     if(data.result>0){
                          for(var jj = 0 ;jj<data.obj.froViewPayments.length;jj++){
                              $(".phdiconfyq").append(sfcsj.paymentpage);
-                         /* 处理支付页面的数据 */
+                         // 处理支付页面的数据 
                              paymentpcl(jj,data);
                          }
                     }
             })
         }
 
-/* 筛选判断的逻辑 */
-    let runscreenv = {
-        winhash:"",      /* 存储路由信息 */
-        time:"",       /* 发送ajax的time值 */
-        cfd:"",         /* 出发地 */
-        mdd:"",         /* 目的地 */
+// 筛选判断的逻辑 
+    var runscreenv = {
+        winhash:"",      // 存储路由信息 
+        time:"",       // 发送ajax的time值 
+        cfd:"",         // 出发地 
+        mdd:""         // 目的地 
     }
-    /*事件处理 */
-        /* 给runscreen添加值 */
-        let valjson = {
+    //事件处理 
+        // 给runscreen添加值 
+        var valjson = {
             "background":"#f2f2f2",
-            "color":"#555",
+            "color":"#555"
         };
-        /* 选择时间 */
+        // 选择时间 
             function runscrqdvohs(){
-                
                 $(".runscrqdvo").css(valjson);
                 $(".runscrqdvt").css(valjson);
                 $(".runscrqdvtr").css(valjson);
             }
-            let rscrdvohslet = {
+            var rscrdvohslet = {
                 one:1,
                 two:1,
-                three:1,
+                three:1
             }
             $(".runscrqdvo").bind("touch click",function(){
                 rscrdvohslet.one +=1;
@@ -836,32 +803,48 @@
                 }
                 
             })
-        /* 选择出发地 */
-            /* 输入 */
+        // 选择出发地 
+            // 输入 
                 $(".rscfcdaipt").bind("blur",function(){
+                    $(".rsfidvlo").css(valjson);
+                    $(".rsfidvlt").css(valjson);
+                    $(".rsfidvltr").css(valjson);
+                    $(".rsfidvf").css(valjson);
+                    $(".rsfidvlfif").css(valjson);
                     runscreenv.cfd = $(".rscfcdaipt").val();
-                    console.log($(".rscfcdaipt").val(),$(".rscfcdaipt").val());
+
                 })
-            /* 点击几个城市 */
+            // 点击几个城市 
                 function rsfidvlovalhs(){
-                    /* 几个div */
+                    // 几个div 
                     $(".rsfidvlo").css(valjson);
                     $(".rsfidvlt").css(valjson);
                     $(".rsfidvltr").css(valjson);
                     $(".rsfidvf").css(valjson);
                     $(".rsfidvlfif").css(valjson); 
                 }
-                let rsfidvloval = {
+                var rsfidvloval = {
                     "background":"#23beae",
-                    "color":"#fff",
+                    "color":"#fff"
                 };
-                let rsflovlhslet = {
+                var rsflovlhslet = {
                     one:1,
                     two:1,
                     three:1,
                     four:1,
-                    five:1,
+                    five:1
                 }
+                var rsdcsdloval = {
+                    "background":"#ff4a39",
+                    "color":"#fff"
+                }
+                var rsdcsdlvllet ={
+                     one:1,
+                     two:1,
+                     three:1,
+                     four:1,
+                     five:1
+                 }
                 $(".rsfidvlo").bind('touch click',function(){
                     rsflovlhslet.one +=1;
                     if(rsflovlhslet.one%2===0){
@@ -920,12 +903,12 @@
                     }
                     
                 })
-        /* 选择目的地 */
-            /* 输入框 */
-            /* 下面几个点击 */
+        // 选择目的地 
+            // 输入框 
+            // 下面几个点击 
                 function rsdcsdlovalhs(){
-                    /* 几个div */
-                    /* 下面几个div */
+                    // 几个div 
+                    // 下面几个div 
                     $(".rsdcsdlo").css(valjson); 
                     $(".rsdcsdlt").css(valjson); 
                     $(".rsdcsdltr").css(valjson); 
@@ -941,9 +924,8 @@
                 window.location.hash = "#run?diver";
             }
         }
-        /* 点击确定时，取值发送ajax，调用渲染页面函数 */
+        // 点击确定时，取值发送ajax，调用渲染页面函数 
         $(".runscjwfbsxdd").bind("touch click",function(){
-            console.log(runscreenv);
             runscreenv.winhash = window.location.hash;
             if(runscreenv.time==="" && runscreenv.cfd ==="" && runscreenv.mdd===""){
                 getqbVowner();
@@ -954,27 +936,26 @@
                     window.location.hash = "#run?diver";
                 }
             }else{
-                /* 判断路由 */
-                /* 乘客页 */
+                // 判断路由 
+                // 乘客页 
                 if(runscreenv.winhash==="#run?passgeran"){
                     $.ajax({
                         url: sfcsj.passengerUrl,
                        type: 'post',
                        data:{
-                           cur:1,  /* 默认取第一页 */
-                           pushType:"Passenger",   /* 乘客 */
-                           uid:"",  /* id号   默认为空就是取全部的数据*/
-                           dateRange:runscreenv.time.trim(),      
-                           arCity:runscreenv.mdd.trim(),      /* 到达城市 */
-                           dpCity:runscreenv.cfd.trim(),      /* 出发城市 */
+                           cur:1,  // 默认取第一页 
+                           pushType:"Passenger",   // 乘客 
+                           uid:"",  // id号   默认为空就是取全部的数据
+                           dateRange:runscreenv.time,      
+                           arCity:runscreenv.mdd.trim(),      // 到达城市 
+                           dpCity:runscreenv.cfd.trim()      // 出发城市 
                        },
                         success: function (data) {
                             qbxcvalsj.passenger = data;
-                           console.log("筛选乘客的数据",data);
-                           /* setPassenger() 处理 乘客端数据的函数*/
-                           /* 先清空，在添加 */
+                           // setPassenger() 处理 乘客端数据的函数
+                           // 先清空，在添加 
                           
-                           /* 成功取到数据后，要清空runscreenv，防止下次再用值不对 */
+                           // 成功取到数据后，要清空runscreenv，防止下次再用值不对 
                            runscjwfbsxddcsh();
                            $("#runpassengerNode").empty();
                            setqbPassenger(data);
@@ -987,19 +968,19 @@
                         url: sfcsj.vownerUrl,
                        type: 'post',
                        data:{
-                           cur:1,  /* 默认取第一页 */
-                           pushType:"Driver",   /* 乘客 */
-                           uid:"",  /* id号   默认为空就是取全部的数据*/
+                           cur:1,  // 默认取第一页 
+                           pushType:"Driver",   // 乘客 
+                           uid:"",  // id号   默认为空就是取全部的数据
                            dateRange:runscreenv.time.trim(),      
-                           arCity:runscreenv.mdd.trim(),      /* 到达城市 */
-                           dpCity:runscreenv.cfd.trim(),      /* 出发城市 */
+                           arCity:runscreenv.mdd.trim(),      // 到达城市 
+                           dpCity:runscreenv.cfd.trim()     // 出发城市 
                        },
                         success: function (data) {
                            qbxcvalsj.vowner = data;
-                           /* 获取成功，但是数据暂时为空 */
-                           console.log("筛选车主的数据",data);
-                           /* setPassenger() 处理 乘客端数据的函数*/
-                           /* 成功取到数据后，要清空runscreenv，防止下次再用值不对 */
+                           // 获取成功，但是数据暂时为空 
+                   
+                           // setPassenger() 处理 乘客端数据的函数
+                           // 成功取到数据后，要清空runscreenv，防止下次再用值不对 
                            runscjwfbsxddcsh();
                            $("#runvownerNode").empty();
                            setqbVowneraa(data);
@@ -1007,20 +988,20 @@
                        }
                       });
                 }
-                /* 完成了要把runscreen,使用完要把那个清空 */
+                // 完成了要把runscreen,使用完要把那个清空 
             }
         })
-        /* 把所有东西初始化 */
-        /* 切换到这两个路由时，就进行初始化  */
+        // 把所有东西初始化 
+        // 切换到这两个路由时，就进行初始化  
         function runscjwfbsxddcsh(){
             runscreenv.cfd ="";
             runscreenv.mdd="";
             runscreenv.time = "";
             runscreenv.winhash ="";
-            /* 样式也要初始化 */
-            let valjson = {
+            // 样式也要初始化 
+            var valjson = {
                 "background":"#f2f2f2",
-                "color":"#555",
+                "color":"#555"
             };
             $(".runsccfcdva .runsccficondv ul li").css(valjson);
             $(".runscrqdvtddcs .runsddcsondv ul li").css(valjson);
@@ -1031,26 +1012,26 @@
             $(".rscfcdaipt").attr("placeholder","请填写以市为结尾的数据");
             $(".rsdcsoipt").val(" ");
             $(".rsdcsoipt").attr("placeholder","请填写以市为结尾的数据");
-            /* 几个div */
+            // 几个div 
             $(".rsfidvlo").css(valjson);
             $(".rsfidvlt").css(valjson);
             $(".rsfidvltr").css(valjson);
             $(".rsfidvf").css(valjson);
             $(".rsfidvlfif").css(valjson); 
-            /* 下面几个div */
+            // 下面几个div 
             $(".rsdcsdlo").css(valjson); 
             $(".rsdcsdlt").css(valjson); 
             $(".rsdcsdltr").css(valjson); 
             $(".rsdcsdlf").css(valjson); 
             $(".rsdcsdlfi").css(valjson); 
         }
-        /* 取消时，直接使用路由 */
+        // 取消时，直接使用路由 
         $(".runscjwfbsxqx").bind("touch click",function(){
-            /* 返回 #run  路由页面  */
+            // 返回 #run  路由页面  
             runscreenv.winhash = window.location.hash;
             getqbVowner();
             getqbPassenger();
-            console.log(runscreenv.winhash);
+           
             if(runscreenv.winhash===""){
                 window.location.hash = "#run";
             }else if(runscreenv.winhash==="#run?diveran"){
