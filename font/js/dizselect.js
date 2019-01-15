@@ -978,7 +978,6 @@ var searchcityval = {
                         success: function (data) {
                            qbxcvalsj.vowner = data;
                            // 获取成功，但是数据暂时为空 
-                   
                            // setPassenger() 处理 乘客端数据的函数
                            // 成功取到数据后，要清空runscreenv，防止下次再用值不对 
                            runscjwfbsxddcsh();
